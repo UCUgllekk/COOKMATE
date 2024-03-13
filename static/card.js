@@ -11,18 +11,15 @@ class Card {
       this.onDislike = onDislike;
       this.#init();
     }
-  
     // private properties
     #startPoint;
     #offsetX;
     #offsetY;
-  
     #isTouchDevice = () => {
       return (('ontouchstart' in window) ||
         (navigator.maxTouchPoints > 0) ||
         (navigator.msMaxTouchPoints > 0));
     }
-  
     #init = () => {
       const card = document.createElement('div');
       card.classList.add('card');
@@ -36,7 +33,6 @@ class Card {
         this.#listenToMouseEvents();
       }
     }
-  
     #listenToTouchEvents = () => {
       this.element.addEventListener('touchstart', (e) => {
         const touch = e.changedTouches[0];
@@ -46,11 +42,9 @@ class Card {
         document.addEventListener('touchmove', this.#handleTouchMove);
         this.element.style.transition = 'transform 0s';
       });
-  
       document.addEventListener('touchend', this.#handleTouchEnd);
       document.addEventListener('cancel', this.#handleTouchEnd);
     }
-  
     #listenToMouseEvents = () => {
       this.element.addEventListener('mousedown', (e) => {
         const { clientX, clientY } = e;
@@ -58,15 +52,12 @@ class Card {
         document.addEventListener('mousemove', this.#handleMouseMove);
         this.element.style.transition = 'transform 0s';
       });
-  
       document.addEventListener('mouseup', this.#handleMoveUp);
-  
       // prevent card from being dragged
       this.element.addEventListener('dragstart', (e) => {
         e.preventDefault();
       });
     }
-  
     #handleMove = (x, y) => {
       this.#offsetX = x - this.#startPoint.x;
       this.#offsetY = y - this.#startPoint.y;
@@ -77,7 +68,6 @@ class Card {
         this.#dismiss(this.#offsetX > 0 ? 1 : -1);
       }
     }
-  
     // mouse event handlers
     #handleMouseMove = (e) => {
       e.preventDefault();
@@ -85,13 +75,11 @@ class Card {
       const { clientX, clientY } = e;
       this.#handleMove(clientX, clientY);
     }
-  
     #handleMoveUp = () => {
       this.#startPoint = null;
       document.removeEventListener('mousemove', this.#handleMouseMove);
       this.element.style.transform = '';
     }
-  
     // touch event handlers
     #handleTouchMove = (e) => {
       if (!this.#startPoint) return;
@@ -100,13 +88,11 @@ class Card {
       const { clientX, clientY } = touch;
       this.#handleMove(clientX, clientY);
     }
-  
     #handleTouchEnd = () => {
       this.#startPoint = null;
       document.removeEventListener('touchmove', this.#handleTouchMove);
       this.element.style.transform = '';
     }
-  
     #dismiss = (direction) => {
       this.#startPoint = null;
       document.removeEventListener('mouseup', this.#handleMoveUp);
