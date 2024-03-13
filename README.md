@@ -4,14 +4,15 @@
 
 # Install all dependencies:
 1. Activate virtual environment
-    * if MacOS\Linux:
+    for MacOS \ Linux:
     ```
     source venv_for_project/bin/activate
     ```
-    * if Windows:
+    for Windows:
     ```
-    none
+    venv_for_project/bin/activate.bat
     ```
+
 2. Install requirements
     ```
     pip install -r requirements.txt
