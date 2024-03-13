@@ -161,7 +161,8 @@ body, html {
   }
   
   .ingredients-section {
-    padding: 30px;
+    margin-left: 50px;
+    padding: 0px;
     justify-content: space-between;
   }
   

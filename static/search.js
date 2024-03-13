@@ -46,7 +46,7 @@ document.getElementById('search-form').addEventListener('submit', function(event
 // Add an event listener for the 'input' event to the search bar
 document.getElementById('search-bar').addEventListener('input', function() {
     // Get the current value of the search bar
-    var inputVal = this.value;
+    var inputVal = this.value.toLowerCase();
     var suggestionsDiv = document.getElementById('suggestions');
 
     // If the search bar is not empty
