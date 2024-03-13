@@ -18,7 +18,6 @@
     ```
 
 * p.s if troubles with 'event_type_opened' from 'watchdog.events':
-    * write: 
     ```
     pip install --upgrade watchdog
     ```
