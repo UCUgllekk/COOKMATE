@@ -179,8 +179,9 @@ body, html {
   }
 
   #suggestions {
+    height: 280px;
     padding: 30px;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
