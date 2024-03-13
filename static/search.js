@@ -46,7 +46,7 @@ document.getElementById('search-form').addEventListener('submit', function(event
 // Add an event listener for the 'input' event to the search bar
 document.getElementById('search-bar').addEventListener('input', function() {
     // Get the current value of the search bar
-    var inputVal = this.value;
+    var inputVal = this.value.toLowerCase();
     var suggestionsDiv = document.getElementById('suggestions');
 
     // If the search bar is not empty
@@ -85,3 +85,25 @@ document.getElementById('search-bar').addEventListener('input', function() {
         suggestionsDiv.innerHTML = '';
     }
 });
+
+
+
+document.getElementById('find_meal_button').addEventListener('click', function() {
+    fetch('/store_data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selected_ingredients),
+    })
+    console.log(selected_ingredients)
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/tinder';
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
