@@ -1,0 +1,232 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.main-container {
+  padding: 30px;
+}
+
+
+.div-3 {
+  display: flex;
+  margin-top: 12px;
+  flex-direction: column;
+  align-items: start;
+  font-size: 10px;
+  color: #7b3f14;
+  font-weight: 300;
+}
+
+@media (max-width: 991px) {
+  .div-3 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+
+.img {
+  aspect-ratio: 1.52;
+  object-fit: auto;
+  object-position: center;
+  width: 35px;
+  margin-left: 40px;
+}
+
+@media (max-width: 991px) {
+  .img {
+    margin-left: 10px;
+  }
+}
+
+.img-2 {
+  aspect-ratio: 7.14;
+  object-fit: auto;
+  object-position: center;
+  width: 118px;
+  max-width: 100%;
+}
+
+.div-4 {
+  align-self: stretch;
+  display: flex;
+  margin-top: 21px;
+  padding-left: 59px;
+  flex-direction: column;
+  align-items: center; /* Вирівнює елементи по центру по горизонталі */
+}
+
+
+@media (max-width: 991px) {
+  .div-4 {
+    padding-left: 20px;
+  }
+}
+
+.div-5 {
+  color: #000;
+  align-self: center;
+  font: 700 50px Inter, sans-serif;
+}
+
+.div-6,
+.div-7 {
+  font: 400 20px Inter, sans-serif;
+  border-radius: 15px;
+  background-color: #ffa552;
+  margin-top: 44px;
+  justify-content: center;
+  align-items: start;
+  text-align: left;
+  padding: 5px 60px 5px 30px; /* Додає відступ перед текстом */
+}
+
+.div-6 {
+  margin-top: 44px;
+}
+
+@media (max-width: 991px) {
+  .div-6 {
+    padding-right: 20px;
+    margin-top: 40px;
+  }
+}
+
+.div-7 {
+  margin-top: 33px;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .div-7 {
+    padding-right: 20px;
+    white-space: initial;
+  }
+}
+
+.div-8 {
+  border-radius: 80px;
+  background-color: #555;
+  align-self: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center; /* Вирівнює текст по центру */
+  padding: 8px 36px;
+  font: 500 20px Inter, sans-serif;
+  margin-top: 20px; /* Зменшує відстань між кнопкою і верхнім краєм контейнера */
+}
+
+.div-2 {
+  gap: 20px;
+  display: flex;
+  align-items: center; /* Вирівнює елементи по центру по вертикалі */
+}
+
+@media (max-width: 991px) {
+  .div-2 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 56%;
+  margin-left: 50px;
+  margin-bottom: 0px;
+  margin-top: 100px;
+
+  
+}
+
+@media (max-width: 991px) {
+  .column {
+    width: 100%;
+    margin-right: 30px;
+    margin-left: 0; /* Додайте цей рядок для скидання лівого відступу */
+  }
+}
+
+.column-2 {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 56%;
+  margin-right: auto; /* Вирівнює контейнер по правому краю */
+  margin-left: auto; /* Вирівнює контейнер по лівому краю */
+  margin-bottom: 20px;
+
+  align-items: center; /* Вирівнює елементи по центру по вертикалі */
+}
+
+@media (max-width: 991px) {
+  .column-2 {
+    width: 100%;
+    margin-top: 100px;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .div-8 {
+    margin: 40px 0 0 10px;
+    padding: 0 20px;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .div-9 {
+    padding: 0 20px;
+  }
+}
+
+.img-3 {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.div-11 {
+  color: #000;
+  align-self: center;
+  font: 700 50px Inter, sans-serif;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0px;
+  text-align: center;
+}
+@media (max-width: 991px) {
+  .div-11 {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}
+
+.div-10 {
+  font-family: Inter, sans-serif;
+  color: #fff;
+  border-radius: 80px;
+  background-color: #555;
+  padding: 8px 33px;
+  font: 500 20px Inter, sans-serif;
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 991px) {
+  .div-10 {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}
+  

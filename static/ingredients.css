@@ -1,0 +1,133 @@
+.recipe-container {
+    background-color: #fff;
+    display: flex;
+    /* max-width: 592px; */
+    padding: 24px;
+    flex-direction: column;
+  }
+
+  .top-section {
+    display: flex;
+    width: 100%;
+    align-items: start;
+    justify-content: space-between;
+    gap: 20px;
+    color: #000;
+    margin: 5px 10px 0 0;
+  }
+
+  @media (max-width: 991px) {
+    .top-section {
+      max-width: 100%;
+      flex-wrap: wrap;
+    }
+  }
+
+  .content-section {
+    display: flex;
+    margin-top: 5px;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .search-header {
+    display: flex;
+    padding: 10px;
+    font-weight: bold;
+    color: #070101;
+    font-size: 0px;
+    font: 300 20px Inter, sans-serif;
+  }
+  .number {
+    color: #AA9E9E;
+    margin-right: 15px;
+  }
+  .number.active{
+    color: #070101;
+  }
+  .image-section {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0%;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .choice-text {
+    text-align: center;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+    margin-left: 330px;
+    font-weight: 700;
+    font-size: 50px;
+    font-family: Inter, sans-serif;
+  }
+
+  .recipe-title {
+    border-radius: 10px;
+    background-color: #ffa552;
+    width: 800px;
+    margin-left: 250px;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    text-align: center;
+    padding: 8px 60px;
+    font-weight: 200;
+    font-size: 20px;
+    font-family: Inter, sans-serif;
+  }
+
+  @media (max-width: 991px) {
+    .recipe-title {
+      max-width: 100%;
+      padding: 8px 20px;
+    }
+  }
+
+  .recipe-details {
+    margin-top: 16px;
+  }
+
+  .ingredients-section {
+    display: flex;
+    gap: 20px;
+  }
+
+  @media (max-width: 991px) {
+    .ingredients-section {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0px;
+    }
+  }
+
+  .ingredients-column {
+    margin-top: 100px;
+    margin-left: 80px;
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+  }
+
+  .ingredient-text {
+    margin-top: 60px;
+    margin-right: 500px;
+    color: #000;
+    font-weight: 200;
+    /* font-size: px; */
+    font-family: Inter, sans-serif;
+  }
+
+  @media (max-width: 991px) {
+    .ingredients-column {
+      width: 100%;
+    }
+
+    .ingredient-text {
+      margin-top: 15px;
+    }
+  }

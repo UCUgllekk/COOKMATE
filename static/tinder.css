@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background:  no-repeat;
+}
+
+#swiper {
+  height: 70vh;
+  aspect-ratio: 2 / 3;
+  perspective: 1000px;
+  perspective-origin: center 50%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card {
+  width: 150%; /* Збільшимо ширину */
+  height: auto; /* Автоматична висота */
+  position: absolute;
+  border-radius: 20px;
+  overflow: hidden;
+  transform: translateZ(calc(-30px * var(--i))) translateY(calc(-20px * var(--i))) rotate(calc(-4deg * var(--i)));
+  filter: drop-shadow(2px 2px 20px rgba(0, 0, 0, 0.5));
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.5s;
+}
+
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* style.css */
+
+.card-container {
+  position: relative;
+}
+
+.card-title {
+  position:fixed;
+  
+  bottom: 0px; /* Змініть це значення за необхідності */
+  left: 10px; /* Змініть це значення за необхідності */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* style.css */
+
+.card-description {
+  position: absolute;
+  bottom: 10px; /* Змініть це значення за необхідності */
+  left: 10px; /* Змініть це значення за необхідності */
+  color: white;
+  font-size: 14px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+
+#like,
+#dislike {
+  font-size: 5vh;
+  border-radius: 50%;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  animation-name: animation1;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  /* don't run animation at the beginning */
+  animation-play-state: paused;
+  margin-left: 100px; /* Додано відступ справа */
+}
+
+
+#like.trigger,
+#dislike.trigger {
+  animation-name: animation2;
+}
+
+#like {
+  color: #ffa552;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#dislike {
+  color: #ccc;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes animation1 {
+
+  70%,
+  100% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 5;
+  }
+}
+
+@keyframes animation2 {
+
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 5;
+  }
+}
