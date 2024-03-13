@@ -105,7 +105,7 @@ body, html {
     background-color: #ffa552;
     border-radius: 10px;
     margin-top: 0px;
-    margin-bottom: 200px;
+    /* margin-bottom: 200px; */
     padding: 20px;
     width: 500px;
     margin-left: 25px;
@@ -186,7 +186,7 @@ body, html {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-left: 65px;
-    transform: translateY(-200px);
+    /* transform: translateY(-200px); */
   }
 
   .option {

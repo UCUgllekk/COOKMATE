@@ -1,3 +1,4 @@
+var selected_ingredients = []
 // Add an event listener for the 'submit' event to the form
 document.getElementById('search-form').addEventListener('submit', function(event) {
     // Prevent the form from being submitted and the page from reloading
@@ -31,8 +32,9 @@ document.getElementById('search-form').addEventListener('submit', function(event
             // Create a new div for the selected ingredient
             var ingredientDiv = document.createElement('div');
             ingredientDiv.textContent = shortestSuggestion.textContent;
-            ingredientDiv.classList.add("tag")
-
+            ingredientDiv.classList.add("tag");
+            selected_ingredients.push(shortestSuggestion.textContent);
+            console.log(selected_ingredients);
             // Add the new div to the list of selected ingredients
             document.getElementById('selected-ingredients').appendChild(ingredientDiv);
         }
