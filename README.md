@@ -13,7 +13,12 @@
     none
     ```
 2. Install requirements
-    * ```pip install -r requirements.txt```
+    ```
+    pip install -r requirements.txt
+    ```
 
 * p.s if troubles with 'event_type_opened' from 'watchdog.events':
-    * write: ``` pip install --upgrade watchdog ```
+    * write: 
+    ```
+    pip install --upgrade watchdog
+    ```
