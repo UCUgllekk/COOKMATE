@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe Steps</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='main_page.css') }}">
+  <link rel="stylesheet" href="main_page_2.css">
 </head>
 <body>
   <main class="main-container">
@@ -35,21 +35,6 @@
         <h3 class="step-title">Cook with the detailed recipe</h3>
       </article>
     </section>
-    <!-- <aside class="search-ingredients">
-      <div class="search-header">
-        <div class="number active">1</div>
-        <div class="number">2</div>
-        <div class="number">3</div>
-      </div>
-      <h2 class="search-title">Choose your <br> ingredients</h2>
-      <form class="input-group" id="search-form">
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4295edfeb8397e09642439a4471b1d1024a71466603be46ee89612408822000?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Search icon" class="search-icon">
-        <input type="text" id="search-bar" placeholder="Type here..." aria-label="Type here to search ingredients"  autocomplete="off">
-      </form>
-      <div id="suggestions"></div>
-      <div id="selected-ingredients"></div>
-      <a href="/tinder"><button id="find_recipes">Find Recipes</button></a>
-    </aside> -->
     <aside class="search-ingredients">
       <div class="search-header">
         <div class="number active">1</div>
@@ -57,21 +42,50 @@
         <div class="number">3</div>
       </div>
       <div class="ingredients-section row">
-        <div>
+        <div class="col">
           <h2 class="search-title">Choose your <br> ingredients</h2>
+          <!-- <div class="input-group">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4295edfeb8397e09642439a4471b1d1024a71466603be46ee89612408822000?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Search icon" class="search-icon">
+            <input id="ingredient-input" type="text" placeholder="Type here..." aria-label="Type here to search ingredients" id="search_bar">
+            <div id="results"></div>
+          </div> -->
           <form class="input-group" id="search-form">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4295edfeb8397e09642439a4471b1d1024a71466603be46ee89612408822000?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Search icon" class="search-icon">
             <input type="text" id="search-bar" placeholder="Search ingredients...", autocomplete="off">
           </form>
           <div id="suggestions"> 
+            <div class="options"> 
+              first child 
+            </div> 
+            <div class="options"> 
+              second child
+            </div> 
+            <div class="options"> 
+              third child 
+            </div> 
           </div>
         </div>
-        <div id="selected-ingredients">
+        <div id="selected-ingredients" class="col">
+          <div class="tag">
+            sugargirlssss
+          </div>
+          <div class="tag">
+            sugargirlssss
+          </div>
+          <div class="tag">
+            sugargirlssss
+          </div>
+          <div class="tag">
+            sugargirlssss
+          </div>
+          <div class="tag">
+            sugargirlssss
+          </div>
         </div>
       </div>
       
     </aside>
   </main>
-<script src="{{ url_for('static', filename='search.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='search.js') }}"></script> -->
 </body>
 </html>

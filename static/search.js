@@ -5,7 +5,7 @@ document.getElementById('search-form').addEventListener('submit', function(event
 
     // Get all the suggestions
     var suggestionsDiv = document.getElementById('suggestions');
-    var suggestions = Array.from(suggestionsDiv.getElementsByTagName('p'));
+    var suggestions = Array.from(suggestionsDiv.getElementsByTagName('div'));
 
     // If there are any suggestions
     if (suggestions.length > 0) {
@@ -20,7 +20,7 @@ document.getElementById('search-form').addEventListener('submit', function(event
 
         // Get all the currently selected ingredients
         var selectedIngredients = Array.from(document.getElementById('selected-ingredients').getElementsByTagName('div'));
-
+        console.log(shortestSuggestion.textContent)
         // Check if the selected ingredient is already in the list of selected ingredients
         var alreadySelected = selectedIngredients.some(function(ingredientDiv) {
             return ingredientDiv.textContent === shortestSuggestion.textContent;
@@ -31,6 +31,7 @@ document.getElementById('search-form').addEventListener('submit', function(event
             // Create a new div for the selected ingredient
             var ingredientDiv = document.createElement('div');
             ingredientDiv.textContent = shortestSuggestion.textContent;
+            ingredientDiv.classList.add("tag")
 
             // Add the new div to the list of selected ingredients
             document.getElementById('selected-ingredients').appendChild(ingredientDiv);
@@ -46,8 +47,6 @@ document.getElementById('search-bar').addEventListener('input', function() {
     var inputVal = this.value;
     var suggestionsDiv = document.getElementById('suggestions');
 
-    // Clear the suggestions div
-    suggestionsDiv.innerHTML = '';
     // If the search bar is not empty
     if (inputVal) {
         // Create a new XMLHttpRequest
@@ -61,13 +60,16 @@ document.getElementById('search-bar').addEventListener('input', function() {
             // Parse the response text as JSON
             var suggestions = JSON.parse(this.responseText);
 
+            // Clear the suggestions div
+            suggestionsDiv.innerHTML = '';
             // For each suggestion
             suggestions.slice(0, 5).forEach(function(suggestion) {
                 // Create a new p element
-                var p = document.createElement('p');
+                var p = document.createElement('div');
 
                 // Set the text content of the p element to the suggestion
                 p.textContent = suggestion;
+                p.classList.add("option")
 
                 // Add the p element to the suggestions div
                 suggestionsDiv.appendChild(p);
