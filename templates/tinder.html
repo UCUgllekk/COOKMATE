@@ -1,24 +1,185 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Card Swiper</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='tinder.css') }}">
+  <title>Recipe Steps</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='tinder.css')}}">
 </head>
-
 <body>
-  <ion-icon id="dislike" name="heart-dislike"></ion-icon>
-  <div id="swiper">
-  </div>
-  <ion-icon id="like" name="heart"></ion-icon>
-
-  <script src="{{ url_for('static', filename='card.js') }}"></script>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <main class="main-container">
+    <header class="header">
+        <a href="/">
+          <img height="91px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc277e0ff378357bda8086eaad29fc23d7c18641518cfe14a929ebc7c8492b5b?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Kitchen scene">
+        </a>
+        <h1 class="search-title">Choose your meal</h1>
+        <div style="width: 250px;">&nbsp;</div>
+        <!-- <a href="/login">
+          <img width="68px" height="66px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2193b59fbc4b070793fc65289e6c6dc81bbe6734b6043853ba8e7a51ab505019?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Profile">
+        </a> -->
+      </header>
+      <!-- <a href="/login">
+        <img width="68px" height="66px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2193b59fbc4b070793fc65289e6c6dc81bbe6734b6043853ba8e7a51ab505019?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Profile">
+      </a> -->
+    <div class="icon-container">
+      <ion-icon id="dislike" name="heart-dislike"></ion-icon>
+      <div id="swiper"></div>
+      <ion-icon id="like" name="heart"></ion-icon>
+    </div>
+    <div class="find-meal-container">
+        <a href="..." class="find-meal">find a meal</a>
+    </div>
+  </main>
+  <script src="{{ url_for('static', filename = 'card.js' )}}"></script>
+  <script src="{{ url_for('static', filename = 'script.js')}}"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
-
 </html>
+
+
+
+
+<!-- <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .wrapper {
+            padding: 15px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header .profile {
+            margin-top: 0;
+        }
+
+        .title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            border: 2px solid #FFA552;
+            border-radius: 30px;
+            color: black;
+            font-size: 12px;
+            display: inline-block;
+            padding: 5px 12px;
+        }
+
+        .list-rated {
+            padding: 25px 65px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .list-rated-item {
+            display: flex;
+            margin-bottom: 35px;
+        }
+
+        .list-rated-item .thumbnail img {
+            max-width: 100%;
+            height: 135px;
+        }
+
+        .list-rated-content {
+            padding: 5px 0 10px 50px;
+        }
+
+        .list-rated-content h2 {
+            font-size: 20px;
+            height: 45px;
+        }
+
+        .list-rated-content .stars {
+            display: flex;
+            margin-bottom: 40px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+        <div class="header">
+            <a href="main_page.html" class="logo">
+                <img width="210px" src="./assets/images/logo.png" />
+            </a>
+            <a href="#" class="profile"><img src="./assets/images/icon-profile.png" /></a> -->
+        <!-- </div>
+        <div class="main">
+            <h1 class="title">Choose your meal</h1>
+            <div class="list-rated">
+                <div class="list-rated-item">
+                </div>
+                <div class="list-rated-item">
+                    <div class="list-rated-content">
+                        <a href="ingredients.html" class="button">end search</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html> -->

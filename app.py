@@ -21,7 +21,7 @@ class SearchView(MethodView):
     def get(self):
         '''search ingredients'''
         query = request.args.get('query')
-        results = mongo.db.ingredients.find({'name': {'$regex': query.strip()}})
+        results = mongo.db.ingredients.find({"name": {"$regex": query.strip()}})
         suggestions = sorted([result['name'] for result in results], key=len)
         return jsonify(suggestions)
 

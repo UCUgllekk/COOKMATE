@@ -33,25 +33,14 @@ function appendNewCard() {
     }
   });
 
-  // Створення елементу для назви фото
-  const title = document.createElement('div');
-  title.textContent = `Фото ${cardCount + 1}`;
-  title.classList.add('card-title');
-
-  // Створення елементу для тексту під фото
-  const description = document.createElement('div');
-  description.textContent = `Опис фото ${cardCount + 1}`;
-  description.classList.add('card-description');
-  
-  // Створення контейнера для карти та її назви та опису
-  const cardContainer = document.createElement('div');
-  cardContainer.classList.add('card-container');
-  cardContainer.appendChild(card.element);
-  cardContainer.appendChild(title);
-  cardContainer.appendChild(description);
-
-  swiper.append(cardContainer);
+  swiper.append(card.element);
   cardCount++;
+
+  // Create title for the card
+  const title = document.createElement('div');
+
+  // Append title after the card element
+  swiper.append(title);
 }
 
 // Виклик функції для створення перших 5 карт
