@@ -63,6 +63,12 @@ class LikedPage(MethodView):
         '''open liked'''
         return render_template('liked.html')
 
+class RatedPage(MethodView):
+    '''Rated'''
+    def get(self):
+        '''open rated'''
+        return render_template('rated.html')
+
 # class StoreDataView(MethodView):
 #     def get(self):
 #         data = request.data
