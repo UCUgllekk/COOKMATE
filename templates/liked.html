@@ -26,7 +26,7 @@
             font: inherit;
             vertical-align: baseline;
         }
-        /* HTML5 display-role reset for older browsers */
+
         article, aside, details, figcaption, figure, 
         footer, header, hgroup, menu, nav, section {
             display: block;
@@ -145,8 +145,8 @@
         <div class="main">
             <h1 class="title">Your profile</h1>
             <div class="links">
-                <a class="active" href="./linked.html">Liked</a>
-                <a href="./rated.html">Rated</a>
+                <a class="active" href="{{ url_for('templates', filename = 'liked.html')}}">Liked</a>
+                <a href="{{ url_for('templates', filename = 'rated.html')}}">Rated</a>
             </div>
             <div class="list-liked">
                 <div class="list-liked-item">

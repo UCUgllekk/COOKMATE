@@ -141,8 +141,8 @@
         <div class="main">
             <h1 class="title">Your profile</h1>
             <div class="links">
-                <a href="./linked.html">Liked</a>
-                <a class="active" href="./rated.html">Rated</a>
+                <a href="{{ url_for('templates', filename = 'liked.html')}}">Liked</a>
+                <a class="active" href="{{ url_for('templates', filename = 'rated.html')}}">Rated</a>
             </div>
             <div class="list-rated">
                 <div class="list-rated-item">

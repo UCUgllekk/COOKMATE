@@ -86,8 +86,6 @@ document.getElementById('search-bar').addEventListener('input', function() {
     }
 });
 
-
-
 document.getElementById('find_meal_button').addEventListener('click', function() {
     fetch('/store_data', {
         method: 'POST',
