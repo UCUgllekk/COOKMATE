@@ -17,6 +17,16 @@ class MainPage(MethodView):
         '''open_main_page'''
         return render_template('main_page.html')
 
+class SearchView(MethodView):
+    '''search ingredients'''
+    def get(self):
+        '''search ingredients'''
+        query = request.args.get('query')
+        results = mongo.db.ingredients.find({"name": {"$regex": query.strip()}})
+        suggestions = sorted([result['name'] for result in results], key=len)
+        return jsonify(suggestions)
+
+
 class LoginPage(MethodView):
     '''LoginPage'''
     def get(self):
@@ -35,11 +45,11 @@ class IngredientsPage(MethodView):
         '''open ingredients'''
         return render_template('ingredients.html')
 
-# class ProfilePage(MethodView):
-#     '''Profile'''
-#     def get(self):
-#         '''open profile'''
-#         return render_template('profile.html')
+class ProfilePage(MethodView):
+    '''Profile'''
+    def get(self):
+        '''open profile'''
+        return render_template('profile.html')
 
 class TinderPage(MethodView):
     '''Tinder'''
@@ -52,12 +62,6 @@ class LikedPage(MethodView):
     def get(self):
         '''open liked'''
         return render_template('liked.html')
-
-class RatedPage(MethodView):
-    '''Rated'''
-    def get(self):
-        '''open rated'''
-        return render_template('rated.html')
 
 # class StoreDataView(MethodView):
 #     def get(self):
@@ -97,14 +101,14 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
 
 app.add_url_rule('/', view_func=MainPage.as_view('main_page'))
 app.add_url_rule('/ingredients', view_func=IngredientsPage.as_view('ingredients'))
-# app.add_url_rule('/profile', view_func=ProfilePage.as_view('profile'))
+app.add_url_rule('/profile', view_func=ProfilePage.as_view('profile'))
 app.add_url_rule('/login', view_func=LoginPage.as_view('login'))
 app.add_url_rule('/sign_up', view_func=SignUpPage.as_view('sign_up'))
 app.add_url_rule('/search', view_func=SearchView.as_view('search_view'))
 app.add_url_rule('/tinder', view_func=TinderPage.as_view('tinder'))
 app.add_url_rule('/store_data', view_func=StoreDataView.as_view('store_data'))
-app.add_url_rule('/liked', view_func=StoreDataView.as_view('liked'))
 app.add_url_rule('/rated', view_func=StoreDataView.as_view('rated'))
+app.add_url_rule('/liked', view_func=StoreDataView.as_view('liked'))
 
 if __name__ == '__main__':
     app.run(debug=True)
