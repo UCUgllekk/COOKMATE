@@ -26,7 +26,6 @@ class SearchView(MethodView):
         suggestions = sorted([result['name'] for result in results], key=len)
         return jsonify(suggestions)
 
-
 class LoginPage(MethodView):
     '''LoginPage'''
     def get(self):
@@ -69,30 +68,26 @@ class RatedPage(MethodView):
         '''open rated'''
         return render_template('rated.html')
 
-# class StoreDataView(MethodView):
-#     def get(self):
-#         data = request.data
-#         data = json.loads(data)
-#         # Now data is a Python list
-#         # Store it in the session
-#         print(f"{data=}")
-#         session['selected_ingredients'] = data
-#         found_recipes = find_with_majority_ingredients(data, 0.5)
-#         return '', 200  # Return found_recipes in the response
-
-class StoreDataView(MethodView):
-    def post(self):
-        data = request.data
-        data = json.loads(data)
-        print(session)
-        session['selected_ingredients'] = data
-        print(session)
-        found_recipes = find_with_majority_ingredients(data, 0.5)
-        return jsonify(found_recipes), 200
-
 class StoreDataView(MethodView):
     def get(self):
-        selected_ingredients = session.get('selected_ingredients', [])
+        data = request.data
+        data = json.loads(data)
+        # Now data is a Python list
+        # Store it in the session
+        print(f"{data=}")
+        session['selected_ingredients'] = data
+        found_recipes = find_with_majority_ingredients(data, 0.5)
+        return '', 200  # Return found_recipes in the response
+
+# class StoreDataView(MethodView):
+#     def post(self):
+#         data = request.data
+#         data = json.loads(data)
+#         print(session)
+#         session['selected_ingredients'] = data
+#         print(session)
+#         found_recipes = find_with_majority_ingredients(data, 0.5)
+#         return jsonify(found_recipes), 200
 
 def find_with_majority_ingredients(ingredient_list, amount: float):
     all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, "Title": 1})  # only return the 'cleaned_ingredients' field
