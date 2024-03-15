@@ -18,12 +18,14 @@
     <div class="column">
         <form action="{{ url_for('sign_up') }}" method="POST">
           {% block content %}
+            <div class="div-5">Sign up</div>
+            <div class="input">
+              <input type="text" name="email" class="div-6" placeholder="Email">
+              <input type="password" name="password" class="div-7" placeholder="Password">
+            </div>
             {% if message %}
             <p style="color:red;"> {{ message }}</p>
             {% endif %}
-            <div class="div-5">Sign up</div>
-            <input type="text" name="email" class="div-6" placeholder="Email">
-            <input type="password" name="password" class="div-7" placeholder="Password">
             <form style="align-self: center;">
               <button class="div-8">Sign up</button>
             </form>
