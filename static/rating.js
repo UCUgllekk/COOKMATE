@@ -1,4 +1,3 @@
-rating.js:
 document.addEventListener('DOMContentLoaded', function() {
     var stars = document.getElementsByClassName('star');
 
