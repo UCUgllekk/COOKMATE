@@ -3,32 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login/signup</title>
+  <title>Recipes</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='ingredients.css') }}">
 </head>
 <body>
-    <main class="recipe-container">
-        <section class="top-section">
-          <div class="content-section">
-            <div class="image-section">
-              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d1d1d37b6b401060d045bc67178394ee2af2a8afbab5e12844328cda216efb5e?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Decorative" class="img" />
-              <div class="search-header">
-                <div class="number active">1</div>
-                <div class="number">2</div>
-                <div class="number">3</div>
-              </div>
-            </div>
-            <div class="choice-text">Your choice</div>
-          </div>
-          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/100b28d4fd6ffe4021200cf3416a9914f51fb01e0ef0e74498730c2d995c23a4?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Decorative" class="img-2" />
-        </section>
+  <main class="main-container">
+    <header class="header">
+      <a href="/">
+          <img height="91px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc277e0ff378357bda8086eaad29fc23d7c18641518cfe14a929ebc7c8492b5b?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Kitchen scene">
+      </a>
+      <a href="/login">
+          <img width="68px" height="66px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2193b59fbc4b070793fc65289e6c6dc81bbe6734b6043853ba8e7a51ab505019?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Profile">
+      </a>
+    </header>
         <section class="recipe-details">
           <div class="recipe-title">Curried Pumpkin Soup</div>
           <div class="ingredients-section">
             <div class="ingredients-column">
               <img loading="lazy" width="400px" height="300px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/64011abae2a0f9fb05bab62eafd294c4542515dc354f9f10ab9e3c885ae35d7f?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Curried Pumpkin Soup" class="img-3" />
             </div>
-            <div>
+            <div class="ingredients">
               <div class="ingredient-text">
                 • 2 medium onions, finely chopped (2 cups)<br />
                 • 2 tablespoons unsalted butter<br />
@@ -50,5 +44,52 @@
             </div>
           </div>
         </section>
+        <div class="find-meal-container">
+          <a href="javascript:void(0);" id="expandButton" class="find-meal visible">Recipe</a>
+        </div>
       </main>
+
+      <script>
+        const expandButton = document.getElementById('expandButton');
+        expandButton.addEventListener('click', function() {
+          const recipeTitle = document.createElement('div');
+          recipeTitle.classList.add('recipe-title2');
+          recipeTitle.innerText = 'Recipe';
+          recipeTitle.style.fontWeight = 'bold';
+          recipeTitle.style.border = 'none'; // Remove the border
+          recipeTitle.style.textAlign = 'left'; // Align text to the left
+
+          const recipeDescription = document.createElement('div');
+          recipeDescription.classList.add('recipe-description');
+          recipeDescription.innerHTML = `
+            <p>Cook onions in butter in a wide 6-quart heavy pot over moderately low heat, stirring occasionally, until softened, 3 to 5 minutes.
+Add garlic and ginger and cook, stirring, 1 minute.
+Add cumin, coriander, and cardamom and cook, stirring, 1 minute.
+Stir in salt, red pepper flakes, pumpkin, water, broth, and coconut milk and simmer, uncovered, stirring occasionally, 30 minutes.
+Purée soup in batches in a blender until smooth (use caution when blending hot liquids), transferring to a large bowl, and return soup to pot.
+Keep soup warm over low heat.
+Heat oil in a small heavy skillet over moderately high heat until hot but not smoking, then cook mustard seeds until they begin to pop, about 15 seconds.
+Add curry leaves and cook 5 seconds, then pour mixture into pumpkin soup.
+Stir until combined well and season soup with salt.
+Soup can be thinned with additional water.</p>
+            <p>...</p>
+          `;
+          const findMealContainer = document.querySelector('.find-meal-container');
+          findMealContainer.parentNode.insertBefore(recipeTitle, findMealContainer.nextSibling);
+          findMealContainer.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
+
+          recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          // Remove the button after clicking
+          expandButton.remove();
+
+          // Add CSS styles to ingredient-text class
+          const ingredientText = document.querySelectorAll('.ingredient-text');
+          ingredientText.forEach(item => {
+            item.style.overflowWrap = 'break-word';
+            item.style.listStyleType = 'disc';
+          });
+        });
+      </script>
 </body>
+</html>

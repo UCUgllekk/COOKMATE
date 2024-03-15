@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login/signup</title>
+  <title>Login/Signup</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
 </head>
 <body>
@@ -16,12 +16,19 @@
 <div class="div">
   <div class="div-2">
     <div class="column">
-          <div class="div-5">Sign up</div>
-          <input type="text" class="div-6" placeholder="Email">
-          <input type="password" class="div-7" placeholder="Password">
-          <form style="align-self: center;">
-            <button class="div-8">Sign up</button>
+        <form action="{{ url_for('sign_up') }}" method="POST">
+          {% block content %}
+            {% if message %}
+            <p style="color:red;"> {{ message }}</p>
+            {% endif %}
+            <div class="div-5">Sign up</div>
+            <input type="text" name="email" class="div-6" placeholder="Email">
+            <input type="password" name="password" class="div-7" placeholder="Password">
+            <form style="align-self: center;">
+              <button class="div-8">Sign up</button>
+            </form>
           </form>
+          {% endblock %}
     </div>
     <div class="column-2">
       <div class="div-11">Already have an account?</div>
