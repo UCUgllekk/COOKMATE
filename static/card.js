@@ -27,7 +27,7 @@ class Card {
       const card = document.createElement('div');
       card.classList.add('card');
       const img = document.createElement('img');
-      img.src = this.imageUrl;
+      img.src = "static/Food Images/"+this.imageUrl + ".jpg";
       card.append(img);
       this.element = card;
       if (this.#isTouchDevice()) {
@@ -123,10 +123,16 @@ class Card {
         this.onDismiss();
       }
       if (typeof this.onLike === 'function' && direction === 1) {
+        liked_recipes.push(recipes.slice(cardCount - 4, cardCount))
+        console.log(cardCount)
+        console.log(liked_recipes)
         this.onLike();
       }
       if (typeof this.onDislike === 'function' && direction === -1) {
         this.onDislike();
       }
+      // if (recipes.length <= cardCount) {
+      //   document.hre
+      // }
     }
   }

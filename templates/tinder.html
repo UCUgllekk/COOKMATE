@@ -8,6 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe Steps</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='tinder.css')}}">
+  <script>
+    var recipes = '{{ recipes|tojson }}';
+  </script>
 </head>
 <body>
   <main class="main-container">
@@ -30,7 +33,7 @@
       <ion-icon id="like" name="heart"></ion-icon>
     </div>
     <div class="find-meal-container">
-        <a href="..." class="find-meal">find a meal</a>
+        <button id="ingredients_button" class="find-meal">find a meal</a>
     </div>
   </main>
   <script src="{{ url_for('static', filename = 'card.js' )}}"></script>

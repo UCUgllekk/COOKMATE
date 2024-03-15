@@ -1,5 +1,5 @@
 '''app.py'''
-from flask import Flask, render_template, request, redirect, jsonify, session
+from flask import Flask, render_template, request, redirect, jsonify, session, url_for
 from flask.views import MethodView
 from flask_pymongo import PyMongo
 import json
@@ -42,7 +42,8 @@ class IngredientsPage(MethodView):
     '''Ingredients'''
     def get(self):
         '''open ingredients'''
-        return render_template('ingredients.html')
+        liked_recipes = session['liked_recipes'] if "liked_recipes" in session else []
+        return render_template('ingredients.html', liked_recipes=liked_recipes)
 
 class ProfilePage(MethodView):
     '''Profile'''
@@ -54,7 +55,8 @@ class TinderPage(MethodView):
     '''Tinder'''
     def get(self):
         '''open tinder'''
-        return render_template('tinder.html')
+        recipes = session['recipes'] if "recipes" in session else []
+        return render_template('tinder.html', recipes=recipes)
 
 class LikedPage(MethodView):
     '''Liked'''
@@ -69,15 +71,27 @@ class RatedPage(MethodView):
         return render_template('rated.html')
 
 class StoreDataView(MethodView):
-    def get(self):
+    def post(self):
         data = request.data
         data = json.loads(data)
         # Now data is a Python list
         # Store it in the session
         print(f"{data=}")
         session['selected_ingredients'] = data
-        found_recipes = find_with_majority_ingredients(data, 0.5)
-        return '', 200  # Return found_recipes in the response
+        session['recipes'] = find_with_majority_ingredients(data, 0.5)
+        # session['recipes'] = ['homemade-paneer-recipe', 'all-day-every-day-yogurt-sauce', 'basic-lemon-vinaigrette', 'preserved-lemons', 'lemon-pepper-salt-rub-51104430']
+        # session['recipes'] = ["d best"]
+        print()
+        print("stored")
+        return "", 200
+
+class StoreLikedRecipesView(MethodView):
+    def post(self):
+        data = request.data
+        data = json.loads(data)
+        session['liked_recipes'] = data
+        print(f"{data = }")
+        return "", 200
 
 # class StoreDataView(MethodView):
 #     def post(self):
@@ -90,7 +104,7 @@ class StoreDataView(MethodView):
 #         return jsonify(found_recipes), 200
 
 def find_with_majority_ingredients(ingredient_list, amount: float):
-    all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, "Title": 1})  # only return the 'cleaned_ingredients' field
+    all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, "Title": 1, "Ingredients": 1, 'Instructions': 1})  # only return the 'cleaned_ingredients' field
     matching_docs = []
     print("docs: ", all_docs)
     for doc in all_docs:
@@ -98,6 +112,9 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
         if len(common_ingredients) / len(doc_ingredients) > amount:
             matching_docs.append(doc['Image_Name'])
+            matching_docs.append(doc['Title'])
+            matching_docs.append(doc['Ingredients'])
+            matching_docs.append(doc['Instructions'])
     return matching_docs
 
 app.add_url_rule('/', view_func=MainPage.as_view('main_page'))
@@ -108,6 +125,7 @@ app.add_url_rule('/sign_up', view_func=SignUpPage.as_view('sign_up'))
 app.add_url_rule('/search', view_func=SearchView.as_view('search_view'))
 app.add_url_rule('/tinder', view_func=TinderPage.as_view('tinder'))
 app.add_url_rule('/store_data', view_func=StoreDataView.as_view('store_data'))
+app.add_url_rule('/store_liked_recipes', view_func=StoreLikedRecipesView.as_view('store_liked_recipes'))
 app.add_url_rule('/rated', view_func=StoreDataView.as_view('rated'))
 app.add_url_rule('/liked', view_func=StoreDataView.as_view('liked'))
 

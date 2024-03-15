@@ -94,7 +94,6 @@ document.getElementById('find_meal_button').addEventListener('click', function()
         },
         body: JSON.stringify(selected_ingredients),
     })
-    console.log(selected_ingredients)
     .then(response => {
         if (response.ok) {
             window.location.href = '/tinder';
