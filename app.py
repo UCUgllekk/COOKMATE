@@ -11,7 +11,8 @@ secret_key = secrets.token_hex(16)
 
 app = Flask(__name__)
 
-app.config["MONGO_URI"] = "mongodb+srv://pavlosiukpn:U221Bd9n@cookmatecluster.uqlmdxd.mongodb.net/python_project"
+app.config["MONGO_URI"] = "mongodb+srv://pavlosiukpn:U221Bd9n@cookma"+\
+    "tecluster.uqlmdxd.mongodb.net/python_project"
 app.secret_key = secret_key
 
 mongo = PyMongo(app)
@@ -90,18 +91,10 @@ class IngredientsView(MethodView):
         print(liked_recipes)
         return render_template('ingredients.html', liked_recipes=liked_recipes)
 
-class ProfileView(MethodView):
-    '''Profile'''
-    def get(self):
-        '''open profile'''
-        return render_template('profile.html')
-
 class TinderView(MethodView):
     '''Tinder'''
     def get(self):
         '''open tinder'''
-        # print(session['recipes'])
-        # recipes = session['recipes'] if "recipes" in session else []
         return render_template('tinder.html', recipes=recipes)
 
 class LikedView(MethodView):
@@ -110,9 +103,8 @@ class LikedView(MethodView):
         '''open liked'''
         user_email = session.get('email')
         user = mongo.db.users.find_one({"email": user_email})
-        liked_recipes = user['liked']
-        print(liked_recipes)
-        return render_template('liked.html', recipes = liked_recipes)
+        liked = user['liked']
+        return render_template('liked.html', recipes = liked)
 
 class RatedView(MethodView):
     '''View Recipes'''
@@ -124,33 +116,8 @@ class RatedView(MethodView):
             return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
         rated_recipes = user['liked']
-        recipes = [mongo.db.recipes.find_one({"id": recipe[0]}) for recipe in rated_recipes]
-        return render_template('rated.html', recipes=recipes)
-
-# class RateView(MethodView):
-#     '''Rating'''
-#     def post(self):
-#         '''Ra'''
-#         print('im in rateview post')
-#         user_email = session.get('email')
-#         if not user_email:
-#             return render_template('login.html')
-#         recipe_id = request.form.get('recipe_id')
-#         rating = request.form.get('rating')
-#         user = mongo.db.users.find_one({"email": user_email})
-#         user['rated'] = [meal for meal in user['rated'] if meal['id'] != recipe_id]
-#         user['rated'].append({'id': recipe_id, 'rating': rating})
-#         mongo.db.users.save(user)
-#         return 'Success', 200
-
-def validate_password(password: str):
-    '''password'''
-    return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", password))
-
-def validate_email(email:str):
-    '''email'''
-    return bool(re.fullmatch(r"^(?!\.)[a-z!#$%&'*+\-/=?^_`{|}~]+(?:\.[a-z!#$%&'*+\-/=?^_`"+\
-        r"{|}~]{1,64})*@[a-z]{1,255}(\.(gmail|ucu|com|org|edu|gov|net|ua))+", email))
+        rated_recipes = [mongo.db.recipes.find_one({"id": recipe[0]}) for recipe in rated_recipes]
+        return render_template('rated.html', recipes=rated_recipes)
 
 class StoreDataView(MethodView):
     '''StoreData'''
@@ -187,14 +154,14 @@ class StoreLikedRecipesView(MethodView):
         return "", 200
 
 class RecipeView(MethodView):
-        '''RecipeView'''
-        def get(self, recipe_id):
-            '''RecipePage'''
-            recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
-            print(recipe)
-            if not recipe:
-                return 'Recipe not found', 404
-            return render_template('recipe.html', recipe=recipe)
+    '''RecipeView'''
+    def get(self, recipe_id):
+        '''RecipePage'''
+        recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
+        print(recipe)
+        if not recipe:
+            return 'Recipe not found', 404
+        return render_template('recipe.html', recipe=recipe)
 
 class RateView(MethodView):
     '''RateView'''
@@ -210,6 +177,32 @@ class RateView(MethodView):
         user['rated'] = (recipe, rating)
         mongo.db.users.save(user)
         return 'Success', 200
+
+# class RateView(MethodView):
+#     '''Rating'''
+#     def post(self):
+#         '''Ra'''
+#         print('im in rateview post')
+#         user_email = session.get('email')
+#         if not user_email:
+#             return render_template('login.html')
+#         recipe_id = request.form.get('recipe_id')
+#         rating = request.form.get('rating')
+#         user = mongo.db.users.find_one({"email": user_email})
+#         user['rated'] = [meal for meal in user['rated'] if meal['id'] != recipe_id]
+#         user['rated'].append({'id': recipe_id, 'rating': rating})
+#         mongo.db.users.save(user)
+#         return 'Success', 200
+
+def validate_password(password: str):
+    '''password'''
+    return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
+        r"(?=.*?[#?!@$%^&*-]).{8,}$", password))
+
+def validate_email(email:str):
+    '''email'''
+    return bool(re.fullmatch(r"^(?!\.)[a-z!#$%&'*+\-/=?^_`{|}~]+(?:\.[a-z!#$%&'*+\-/=?^_`"+\
+        r"{|}~]{1,64})*@[a-z]{1,255}(\.(gmail|ucu|com|org|edu|gov|net|ua))+", email))
 
 def find_with_majority_ingredients(ingredient_list, amount: float):
     '''Find recipes by ingredients'''
@@ -228,6 +221,7 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
             matching_docs.append(doc['Instructions'])
     return matching_docs
 
+
 app.add_url_rule('/', view_func=MainView.as_view('main_page'))
 app.add_url_rule('/ingredients', view_func=IngredientsView.as_view('ingredients'))
 app.add_url_rule('/login', view_func=LoginView.as_view('log_in'))
@@ -240,6 +234,7 @@ app.add_url_rule('/store_liked_recipes', view_func=StoreLikedRecipesView.as_view
 app.add_url_rule('/rated', view_func=RatedView.as_view('recipes'))
 app.add_url_rule('/rate', view_func=RateView.as_view('rate'))
 app.add_url_rule('/recipe/<recipe_id>/', view_func=RecipeView.as_view('recipe'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
