@@ -180,23 +180,39 @@ body, html {
   }
 
   #suggestions {
-    height: 280px;
+    height: 320px;
     padding: 30px;
-    /* display: flex; */
+    display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-left: 65px;
+    /* justify-content: flex-start; */
+    align-items: left;
+    /* justify-content: space-between; */
+    margin-left: 60px;
     /* transform: translateY(-200px); */
   }
 
   .option {
+    /* color: transparent; */
+    background-color: transparent;
+    border-color: transparent;
     font: 300 30px Inter, sans-serif;
+    /* padding: 0; */
+    text-align: left;
+    padding-top: 10px;
+    margin-top: -10px;
 
   }
   /* Визначити клас для кожного елемента, крім першого */
   .option:not(:first-child) {
-    margin-top: 10px;
+    margin-top: 0;
+  }
+
+
+  .option:hover {
+    /* color: gray; */
+    background-color: rgb(232, 232, 232);
+    border-radius: 5%;
   }
 
   .find-meal-container {

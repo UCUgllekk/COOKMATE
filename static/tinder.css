@@ -194,3 +194,14 @@ body {
     opacity: 5;
   }
 }
+
+.removed {
+  display: none;
+}
+
+.no-elements {
+  margin: 40% 30%;
+}
+/* .no-recipe-div {
+  margin: 40% 30%;
+} */

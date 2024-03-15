@@ -1,3 +1,4 @@
+
 if (liked_recipes) {
     liked_recipes = liked_recipes.slice(2, -2).split("], [");
     for (var i = 0; i < liked_recipes.length; i++) {

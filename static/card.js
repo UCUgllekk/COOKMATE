@@ -132,6 +132,23 @@ class Card {
       if (typeof this.onDislike === 'function' && direction === -1) {
         this.onDislike();
       }
+      if (recipes.length <= cardCount) {
+        fetch('/store_liked_recipes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(liked_recipes),
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = '/ingredients';
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+      }
       // if (recipes.length <= cardCount) {
       //   document.hre
       // }

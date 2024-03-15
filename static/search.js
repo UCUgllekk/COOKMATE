@@ -6,14 +6,12 @@ document.getElementById('search-form').addEventListener('submit', function(event
 
     // Get all the suggestions
     var suggestionsDiv = document.getElementById('suggestions');
-    var suggestions = Array.from(suggestionsDiv.getElementsByTagName('div'));
+    var suggestions = Array.from(suggestionsDiv.getElementsByTagName('button'));
 
     // If there are any suggestions
     if (suggestions.length > 0) {
         // Find the shortest suggestion
-        var shortestSuggestion = suggestions.reduce(function(prev, curr) {
-            return prev.textContent.length < curr.textContent.length ? prev : curr;
-        });
+        var shortestSuggestion = suggestions[0]
 
         // Set the value of the search bar to the shortest suggestion
         var searchBar = document.getElementById('search-bar');
@@ -43,6 +41,43 @@ document.getElementById('search-form').addEventListener('submit', function(event
     document.getElementById('suggestions').innerHTML = "";
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Attach the click event listener to the document
+    document.addEventListener('click', function(event) {
+        // If the clicked element has the class name "option"
+        if (event.target.classList.contains('option')) {
+            console.log("option")
+            console.log(event.target)
+
+            var suggestion = event.target.innerText;
+            console.log(suggestion)
+            if (suggestion.length > 0) {
+
+                var searchBar = document.getElementById('search-bar');
+                searchBar.value = suggestion;
+
+                var selectedIngredients = Array.from(document.getElementById('selected-ingredients').getElementsByTagName('div'));
+                console.log(suggestion)
+                var alreadySelected = selectedIngredients.some(function(ingredientDiv) {
+                    return ingredientDiv.textContent === suggestion;
+                });
+
+                if (!alreadySelected) {
+                    var ingredientDiv = document.createElement('div');
+                    ingredientDiv.textContent = suggestion;
+                    ingredientDiv.classList.add("tag");
+                    selected_ingredients.push(suggestion);
+                    console.log(selected_ingredients);
+                    document.getElementById('selected-ingredients').appendChild(ingredientDiv);
+                }
+            };
+            document.getElementById('search-bar').value = "";
+            document.getElementById('suggestions').innerHTML = "";
+        }
+    });
+});
+        
+
 // Add an event listener for the 'input' event to the search bar
 document.getElementById('search-bar').addEventListener('input', function() {
     // Get the current value of the search bar
@@ -67,7 +102,7 @@ document.getElementById('search-bar').addEventListener('input', function() {
             // For each suggestion
             suggestions.slice(0, 5).forEach(function(suggestion) {
                 // Create a new p element
-                var p = document.createElement('div');
+                var p = document.createElement('button');
 
                 // Set the text content of the p element to the suggestion
                 p.textContent = suggestion;
