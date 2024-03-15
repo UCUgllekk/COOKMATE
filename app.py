@@ -181,21 +181,6 @@ class StoreLikedRecipesView(MethodView):
             users.find_one({"email": user_email})
         return "", 200
 
-# class StoreLikedRecipesView(MethodView):
-#     '''StoreLikedRecipes'''
-#     def post(self):
-#         '''Storing liked recipes'''
-#         data = request.data
-#         data = json.loads(data)
-#         session['liked_recipes'] = data
-#         user_email = session.get('email')
-#         if user_email:
-#             users = mongo.db.users
-#             for meal in session['liked_recipes']:
-#                 users.update_one({'email': user_email}, {'$push': {'liked': meal[0]}})
-#             user = users.find_one({"email": user_email})
-#             print(user['liked'])
-#         return "", 200
 
 def find_with_majority_ingredients(ingredient_list, amount: float):
     '''Find recipes by ingredients'''
