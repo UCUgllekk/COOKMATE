@@ -85,6 +85,7 @@ class IngredientsView(MethodView):
     '''Ingredients'''
     def get(self):
         '''open ingredients'''
+        print(liked_recipes)
         return render_template('ingredients.html', liked_recipes=liked_recipes)
 
 class ProfileView(MethodView):
@@ -167,6 +168,7 @@ class StoreLikedRecipesView(MethodView):
         data = request.data
         data = json.loads(data)
         liked_recipes = data
+        print(liked_recipes)
         user_email = session.get('email')
         if user_email:
             users = mongo.db.users

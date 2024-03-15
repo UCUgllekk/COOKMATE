@@ -32,7 +32,21 @@ function appendNewCard() {
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
-    window.location.href = "/ingredients"
+    fetch('/store_liked_recipes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(liked_recipes),
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/ingredients';
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
   } else {
   const card = new Card({
     imageUrl: recipes[cardCount],
