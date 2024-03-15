@@ -62,7 +62,7 @@ function appendNewCard() {
   cardCount += 4;
   if (recipes.length <= cardCount) {
     console.log("no recipes left")
-    const elements = document.getElementsByClassName("title");
+    const elements = document.getElementsByClassName("meal-title");
     if (elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
@@ -82,18 +82,18 @@ function appendNewCard() {
   });
   swiper.append(card.element);
 
-  const elements = document.getElementsByClassName("title");
+  const elements = document.getElementsByClassName("meal-title");
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
 
   // Create title for the card
   const title = document.createElement('div');
-  title.innerText = "";
-  title.classList.add("title");
+  title.innerText = recipes[cardCount + 1];
+  title.classList.add("meal-title");
 
   // Append title after the card element
-  swiper.append(title);
+  document.getElementsByClassName("main-container")[0].insertBefore(title, document.getElementsByClassName("find-meal-container")[0]);
   }
 }
 

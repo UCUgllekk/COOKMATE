@@ -47,7 +47,7 @@ body {
 }
 
 #swiper {
-  height: 38vh;
+  height: 55vh;
   aspect-ratio: 40/30;
   perspective: 1000px;
   perspective-origin: center 50%;
@@ -56,7 +56,7 @@ body {
 }
 
 .card {
-  width: 150%;
+  width: 100%;
   height: auto;
   position: absolute;
   border-radius: 20px;
@@ -74,7 +74,7 @@ body {
   border-radius: 5%;
   object-fit: cover;
   object-position: 50% 50%;
-  margin-left: -100px;
+  /* margin-left: -100px; */
 }
 
 /* style.css */
@@ -105,7 +105,7 @@ body {
 .icon-container {
   display: flex;
   justify-content: center;
-  gap: 200px;
+  gap: 130px;
   margin-top: 30px;
 }
 
@@ -195,13 +195,9 @@ body {
   }
 }
 
-.removed {
-  display: none;
+.meal-title {
+  font-size: 25px;
+  margin-bottom: 30px;
+  margin-top: -40px;
+  font-family: Inter, sans-serif;
 }
-
-.no-elements {
-  margin: 40% 30%;
-}
-/* .no-recipe-div {
-  margin: 40% 30%;
-} */
