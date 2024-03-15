@@ -172,7 +172,7 @@ class StoreLikedRecipesView(MethodView):
         user_email = session.get('email')
         if user_email:
             users = mongo.db.users
-            for meal in session['liked_recipes']:
+            for meal in liked_recipes:
                 liked_meal = {'Ingredients': meal[2],
                                        'Instructions': meal[3],
                                        'Image_Name': f"{meal[0]}.jpg"}
