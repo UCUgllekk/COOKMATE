@@ -61,8 +61,8 @@ class SignUpView(MethodView):
     '''SignUp'''
     def get(self):
         '''SignUpPage'''
-        if 'email' in session:
-            return redirect(url_for('profile'))
+        # if 'email' in session:
+        #     return redirect(url_for('Si'))
         return render_template('sign_up.html', message='')
 
     def post(self):
@@ -101,10 +101,13 @@ class LikedView(MethodView):
     '''Liked'''
     def get(self):
         '''open liked'''
-        user_email = session.get('email')
-        user = mongo.db.users.find_one({"email": user_email})
-        liked = user['liked']
-        return render_template('liked.html', recipes = liked)
+        if 'email' in session:
+            print(session)
+            user_email = session.get('email')
+            user = mongo.db.users.find_one({"email": user_email})
+            liked = user['liked']
+            return render_template('liked.html', recipes = liked)
+        return render_template('sign_up.html')
 
 class RatedView(MethodView):
     '''View Recipes'''
@@ -116,7 +119,8 @@ class RatedView(MethodView):
             return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
         rated_recipes = user['liked']
-        rated_recipes = [mongo.db.recipes.find_one({"id": recipe[0]}) for recipe in rated_recipes]
+        rated_recipes = [mongo.db.recipes.find_one({"Title": recipe}) for recipe in rated_recipes]
+        print(rated_recipes)
         return render_template('rated.html', recipes=rated_recipes)
 
 class StoreDataView(MethodView):
@@ -161,7 +165,8 @@ class RecipeView(MethodView):
         print(recipe)
         if not recipe:
             return 'Recipe not found', 404
-        return render_template('recipe.html', recipe=recipe)
+        counter = 0
+        return render_template('recipe.html', recipe=recipe, counter = counter)
 
 class RateView(MethodView):
     '''RateView'''
