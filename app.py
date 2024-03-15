@@ -16,6 +16,8 @@ app.secret_key = secret_key
 
 mongo = PyMongo(app)
 records = mongo.db.users
+recipes = []
+liked_recipes = []
 
 class MainView(MethodView):
     '''MainPage'''
@@ -83,7 +85,6 @@ class IngredientsView(MethodView):
     '''Ingredients'''
     def get(self):
         '''open ingredients'''
-        liked_recipes = session['liked_recipes'] if "liked_recipes" in session else []
         return render_template('ingredients.html', liked_recipes=liked_recipes)
 
 class ProfileView(MethodView):
@@ -96,7 +97,8 @@ class TinderView(MethodView):
     '''Tinder'''
     def get(self):
         '''open tinder'''
-        recipes = session['recipes'] if "recipes" in session else []
+        # print(session['recipes'])
+        # recipes = session['recipes'] if "recipes" in session else []
         return render_template('tinder.html', recipes=recipes)
 
 class LikedView(MethodView):
@@ -147,11 +149,12 @@ class StoreDataView(MethodView):
     '''StoreData'''
     def post(self):
         '''Storing Data'''
+        global recipes
         data = request.data
         data = json.loads(data)
         print(f"{data=}")
         session['selected_ingredients'] = data
-        session['recipes'] = find_with_majority_ingredients(data, 0.5)
+        recipes = find_with_majority_ingredients(data, 0.5)
         print()
         print("stored")
         return "", 200
@@ -160,9 +163,10 @@ class StoreLikedRecipesView(MethodView):
     '''StoreLikedRecipes'''
     def post(self):
         '''Storing liked recipes'''
+        global liked_recipes
         data = request.data
         data = json.loads(data)
-        session['liked_recipes'] = data
+        liked_recipes = data
         user_email = session.get('email')
         if user_email:
             users = mongo.db.users
@@ -200,7 +204,9 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
     for doc in all_docs:
         doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
+        # print(common_ingredients, doc_ingredients)
         if len(common_ingredients) / len(doc_ingredients) > amount:
+            print(doc_ingredients, common_ingredients)
             matching_docs.append(doc['Image_Name'])
             matching_docs.append(doc['Title'])
             matching_docs.append(doc['Ingredients'])

@@ -55,6 +55,7 @@ console.log(liked_recipes)
 console.log(document.getElementById("expandButton"))
 const expandButtons = document.getElementsByClassName('find-meal');
 expandButtons_dict = {}
+num_of_buttons = expandButtons.length
 console.log(expandButtons)
 for (var i = 0; i < expandButtons.length; i ++) {
     expandButtons_dict[i] = expandButtons[i]
@@ -76,7 +77,9 @@ for (var i = 0; i < expandButtons.length; i ++) {
         const findMealContainers = document.getElementsByClassName('find-meal-container');
         findMealContainers[this.value].parentNode.insertBefore(recipeTitle, findMealContainers[this.value].nextSibling);
         findMealContainers[this.value].parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
+        if (this.value == num_of_buttons - 1) {
         recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
         // Remove the button after clicking
         expandButtons_dict[this.value].parentNode.removeChild(expandButtons_dict[this.value]);
 

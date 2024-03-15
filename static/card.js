@@ -28,6 +28,7 @@ class Card {
       card.classList.add('card');
       const img = document.createElement('img');
       img.src = "static/Food Images/"+this.imageUrl + ".jpg";
+      img.classList.add("food_img")
       card.append(img);
       this.element = card;
       if (this.#isTouchDevice()) {

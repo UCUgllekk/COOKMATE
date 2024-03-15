@@ -3,6 +3,9 @@ const swiper = document.querySelector('#swiper');
 const like = document.querySelector('#like');
 const dislike = document.querySelector('#dislike');
 recipes = recipes.slice(2, -2).split('", "')
+if (recipes && recipes[0] == "") {
+  recipes = []
+}
 var liked_recipes = []
 console.log(recipes)
 // constants
