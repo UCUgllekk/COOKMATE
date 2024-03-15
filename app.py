@@ -181,6 +181,30 @@ class StoreLikedRecipesView(MethodView):
             users.find_one({"email": user_email})
         return "", 200
 
+    class RecipeView(MethodView):
+        '''RecipeView'''
+        def get(self, recipe_id):
+            '''RecipePage'''
+            print(recipe_id)
+            recipe = mongo.db.recipes.find({"Image_Name": recipe_id[:-4]})
+            if not recipe:
+                return 'Recipe not found', 404
+            return render_template('recipe.html', recipe=recipe_id)
+
+class RateView(MethodView):
+    '''RateView'''
+    def post(self):
+        '''Set Rate'''
+        user_email = session.get('email')  # Get the email from the session
+        if not user_email:
+            return render_template('login.html')
+
+        rating = request.form.get('rating')
+        recipe = request.form.get('recipe')
+        user = mongo.db.users.find_one({"email": user_email})
+        user['rated'] = (recipe, rating)  # Save the rating
+        mongo.db.users.save(user)
+        return 'Success', 200
 
 def find_with_majority_ingredients(ingredient_list, amount: float):
     '''Find recipes by ingredients'''
@@ -211,6 +235,7 @@ app.add_url_rule('/store_data', view_func=StoreDataView.as_view('store_data'))
 app.add_url_rule('/store_liked_recipes', view_func=StoreLikedRecipesView.as_view('store_liked_recipes'))
 app.add_url_rule('/rated', view_func=RatedView.as_view('recipes'))
 app.add_url_rule('/rate', view_func=RateView.as_view('rate'))
+app.add_url_rule('/recipe/<recipe_id>/', view_func=RecipeView.as_view('recipe'))
 
 if __name__ == '__main__':
     app.run(debug=True)
