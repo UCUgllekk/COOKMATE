@@ -106,7 +106,9 @@ class LikedView(MethodView):
         return render_template('liked.html')
 
 class RecipesView(MethodView):
+    '''View Recipes'''
     def get(self):
+        '''Recipes'''
         user_email = session.get('email')
         if not user_email:
             return 'User not logged in', 401
@@ -144,7 +146,9 @@ def validate_email(email:str):
         r"{|}~]{1,64})*@[a-z]{1,255}(\.(gmail|ucu|com|org|edu|gov|net|ua))+", email))
 
 class StoreDataView(MethodView):
+    '''StoreData'''
     def post(self):
+        '''Storing Data'''
         data = request.data
         data = json.loads(data)
         print(f"{data=}")
@@ -155,7 +159,9 @@ class StoreDataView(MethodView):
         return "", 200
 
 class StoreLikedRecipesView(MethodView):
+    '''StoreLikedRecipes'''
     def post(self):
+        '''Storing liked recipes'''
         data = request.data
         data = json.loads(data)
         session['liked_recipes'] = data
@@ -163,11 +169,13 @@ class StoreLikedRecipesView(MethodView):
         return "", 200
 
 def find_with_majority_ingredients(ingredient_list, amount: float):
-    all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, "Title": 1, "Ingredients": 1, 'Instructions': 1})  # only return the 'cleaned_ingredients' field
+    '''Find recipes by ingredients'''
+    all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, \
+        "Title": 1, "Ingredients": 1, 'Instructions': 1})
     matching_docs = []
     print("docs: ", all_docs)
     for doc in all_docs:
-        doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")  # assuming ingredients are comma-separated
+        doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
         if len(common_ingredients) / len(doc_ingredients) > amount:
             matching_docs.append(doc['Image_Name'])
