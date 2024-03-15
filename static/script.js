@@ -19,12 +19,14 @@ if (!recipes.length) {
   // innerText = "&nbsp;"
   // document.getElementsByClassName("icon-container")[0].classList.add("removed")
   // document.getElementsByClassName("find-meal-container")[0].classList.add("removed")
-  var textdiv = document.createElement("h1")
-  textdiv.classList.add("no-elements")
-  textdiv.innerText = "No recipes."
+  var textdiv = document.createElement("div")
+  var h1 = document.createElement("h1")
+  h1.innerText = "No recipes."
+  textdiv.append(h1)
   // document.getElementsByClassName("main-container")[0].append(textdiv)
   swiper.innerHTML = ""
-  swiper.classList.add("no-recipe-div")
+  swiper.style = "display: flex; justify-content: center; align-items: center;"
+  // swiper.style.justify-content = "center";
   swiper.append(textdiv)
   document.getElementById("ingredients_button").innerText = "main page"
   document.getElementById("ingredients_button").id = "main_page"

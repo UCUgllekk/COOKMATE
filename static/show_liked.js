@@ -1,8 +1,12 @@
 
-if (liked_recipes) {
-    liked_recipes = liked_recipes.slice(2, -2).split("], [");
-    for (var i = 0; i < liked_recipes.length; i++) {
-        liked_recipes[i] = liked_recipes[i].slice(1, -1).split('", "');
+console.log(liked_recipes.length)
+if (liked_recipes != "[]") {
+    new_liked_recipes = liked_recipes.slice(2, -2).split("], [");
+    liked_recipe = []
+    for (var i = 0; i < new_liked_recipes.length; i++) {
+        if (new_liked_recipes[i].slice(1, -1).split('", "')) {
+        liked_recipes.push(new_liked_recipes[i].slice(1, -1).split('", "'));
+        }
     }
     console.log(liked_recipes)
     for (var i = 0; i < liked_recipes.length; i ++) {
@@ -51,6 +55,23 @@ if (liked_recipes) {
         document.getElementsByClassName("recipe-details")[0].append(ingredients_section)
         document.getElementsByClassName("recipe-details")[0].append(find_meal_div)
     }
+} else {
+    var h2 = document.createElement("h1")
+    h2.innerText = "No liked recipes"
+    h2.style.margin = "10% 10%";
+    var main_page = document.createElement("a")
+    main_page.innerText = "main page"
+    main_page.href = "/"
+    main_page.classList.add("find-meal")
+    main_page.classList.add("visible")
+
+    var main_page_div = document.createElement("div")
+    main_page_div.classList.add("find-meal-container")
+    main_page_div.style.position = "absolute";
+    main_page_div.style.bottom = 0;
+    main_page_div.append(main_page)
+    document.getElementsByClassName("main-container")[0].append(h2)
+    document.getElementsByClassName("main-container")[0].append(main_page_div)
 }
 console.log(liked_recipes)
 console.log(document.getElementById("expandButton"))
