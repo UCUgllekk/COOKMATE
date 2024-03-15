@@ -14,7 +14,7 @@ if (liked_recipes) {
         img.loading = "lazy";
         img.classList.add("img-3");
         column_div.append(img);
-        
+
         var div = document.createElement("div");
         var textdiv = document.createElement("div")
         textdiv.classList.add("ingredient-text")
@@ -25,7 +25,7 @@ if (liked_recipes) {
         textdiv.innerHTML = ingredients.join("")
 
         div.append(textdiv)
-        
+
         ingredients_section.append(column_div)
         ingredients_section.append(div)
 
