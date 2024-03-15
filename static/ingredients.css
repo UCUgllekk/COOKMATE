@@ -141,7 +141,11 @@
     margin-top: 40px;
     margin-bottom: 40px;
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> e7c5bb6bd46936a941f9d00d4b2fb911cbfd9836
   .find-meal {
     font-family: Inter, sans-serif;
     color: black;
@@ -163,8 +167,12 @@
     text-align: left; /* Вирівнюємо текст ліворуч */
     padding: 20px;
   }
+<<<<<<< HEAD
   
   
+=======
+
+>>>>>>> e7c5bb6bd46936a941f9d00d4b2fb911cbfd9836
   .ingredient-text {
     overflow-wrap: break-word;
     list-style-type: disc;
@@ -176,9 +184,12 @@
     font-family: Inter, sans-serif;
     padding-left: 30px;
     padding-right: 30px;
+<<<<<<< HEAD
   }
 
   .img-3 {
     width: 400px;
     height: 300px;
+=======
+>>>>>>> e7c5bb6bd46936a941f9d00d4b2fb911cbfd9836
   }

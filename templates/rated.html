@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Rated</title>
 
     <style>
         html, body, div, span, applet, object, iframe,
@@ -133,21 +133,20 @@
   <body>
     <div class="wrapper">
         <div class="header">
-            <a href="#" class="logo">
-                <img width="110px" src="./assets/images/logo.png" />
+            <a href="/" class="logo">
+                <img height="91px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc277e0ff378357bda8086eaad29fc23d7c18641518cfe14a929ebc7c8492b5b?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Kitchen scene">
             </a>
-            <a href="#" class="profile"><img src="./assets/images/icon-profile.png" /></a>
         </div>
         <div class="main">
             <h1 class="title">Your profile</h1>
             <div class="links">
-                <a href="{{ url_for('templates', filename = 'liked.html')}}">Liked</a>
-                <a class="active" href="{{ url_for('templates', filename = 'rated.html')}}">Rated</a>
+                <a href="/liked">Liked</a>
+                <a class="active" href="/rated">Rated</a>
             </div>
             <div class="list-rated">
                 <div class="list-rated-item">
                     <div class="thumbnail">
-                        <img src="./assets/images/3-ingredient-pumpkin-mousse 6.png">
+                        <img src="static/Food Images/3-ingredient-pumpkin-mousse 6.png">
                     </div>
                     <div class="list-rated-content">
                         <h2>Curried Pumpkin Soup</h2>
