@@ -15,8 +15,8 @@
         dl, dt, dd, ol, ul, li,
         fieldset, form, label, legend,
         table, caption, tbody, tfoot, thead, tr, th, td,
-        article, aside, canvas, details, embed, 
-        figure, figcaption, footer, header, hgroup, 
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
         menu, nav, output, ruby, section, summary,
         time, mark, audio, video {
             margin: 0;
@@ -27,7 +27,7 @@
             vertical-align: baseline;
         }
 
-        article, aside, details, figcaption, figure, 
+        article, aside, details, figcaption, figure,
         footer, header, hgroup, menu, nav, section {
             display: block;
         }
@@ -143,27 +143,51 @@
         </div>
         <div class="main">
             <h1 class="title">Your profile</h1>
-            <div class="links">
+            <!-- <div class="links">
                 <a class="active" href="/liked">Liked</a>
                 <a href="/rated">Rated</a>
-            </div>
+            </div> -->
             <div class="list-liked">
-                <div class="list-liked-item">
-                    <h2><a href="#">Curried Pumpkin Soup</a></h2>
-                    <img src="./assets/images/curried-pumpkin-soup-232968 6.png" />
+                <div id="recipes">
+                    {% for recipe in recipes %}
+                    <div class="recipe">
+                        <img src="/static/Food Images/"+{{recipe.Image_Name}} alt={{recipe.Title}}>
+                        <h2>{{ recipe.Title }}</h2>
+                        <h4>{{ recipe.Instructions }}</h4>
+                        <div class="stars">
+                            {% for i in range(5) %}
+                            <span class="star" data-recipe-id="{{ recipe.id }}" data-value="{{ i+1 }}">★</span>
+                            {% endfor %}
+                        </div>
+                        <script>
+                            const expandButton = document.getElementById('expandButton');
+                            expandButton.addEventListener('click', function() {
+                              const recipeTitle = document.createElement('div');
+                              recipeTitle.classList.add('recipe-title2');
+                              recipeTitle.innerText = 'Recipe';
+                              recipeTitle.style.fontWeight = 'bold';
+                              recipeTitle.style.border = 'none'; // Remove the border
+                              recipeTitle.style.textAlign = 'left'; // Align text to the left
+                              const recipeDescription = document.createElement('div');
+                              recipeDescription.classList.add('recipe-description');
+                              recipeDescription.innerHTML = recipe.Instructions;
+                              const findMealContainer = document.querySelector('.find-meal-container');
+                              findMealContainer.parentNode.insertBefore(recipeTitle, findMealContainer.nextSibling);
+                              findMealContainer.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
+                              recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              expandButton.remove();
+                              const ingredientText = document.querySelectorAll('.ingredient-text');
+                              ingredientText.forEach(item => {
+                                item.style.overflowWrap = 'break-word';
+                                item.style.listStyleType = 'disc';
+                              });
+                            });
+                          </script>
+                    </div>
+                    {% endfor %}
                 </div>
-                <div class="list-liked-item">
-                    <h2><a href="#">Curried Pumpkin Soup</a></h2>
-                    <img src="./assets/images/curried-pumpkin-soup-232968 6.png" />
-                </div>
-                <div class="list-liked-item">
-                    <h2><a href="#">Curried Pumpkin Soup</a></h2>
-                    <img src="./assets/images/curried-pumpkin-soup-232968 6.png" />
-                </div>
-                <div class="list-liked-item">
-                    <h2><a href="#">Curried Pumpkin Soup</a></h2>
-                    <img src="./assets/images/curried-pumpkin-soup-232968 6.png" />
-                </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="{{ url_for('static', filename='rating.js') }}"></script>
             </div>
         </div>
     </div>
