@@ -72,8 +72,8 @@ class SignUpView(MethodView):
             if records.find_one({'email': email}):
                 return render_template('sign_up.html', message='User already exists!')
             hashed = generate_password_hash(password, method='scrypt')
-            user_input = {'email': email, 'password': hashed, 'liked': [], \
-                'rated': {'5':{}, "4":{}, '3':{}, '2':{}, '1':{}, '0':{}}}
+            user_input = {'email': email, 'password': hashed, 'liked': {}, \
+                'rated': {}}
             records.insert_one(user_input)
             session['email'] = email
             return redirect(url_for('liked'))
@@ -103,29 +103,33 @@ class LikedView(MethodView):
     '''Liked'''
     def get(self):
         '''open liked'''
-        return render_template('liked.html')
+        user_email = session.get('email')
+        user = mongo.db.users.find_one({"email": user_email})
+        liked_recipes = user['liked']
+        print(liked_recipes)
+        return render_template('liked.html', recipes = liked_recipes)
 
-class RecipesView(MethodView):
+class RatedView(MethodView):
     '''View Recipes'''
     def get(self):
         '''Recipes'''
+        print('im in recipeview get')
         user_email = session.get('email')
         if not user_email:
-            return 'User not logged in', 401
-
+            return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
-        rated_recipes = user['rated_meals']
+        rated_recipes = user['liked']
         recipes = [mongo.db.recipes.find_one({"id": recipe[0]}) for recipe in rated_recipes]
-        return render_template('liked.html', recipes=recipes)
+        return render_template('rated.html', recipes=recipes)
 
 class RateView(MethodView):
     '''Rating'''
     def post(self):
         '''Ra'''
+        print('im in rateview post')
         user_email = session.get('email')
         if not user_email:
-            return 'User not logged in', 401
-
+            return render_template('login.html')
         recipe_id = request.form.get('recipe_id')
         rating = request.form.get('rating')
         user = mongo.db.users.find_one({"email": user_email})
@@ -133,12 +137,6 @@ class RateView(MethodView):
         user['rated'].append({'id': recipe_id, 'rating': rating})
         mongo.db.users.save(user)
         return 'Success', 200
-
-class RatedView(MethodView):
-    '''Rated'''
-    def get(self):
-        '''open rated'''
-        return render_template('rated.html')
 
 def validate_email(email:str):
     '''email'''
@@ -165,8 +163,33 @@ class StoreLikedRecipesView(MethodView):
         data = request.data
         data = json.loads(data)
         session['liked_recipes'] = data
-        print(f"{data = }")
+        user_email = session.get('email')
+        if user_email:
+            users = mongo.db.users
+            for meal in session['liked_recipes']:
+                liked_meal = {'Ingredients': meal[2],
+                                       'Instructions': meal[3],
+                                       'Image_Name': f"{meal[0]}.jpg"}
+                # user['liked'].append(liked_meal)
+                users.update_one({'email': user_email}, {'$push': {f'liked.{meal[1]}': liked_meal}})
+            users.find_one({"email": user_email})
         return "", 200
+
+# class StoreLikedRecipesView(MethodView):
+#     '''StoreLikedRecipes'''
+#     def post(self):
+#         '''Storing liked recipes'''
+#         data = request.data
+#         data = json.loads(data)
+#         session['liked_recipes'] = data
+#         user_email = session.get('email')
+#         if user_email:
+#             users = mongo.db.users
+#             for meal in session['liked_recipes']:
+#                 users.update_one({'email': user_email}, {'$push': {'liked': meal[0]}})
+#             user = users.find_one({"email": user_email})
+#             print(user['liked'])
+#         return "", 200
 
 def find_with_majority_ingredients(ingredient_list, amount: float):
     '''Find recipes by ingredients'''
@@ -190,10 +213,11 @@ app.add_url_rule('/login', view_func=LoginView.as_view('log_in'))
 app.add_url_rule('/sign_up', view_func=SignUpView.as_view('sign_up'))
 app.add_url_rule('/search', view_func=SearchView.as_view('search_view'))
 app.add_url_rule('/tinder', view_func=TinderView.as_view('tinder'))
-app.add_url_rule('/rated', view_func=RatedView.as_view('rated'))
 app.add_url_rule('/liked', view_func=LikedView.as_view('liked'))
 app.add_url_rule('/store_data', view_func=StoreDataView.as_view('store_data'))
 app.add_url_rule('/store_liked_recipes', view_func=StoreLikedRecipesView.as_view('store_liked_recipes'))
+app.add_url_rule('/rated', view_func=RatedView.as_view('recipes'))
+app.add_url_rule('/rate', view_func=RateView.as_view('rate'))
 
 if __name__ == '__main__':
     app.run(debug=True)

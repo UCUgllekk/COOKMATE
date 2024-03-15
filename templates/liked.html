@@ -143,51 +143,22 @@
         </div>
         <div class="main">
             <h1 class="title">Your profile</h1>
-            <!-- <div class="links">
+            <div class="links">
                 <a class="active" href="/liked">Liked</a>
                 <a href="/rated">Rated</a>
-            </div> -->
+            </div>
             <div class="list-liked">
-                <div id="recipes">
-                    {% for recipe in recipes %}
-                    <div class="recipe">
-                        <img src="/static/Food Images/"+{{recipe.Image_Name}} alt={{recipe.Title}}>
-                        <h2>{{ recipe.Title }}</h2>
-                        <h4>{{ recipe.Instructions }}</h4>
-                        <div class="stars">
-                            {% for i in range(5) %}
-                            <span class="star" data-recipe-id="{{ recipe.id }}" data-value="{{ i+1 }}">★</span>
-                            {% endfor %}
-                        </div>
-                        <script>
-                            const expandButton = document.getElementById('expandButton');
-                            expandButton.addEventListener('click', function() {
-                              const recipeTitle = document.createElement('div');
-                              recipeTitle.classList.add('recipe-title2');
-                              recipeTitle.innerText = 'Recipe';
-                              recipeTitle.style.fontWeight = 'bold';
-                              recipeTitle.style.border = 'none'; // Remove the border
-                              recipeTitle.style.textAlign = 'left'; // Align text to the left
-                              const recipeDescription = document.createElement('div');
-                              recipeDescription.classList.add('recipe-description');
-                              recipeDescription.innerHTML = recipe.Instructions;
-                              const findMealContainer = document.querySelector('.find-meal-container');
-                              findMealContainer.parentNode.insertBefore(recipeTitle, findMealContainer.nextSibling);
-                              findMealContainer.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
-                              recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                              expandButton.remove();
-                              const ingredientText = document.querySelectorAll('.ingredient-text');
-                              ingredientText.forEach(item => {
-                                item.style.overflowWrap = 'break-word';
-                                item.style.listStyleType = 'disc';
-                              });
-                            });
-                          </script>
-                    </div>
-                    {% endfor %}
+                {% if recipes %}
+                {% for recipe,list in recipes.items() %}
+                <div class = 'recipe'><a href="/">
+                    <div class = 'recipe_title'>{{recipe}}</div>
+                    <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list[0]['Image_Name']) }}">
+                    </a>
                 </div>
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="{{ url_for('static', filename='rating.js') }}"></script>
+                {% endfor %}
+                {% else %}
+                <div class = 'No_liked'><h2>You have not liked any recipes yet</h2></div>
+                {% endif %}
             </div>
         </div>
     </div>

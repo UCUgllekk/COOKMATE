@@ -143,40 +143,21 @@
                 <a href="/liked">Liked</a>
                 <a class="active" href="/rated">Rated</a>
             </div>
-            <div class="list-rated">
-                <div class="list-rated-item">
-                    <div class="thumbnail">
-                        <img src="static/Food Images/3-ingredient-pumpkin-mousse 6.png">
-                    </div>
-                    <div class="list-rated-content">
-                        <h2>Curried Pumpkin Soup</h2>
-                        <div class="stars">
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 5.png" />
-                        </div>
-                        <a href="#" class="button">jump to recipe</a>
+                <div id="recipes">
+                {% for recipe in recipes %}
+                <div class="recipe">
+                    <img src="{{ url_for('static', filename = '/Food Images/{recipe.Image_Name}')}}" alt='{{recipe.Title}}''>
+                    <h2>{{ recipe.Title }}</h2>
+                    <div class="stars">
+                        {% for i in range(5) %}
+                        <span class="star" data-recipe-id="{{ recipe.id }}" data-value="{{ i+1 }}">★</span>
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="list-rated-item">
-                    <div class="thumbnail">
-                        <img src="./assets/images/3-ingredient-pumpkin-mousse 6.png">
-                    </div>
-                    <div class="list-rated-content">
-                        <h2>Curried Pumpkin Soup</h2>
-                        <div class="stars">
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 1.png" />
-                            <img src="assets/images/Star 5.png" />
-                        </div>
-                        <a href="ingredients.html" class="button">jump to recipe</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="{{ url_for('static', filename='rating.js') }}"></script>
         </div>
     </div>
   </body>

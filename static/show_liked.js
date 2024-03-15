@@ -14,7 +14,7 @@ if (liked_recipes) {
         // ingredients_section.append(titleDiv)
         var column_div = document.createElement('div');
         column_div.classList.add("ingredients-column");
-        
+
         var img = document.createElement('img');
         img.src = "static/Food Images/"+ liked_recipes[i][0] + ".jpg";
         img.loading = "lazy";
