@@ -150,8 +150,8 @@
             <div class="list-liked">
                 {% if recipes %}
                 {% for recipe,list in recipes.items() %}
-                <div class = 'recipe'><a href="/">
-                    <div class = 'recipe_title'>{{recipe}}</div>
+                <div class = 'recipe'><a href='/recipe/{{ list[0]["Image_Name"] }}/'>
+                    <div class = 'recipe_title'>{{ recipe }}</div>
                     <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list[0]['Image_Name']) }}">
                     </a>
                 </div>

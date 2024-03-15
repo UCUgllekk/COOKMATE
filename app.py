@@ -69,16 +69,18 @@ class SignUpView(MethodView):
         email = request.form.get('email')
         if validate_email(email):
             password = request.form.get('password')
-            if not email or not password:
-                return render_template('sign_up.html', message='Please fill in all the fields')
-            if records.find_one({'email': email}):
-                return render_template('sign_up.html', message='User already exists!')
-            hashed = generate_password_hash(password, method='scrypt')
-            user_input = {'email': email, 'password': hashed, 'liked': {}, \
-                'rated': {}}
-            records.insert_one(user_input)
-            session['email'] = email
-            return redirect(url_for('liked'))
+            if validate_password(password):
+                if not email or not password:
+                    return render_template('sign_up.html', message='Please fill in all the fields')
+                if records.find_one({'email': email}):
+                    return render_template('sign_up.html', message='User already exists!')
+                hashed = generate_password_hash(password, method='scrypt')
+                user_input = {'email': email, 'password': hashed, 'liked': {}, \
+                    'rated': {}}
+                records.insert_one(user_input)
+                session['email'] = email
+                return redirect(url_for('liked'))
+            return render_template('sign_up.html', message='Wrong password form')
         return render_template('sign_up.html', message='Wrong email form')
 
 class IngredientsView(MethodView):
@@ -125,21 +127,25 @@ class RatedView(MethodView):
         recipes = [mongo.db.recipes.find_one({"id": recipe[0]}) for recipe in rated_recipes]
         return render_template('rated.html', recipes=recipes)
 
-class RateView(MethodView):
-    '''Rating'''
-    def post(self):
-        '''Ra'''
-        print('im in rateview post')
-        user_email = session.get('email')
-        if not user_email:
-            return render_template('login.html')
-        recipe_id = request.form.get('recipe_id')
-        rating = request.form.get('rating')
-        user = mongo.db.users.find_one({"email": user_email})
-        user['rated'] = [meal for meal in user['rated'] if meal['id'] != recipe_id]
-        user['rated'].append({'id': recipe_id, 'rating': rating})
-        mongo.db.users.save(user)
-        return 'Success', 200
+# class RateView(MethodView):
+#     '''Rating'''
+#     def post(self):
+#         '''Ra'''
+#         print('im in rateview post')
+#         user_email = session.get('email')
+#         if not user_email:
+#             return render_template('login.html')
+#         recipe_id = request.form.get('recipe_id')
+#         rating = request.form.get('rating')
+#         user = mongo.db.users.find_one({"email": user_email})
+#         user['rated'] = [meal for meal in user['rated'] if meal['id'] != recipe_id]
+#         user['rated'].append({'id': recipe_id, 'rating': rating})
+#         mongo.db.users.save(user)
+#         return 'Success', 200
+
+def validate_password(password: str):
+    '''password'''
+    return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", password))
 
 def validate_email(email:str):
     '''email'''
@@ -168,7 +174,6 @@ class StoreLikedRecipesView(MethodView):
         data = request.data
         data = json.loads(data)
         liked_recipes = data
-        print(liked_recipes)
         user_email = session.get('email')
         if user_email:
             users = mongo.db.users
@@ -181,15 +186,15 @@ class StoreLikedRecipesView(MethodView):
             users.find_one({"email": user_email})
         return "", 200
 
-    class RecipeView(MethodView):
+class RecipeView(MethodView):
         '''RecipeView'''
         def get(self, recipe_id):
             '''RecipePage'''
-            print(recipe_id)
-            recipe = mongo.db.recipes.find({"Image_Name": recipe_id[:-4]})
+            recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
+            print(recipe)
             if not recipe:
                 return 'Recipe not found', 404
-            return render_template('recipe.html', recipe=recipe_id)
+            return render_template('recipe.html', recipe=recipe)
 
 class RateView(MethodView):
     '''RateView'''
@@ -202,7 +207,7 @@ class RateView(MethodView):
         rating = request.form.get('rating')
         recipe = request.form.get('recipe')
         user = mongo.db.users.find_one({"email": user_email})
-        user['rated'] = (recipe, rating)  # Save the rating
+        user['rated'] = (recipe, rating)
         mongo.db.users.save(user)
         return 'Success', 200
 
@@ -215,7 +220,6 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
     for doc in all_docs:
         doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
-        # print(common_ingredients, doc_ingredients)
         if len(common_ingredients) / len(doc_ingredients) > amount:
             print(doc_ingredients, common_ingredients)
             matching_docs.append(doc['Image_Name'])

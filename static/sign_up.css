@@ -3,7 +3,7 @@ html, body {
     padding: 0;
     height: 100%;
   }
-  
+
   .main-container {
     padding: 30px;
   }
@@ -26,7 +26,7 @@ html, body {
       gap: 0px;
     }
   }
-  
+
   .img {
     aspect-ratio: 1.52;
     object-fit: auto;
@@ -34,13 +34,13 @@ html, body {
     width: 35px;
     margin-left: 40px;
   }
-  
+
   @media (max-width: 991px) {
     .img {
       margin-left: 10px;
     }
   }
-  
+
   .img-2 {
     aspect-ratio: 7.14;
     object-fit: auto;
@@ -57,56 +57,59 @@ html, body {
     flex-direction: column;
     align-items: center;
   }
-  
-  
+
   @media (max-width: 991px) {
     .div-4 {
       padding-left: 20px;
     }
   }
-  
+
   .div-5 {
     color: #000;
     align-self: center;
+    text-align: center;
     font: 700 50px Inter, sans-serif;
   }
-  
+
   .div-6,
   .div-7 {
+    display: flexbox;
     font: 400 20px Inter, sans-serif;
     border-radius: 15px;
     background-color: #ffa552;
     margin-top: 44px;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     text-align: left;
-    padding: 5px 60px 5px 30px; /* Додає відступ перед текстом */
+    padding: 5px 6% 5px 4%;
+    width: 90%;
   }
-  
+
   .div-6 {
     margin-top: 44px;
   }
-  
+
   @media (max-width: 991px) {
     .div-6 {
       padding-right: 20px;
       margin-top: 40px;
     }
   }
-  
+
   .div-7 {
     margin-top: 33px;
     white-space: nowrap;
   }
-  
+
   @media (max-width: 991px) {
     .div-7 {
       padding-right: 20px;
       white-space: initial;
     }
   }
-  
+
   .div-8 {
+    display: flex;
     border-radius: 80px;
     background-color: #555;
     align-self: center;
@@ -115,15 +118,17 @@ html, body {
     text-align: center;
     padding: 8px 36px;
     font: 500 20px Inter, sans-serif;
+    margin: 0 auto;
     margin-top: 20px;
+
   }
-  
+
   .div-2 {
     gap: 20px;
     display: flex;
     align-items: center;
   }
-  
+
   @media (max-width: 991px) {
     .div-2 {
       flex-direction: column;
@@ -131,7 +136,7 @@ html, body {
       gap: 0px;
     }
   }
-  
+
   .column {
     display: flex;
     flex-direction: column;
@@ -140,9 +145,8 @@ html, body {
     margin-left: 50px;
     margin-bottom: 0px;
     margin-top: 100px;
-
   }
-  
+
   @media (max-width: 991px) {
     .column {
       width: 100%;
@@ -150,7 +154,7 @@ html, body {
       margin-left: 0;
     }
   }
-  
+
   .column-2 {
     display: flex;
     flex-direction: column;
@@ -161,17 +165,15 @@ html, body {
     margin-top: 20px;
     align-items: center;
   }
-  
+
   @media (max-width: 991px) {
     .column-2 {
       width: 100%;
     }
   }
-  
 
   @media (max-width: 991px) {
     .div-8 {
-      margin: 40px 0 0 10px;
       padding: 0 20px;
     }
   }
@@ -182,7 +184,7 @@ html, body {
       padding: 0 20px;
     }
   }
-  
+
   .img-3 {
     position: absolute;
     inset: 0;
@@ -226,20 +228,4 @@ html, body {
       margin-top: 40px;
       padding: 0 20px;
     }
-  }
-
-  #selected-ingredients {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10px 0;
-  }
-
-  #selected-ingredients div {
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin: 5px;
-    font-size: 14px;
-    line-height: 1.5;
   }
