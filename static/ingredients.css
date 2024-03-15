@@ -71,12 +71,12 @@
     font-weight: bold;
     border-radius: 10px;
     background-color: #ffa552;
-    width: 800px;
+    width: 80%;
     color: #000;
     text-align: center;
     padding: 8px 60px;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 25px;
     font-family: Inter, sans-serif;
     margin: 0 auto; /* Центруємо блок по горизонталі */
     margin-top: 30px;
@@ -97,8 +97,12 @@
   }
 
   .ingredients-section {
+    /* width: 90%; */
+    align-content: center;
     display: flex;
     gap: 20px;
+    margin: 0 auto;
+    margin-bottom: 5%;
   }
 
   @media (max-width: 991px) {
@@ -110,19 +114,21 @@
   }
 
   .ingredients-column {
-    margin-top: 100px;
-    margin-left: 80px;
+    margin-top: 2%;
+    margin-left: 10%;
     display: flex;
     flex-direction: column;
     line-height: normal;
-    width: 50%;
+    /* width: 50%; */
   }
 
   .ingredient-text {
-    margin-top: 60px;
-    margin-right: 500px;
+    margin-top: 2%;
+    margin-right: 10%;
+    /* width: 100%; */
     color: #000;
     font-weight: 300;
+    font-size: 20px;
     font-family: Inter, sans-serif;
   }
 
@@ -132,7 +138,13 @@
     }
 
     .ingredient-text {
-      margin-top: 15px;
+      margin-left: 10%;
+    }
+    .recipe-title2 {
+      width: 80%;
+    }
+    .recipe-description {
+      width: 80%;
     }
   }
 
@@ -156,29 +168,27 @@
   .recipe-title2 {
     font-weight: bold;
     margin-left: 0; /* Забираємо відступи зліва */
-    margin-right: 1120px;
+    /* margin-right: 1120px; */
+    width: 800px;
     border: none; /* Видаляємо рамку */
     align-items: flex-start;
     font: 500 20px Inter, sans-serif;
     text-align: left; /* Вирівнюємо текст ліворуч */
     padding: 20px;
+    padding-left: 9%;
   }
-  
-  
-  .ingredient-text {
-    overflow-wrap: break-word;
-    list-style-type: disc;
-    font-weight: 300;
-  }
+
 
   .recipe-description {
     font-weight: 300;
+    width: 800px;
     font-family: Inter, sans-serif;
-    padding-left: 30px;
+    padding-left: 10%;
     padding-right: 30px;
   }
 
   .img-3 {
-    width: 400px;
-    height: 300px;
+    width: 440px;
+    height: 330px;
+    border-radius: 5%;
   }

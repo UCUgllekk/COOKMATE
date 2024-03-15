@@ -20,55 +20,12 @@
       </a>
     </header>
         <section class="recipe-details">
-          <div class="recipe-title">Curried Pumpkin Soup</div>
-          <div id="ingredients_section" class="ingredients-section">
-          </div>
         </section>
-        <div class="find-meal-container">
+        <!-- <div class="find-meal-container">
           <a href="javascript:void(0);" id="expandButton" class="find-meal visible">find a meal</a>
-        </div>
+        </div> -->
       </main>
       <script src="{{ url_for('static', filename='show_liked.js') }}"></script>
-      <script>
-        const expandButton = document.getElementById('expandButton');
-        expandButton.addEventListener('click', function() {
-          const recipeTitle = document.createElement('div');
-          recipeTitle.classList.add('recipe-title2');
-          recipeTitle.innerText = 'Recipe';
-          recipeTitle.style.fontWeight = 'bold';
-          recipeTitle.style.border = 'none'; // Remove the border
-          recipeTitle.style.textAlign = 'left'; // Align text to the left
-
-          const recipeDescription = document.createElement('div');
-          recipeDescription.classList.add('recipe-description');
-          recipeDescription.innerHTML = `
-            <p>Cook onions in butter in a wide 6-quart heavy pot over moderately low heat, stirring occasionally, until softened, 3 to 5 minutes.
-Add garlic and ginger and cook, stirring, 1 minute. 
-Add cumin, coriander, and cardamom and cook, stirring, 1 minute.
-Stir in salt, red pepper flakes, pumpkin, water, broth, and coconut milk and simmer, uncovered, stirring occasionally, 30 minutes.
-Purée soup in batches in a blender until smooth (use caution when blending hot liquids), transferring to a large bowl, and return soup to pot.
-Keep soup warm over low heat.
-Heat oil in a small heavy skillet over moderately high heat until hot but not smoking, then cook mustard seeds until they begin to pop, about 15 seconds.
-Add curry leaves and cook 5 seconds, then pour mixture into pumpkin soup.
-Stir until combined well and season soup with salt.
-Soup can be thinned with additional water.</p>
-            <p>...</p>
-          `;
-          const findMealContainer = document.querySelector('.find-meal-container');
-          findMealContainer.parentNode.insertBefore(recipeTitle, findMealContainer.nextSibling);
-          findMealContainer.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
-          recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Remove the button after clicking
-          expandButton.remove();
-
-          // Add CSS styles to ingredient-text class
-          const ingredientText = document.querySelectorAll('.ingredient-text');
-          ingredientText.forEach(item => {
-            item.style.overflowWrap = 'break-word';
-            item.style.listStyleType = 'disc';
-          });
-        });
-      </script>
 
 </body>
 </html>
