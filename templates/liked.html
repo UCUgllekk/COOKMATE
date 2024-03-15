@@ -148,8 +148,17 @@
                 <a href="/rated">Rated</a>
             </div>
             <div class="list-liked">
-                {{ for recipe in recipes }}
-                
+                {% if recipes %}
+                {% for recipe,list in recipes.items() %}
+                <div class = 'recipe'><a href="/">
+                    <div class = 'recipe_title'>{{recipe}}</div>
+                    <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list[0]['Image_Name']) }}">
+                    </a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class = 'No_liked'><h2>You have not liked any recipes yet</h2></div>
+                {% endif %}
             </div>
         </div>
     </div>
