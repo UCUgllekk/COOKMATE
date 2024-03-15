@@ -32,6 +32,7 @@ function appendNewCard() {
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
+    window.location.href = "/ingredients"
   } else {
   const card = new Card({
     imageUrl: recipes[cardCount],
@@ -54,7 +55,7 @@ function appendNewCard() {
 
   // Create title for the card
   const title = document.createElement('div');
-  title.innerText = recipes[cardCount + 1];
+  title.innerText = "";
   title.classList.add("title");
 
   // Append title after the card element
