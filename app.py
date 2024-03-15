@@ -105,6 +105,35 @@ class LikedView(MethodView):
         '''open liked'''
         return render_template('liked.html')
 
+class RecipesView(MethodView):
+    '''View Recipes'''
+    def get(self):
+        '''Recipes'''
+        user_email = session.get('email')
+        if not user_email:
+            return 'User not logged in', 401
+
+        user = mongo.db.users.find_one({"email": user_email})
+        rated_recipes = user['rated_meals']
+        recipes = [mongo.db.recipes.find_one({"id": recipe[0]}) for recipe in rated_recipes]
+        return render_template('liked.html', recipes=recipes)
+
+class RateView(MethodView):
+    '''Rating'''
+    def post(self):
+        '''Ra'''
+        user_email = session.get('email')
+        if not user_email:
+            return 'User not logged in', 401
+
+        recipe_id = request.form.get('recipe_id')
+        rating = request.form.get('rating')
+        user = mongo.db.users.find_one({"email": user_email})
+        user['rated'] = [meal for meal in user['rated'] if meal['id'] != recipe_id]
+        user['rated'].append({'id': recipe_id, 'rating': rating})
+        mongo.db.users.save(user)
+        return 'Success', 200
+
 class RatedView(MethodView):
     '''Rated'''
     def get(self):
@@ -117,7 +146,9 @@ def validate_email(email:str):
         r"{|}~]{1,64})*@[a-z]{1,255}(\.(gmail|ucu|com|org|edu|gov|net|ua))+", email))
 
 class StoreDataView(MethodView):
+    '''StoreData'''
     def post(self):
+        '''Storing Data'''
         data = request.data
         data = json.loads(data)
         print(f"{data=}")
@@ -128,24 +159,23 @@ class StoreDataView(MethodView):
         return "", 200
 
 class StoreLikedRecipesView(MethodView):
+    '''StoreLikedRecipes'''
     def post(self):
+        '''Storing liked recipes'''
         data = request.data
         data = json.loads(data)
         session['liked_recipes'] = data
         print(f"{data = }")
         return "", 200
 
-app.add_url_rule('/', view_func=MainView.as_view('main_page'))
-app.add_url_rule('/ingredients', view_func=IngredientsView.as_view('ingredients'))
-app.add_url_rule('/login', view_func=LoginView.as_view('log_in'))
-app.add_url_rule('/sign_up', view_func=SignUpView.as_view('sign_up'))
-
 def find_with_majority_ingredients(ingredient_list, amount: float):
-    all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, "Title": 1, "Ingredients": 1, 'Instructions': 1})  # only return the 'cleaned_ingredients' field
+    '''Find recipes by ingredients'''
+    all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, \
+        "Title": 1, "Ingredients": 1, 'Instructions': 1})
     matching_docs = []
     print("docs: ", all_docs)
     for doc in all_docs:
-        doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")  # assuming ingredients are comma-separated
+        doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
         if len(common_ingredients) / len(doc_ingredients) > amount:
             matching_docs.append(doc['Image_Name'])
@@ -154,6 +184,10 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
             matching_docs.append(doc['Instructions'])
     return matching_docs
 
+app.add_url_rule('/', view_func=MainView.as_view('main_page'))
+app.add_url_rule('/ingredients', view_func=IngredientsView.as_view('ingredients'))
+app.add_url_rule('/login', view_func=LoginView.as_view('log_in'))
+app.add_url_rule('/sign_up', view_func=SignUpView.as_view('sign_up'))
 app.add_url_rule('/search', view_func=SearchView.as_view('search_view'))
 app.add_url_rule('/tinder', view_func=TinderView.as_view('tinder'))
 app.add_url_rule('/rated', view_func=RatedView.as_view('rated'))

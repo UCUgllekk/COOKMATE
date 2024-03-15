@@ -21,7 +21,6 @@
     </header>
         <section class="recipe-details">
           <div class="recipe-title">Curried Pumpkin Soup</div>
-<<<<<<< HEAD
           <div id="ingredients_section" class="ingredients-section">
           </div>
         </section>
@@ -30,39 +29,6 @@
         </div>
       </main>
       <script src="{{ url_for('static', filename='show_liked.js') }}"></script>
-=======
-          <div class="ingredients-section">
-            <div class="ingredients-column">
-              <img loading="lazy" width="400px" height="300px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/64011abae2a0f9fb05bab62eafd294c4542515dc354f9f10ab9e3c885ae35d7f?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Curried Pumpkin Soup" class="img-3" />
-            </div>
-            <div class="ingredients">
-              <div class="ingredient-text">
-                • 2 medium onions, finely chopped (2 cups)<br />
-                • 2 tablespoons unsalted butter<br />
-                • 2 large garlic cloves, minced<br />
-                • 1 1/2 tablespoons minced peeled fresh ginger<br />
-                • 2 teaspoons ground cumin<br />
-                • 1 teaspoon ground coriander<br />
-                • 1/8 teaspoon ground cardamom<br />
-                • 1 1/2 teaspoons salt<br />
-                • 3/4 teaspoon dried hot red pepper flakes<br />
-                • 2 (15-oz) cans solid-pack pumpkin (3 1/2 cups; not pie filling)<br />
-                • 4 cups water<br />
-                • 1 1/2 cups reduced-sodium chicken broth (12 floz)<br />
-                • 1 (14-oz) can unsweetened coconut milk (not low-fat)<br />
-                • 1/4 cup olive oil<br />
-                • 2 teaspoons brown mustard seeds<br />
-                • 8 fresh curry leaves<br />
-              </div>
-            </div>
-          </div>
-        </section>
-        <div class="find-meal-container">
-          <a href="javascript:void(0);" id="expandButton" class="find-meal visible">Recipe</a>
-        </div>
-      </main>
-
->>>>>>> e7c5bb6bd46936a941f9d00d4b2fb911cbfd9836
       <script>
         const expandButton = document.getElementById('expandButton');
         expandButton.addEventListener('click', function() {
@@ -77,11 +43,7 @@
           recipeDescription.classList.add('recipe-description');
           recipeDescription.innerHTML = `
             <p>Cook onions in butter in a wide 6-quart heavy pot over moderately low heat, stirring occasionally, until softened, 3 to 5 minutes.
-<<<<<<< HEAD
 Add garlic and ginger and cook, stirring, 1 minute. 
-=======
-Add garlic and ginger and cook, stirring, 1 minute.
->>>>>>> e7c5bb6bd46936a941f9d00d4b2fb911cbfd9836
 Add cumin, coriander, and cardamom and cook, stirring, 1 minute.
 Stir in salt, red pepper flakes, pumpkin, water, broth, and coconut milk and simmer, uncovered, stirring occasionally, 30 minutes.
 Purée soup in batches in a blender until smooth (use caution when blending hot liquids), transferring to a large bowl, and return soup to pot.
@@ -95,15 +57,7 @@ Soup can be thinned with additional water.</p>
           const findMealContainer = document.querySelector('.find-meal-container');
           findMealContainer.parentNode.insertBefore(recipeTitle, findMealContainer.nextSibling);
           findMealContainer.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
-<<<<<<< HEAD
-          
           recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          
-=======
-
-          recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
->>>>>>> e7c5bb6bd46936a941f9d00d4b2fb911cbfd9836
           // Remove the button after clicking
           expandButton.remove();
 
@@ -115,9 +69,6 @@ Soup can be thinned with additional water.</p>
           });
         });
       </script>
-<<<<<<< HEAD
- 
-=======
->>>>>>> e7c5bb6bd46936a941f9d00d4b2fb911cbfd9836
+
 </body>
 </html>
