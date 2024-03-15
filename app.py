@@ -1,5 +1,6 @@
 '''app.py'''
 import secrets
+import json
 import re
 from flask import Flask, render_template, request, redirect, jsonify, session, url_for
 from flask.views import MethodView
@@ -119,13 +120,9 @@ class StoreDataView(MethodView):
     def post(self):
         data = request.data
         data = json.loads(data)
-        # Now data is a Python list
-        # Store it in the session
         print(f"{data=}")
         session['selected_ingredients'] = data
         session['recipes'] = find_with_majority_ingredients(data, 0.5)
-        # session['recipes'] = ['homemade-paneer-recipe', 'all-day-every-day-yogurt-sauce', 'basic-lemon-vinaigrette', 'preserved-lemons', 'lemon-pepper-salt-rub-51104430']
-        # session['recipes'] = ["d best"]
         print()
         print("stored")
         return "", 200
@@ -163,8 +160,6 @@ app.add_url_rule('/rated', view_func=RatedView.as_view('rated'))
 app.add_url_rule('/liked', view_func=LikedView.as_view('liked'))
 app.add_url_rule('/store_data', view_func=StoreDataView.as_view('store_data'))
 app.add_url_rule('/store_liked_recipes', view_func=StoreLikedRecipesView.as_view('store_liked_recipes'))
-app.add_url_rule('/rated', view_func=StoreDataView.as_view('rated'))
-app.add_url_rule('/liked', view_func=StoreDataView.as_view('liked'))
 
 if __name__ == '__main__':
     app.run(debug=True)
