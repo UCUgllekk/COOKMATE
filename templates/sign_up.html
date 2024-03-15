@@ -20,8 +20,8 @@
           {% block content %}
             <div class="div-5">Sign up</div>
             <div class="input">
-              <input type="text" name="email" class="div-6" placeholder="Email">
-              <input type="password" name="password" class="div-7" placeholder="Password">
+              <input type="text" name="email" class="div-6" placeholder="Email", autofocus="on", autocomplete="off">
+              <input type="password" name="password" class="div-7" placeholder="Password", autocomplete="off">
             </div>
             {% if message %}
             <p style="color:red;"> {{ message }}</p>

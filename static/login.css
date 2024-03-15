@@ -76,11 +76,9 @@ html, body {
   font: 400 20px Inter, sans-serif;
   border-radius: 15px;
   background-color: #ffa552;
-  margin-top: 44px;
-  justify-content: center;
-  align-items: start;
   text-align: left;
-  padding: 5px 60px 5px 30px; /* Додає відступ перед текстом */
+  padding: 5px 6% 5px 4%;
+  width: 90%;
 }
 
 .div-6 {
@@ -107,6 +105,7 @@ html, body {
 }
 
 .div-8 {
+  display: flex;
   border-radius: 80px;
   background-color: #555;
   align-self: center;
@@ -115,7 +114,8 @@ html, body {
   text-align: center; /* Вирівнює текст по центру */
   padding: 8px 36px;
   font: 500 20px Inter, sans-serif;
-  margin-top: 20px; /* Зменшує відстань між кнопкою і верхнім краєм контейнера */
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 .div-2 {
