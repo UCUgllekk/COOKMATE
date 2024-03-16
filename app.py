@@ -168,9 +168,11 @@ class RecipeView(MethodView):
         if not user_email:
             return render_template('login.html')
         recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
+        user = mongo.db.users.find_one({"email": user_email})
+        rated_recipes = user['rated']
         if not recipe:
             return 'Recipe not found', 40
-        return render_template('recipe.html', recipe=recipe)
+        return render_template('recipe.html', recipe=recipe, rating=rated_recipes[recipe['Title']][0]['Rating'] if recipe['Title'] in rated_recipes else 0)
 
 class RateView(MethodView):
     '''RateView'''
