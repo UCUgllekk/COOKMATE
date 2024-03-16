@@ -206,6 +206,7 @@ def validate_password(password: str):
         return "Password should contain at least one digit"
     if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*$", password)):
         return "Password should contain at least one of these symbols: #?!@$%^&*_-"
+    return True
     # return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
     #     r"(?=.*?[#?!@$%^&*_-]).{8,}$", password))
 def validate_email(email:str):
