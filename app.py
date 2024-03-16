@@ -57,6 +57,14 @@ class LoginView(MethodView):
             return render_template('login.html', message='Wrong Password!')
         return render_template('login.html', message='User does not exist!')
 
+class LogoutView(MethodView):
+    '''Logout'''
+    def get(self):
+        '''LogoutPage'''
+        if 'email' in session:
+            session.pop('email', None)
+        return redirect(url_for('main_page'))
+
 class SignUpView(MethodView):
     '''SignUp'''
     def get(self):
@@ -243,6 +251,7 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
 app.add_url_rule('/', view_func=MainView.as_view('main_page'))
 app.add_url_rule('/ingredients', view_func=IngredientsView.as_view('ingredients'))
 app.add_url_rule('/login', view_func=LoginView.as_view('log_in'))
+app.add_url_rule('/logout', view_func=LogoutView.as_view('logout'))
 app.add_url_rule('/sign_up', view_func=SignUpView.as_view('sign_up'))
 app.add_url_rule('/search', view_func=SearchView.as_view('search_view'))
 app.add_url_rule('/tinder', view_func=TinderView.as_view('tinder'))
