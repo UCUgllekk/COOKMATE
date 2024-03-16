@@ -24,7 +24,10 @@
                     {% for recipe,list in recipes.items() %}
                     <div class = 'recipe'><a href='/recipe/{{ list["Image_Name"] }}/'>
                         <div class = 'recipe_title'>{{ recipe }}</div>
-                        <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
+                        <div class = "recipe_image">
+                            <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
+                        </div>
+                        <!-- <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}"> -->
                         </a>
                         <div class="rating">
                             {% for i in range(list['Rating']) %}
