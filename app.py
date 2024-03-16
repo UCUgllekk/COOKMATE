@@ -94,7 +94,6 @@ class IngredientsView(MethodView):
     '''Ingredients'''
     def get(self):
         '''open ingredients'''
-        print(liked_recipes)
         return render_template('ingredients.html', liked_recipes=liked_recipes)
 
 class TinderView(MethodView):
@@ -120,7 +119,6 @@ class LikedView(MethodView):
                                  'Rating': user['rated'][liked_recipe]['Rating']}
                     users.update_one({'email': user_email}, {'$set': {f'liked.{liked_recipe}':\
                         new_liked}})
-            print(user['liked'])
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
 
@@ -133,7 +131,6 @@ class RatedView(MethodView):
             return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
         rated_recipes = user['rated']
-        print(rated_recipes)
         return render_template('rated.html', recipes=rated_recipes)
 
 class StoreDataView(MethodView):
@@ -143,11 +140,8 @@ class StoreDataView(MethodView):
         global recipes
         data = request.data
         data = json.loads(data)
-        print(f"{data=}")
         session['selected_ingredients'] = data
         recipes = find_with_majority_ingredients(data, 0.5) if data else []
-        print()
-        print("stored")
         return "", 200
 
 class StoreLikedRecipesView(MethodView):
@@ -167,8 +161,6 @@ class StoreLikedRecipesView(MethodView):
                                        'Image_Name': f"{meal[0]}.jpg",
                                        'Rating': 0}
                 users.update_one({'email': user_email}, {'$set': {f'liked.{meal[1]}': liked_meal}})
-            # user = users.find_one({"email": user_email})
-            # print(user)
         return "", 200
 
 class RecipeView(MethodView):
@@ -207,8 +199,6 @@ class RateView(MethodView):
                         'Rating': rating}
         users.update_one({'email': user_email}, {'$set': \
             {f"rated.{recipe['Title']}": rated_recipe}})
-        # user = users.find_one({"email": user_email})
-        # print(user)
         return 'Success', 200
 
 def validate_password(password: str):
@@ -236,12 +226,10 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
     all_docs = mongo.db.recipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, \
         "Title": 1, "Ingredients": 1, 'Instructions': 1})
     matching_docs = []
-    print("docs: ", all_docs)
     for doc in all_docs:
         doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
         if len(common_ingredients) / len(doc_ingredients) > amount:
-            print(doc_ingredients, common_ingredients)
             matching_docs.append(doc['Image_Name'])
             matching_docs.append(doc['Title'])
             matching_docs.append(doc['Ingredients'])
