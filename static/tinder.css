@@ -135,10 +135,16 @@ body {
   color: #ffa552;
   background-color: rgba(255, 255, 255, 0.5);
 }
+#like:hover {
+  color: #eb882c;
+}
 
 #dislike {
   color: #ccc;
   background-color: rgba(0, 0, 0, 0.5);
+}
+#dislike:hover {
+  color: #b6b4b4;
 }
 
 .button {
