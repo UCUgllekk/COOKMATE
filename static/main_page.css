@@ -215,6 +215,21 @@ body, html {
     border-radius: 5%;
   }
 
+  .no-option {
+    /* color: transparent; */
+    background-color: transparent;
+    border-color: transparent;
+    font: 300 30px Inter, sans-serif;
+    /* padding: 0; */
+    text-align: left;
+    padding-top: 10px;
+    margin-top: -10px;
+  }
+
+  .no-option:not(:first-child) {
+    margin-top: 0;
+  }
+
   .find-meal-container {
     text-align: center;
     margin-top: 40px;
