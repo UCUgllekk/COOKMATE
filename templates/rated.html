@@ -12,9 +12,6 @@
             <a href="/" class="logo">
                 <img height="91px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc277e0ff378357bda8086eaad29fc23d7c18641518cfe14a929ebc7c8492b5b?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Kitchen scene">
             </a>
-            <a href="{{ url_for('logout') }}" >
-                <button class="log-out">Log Out</button>
-            </a>
         </div>
         <div class="main">
             <h1 class="title">Your profile</h1>
@@ -25,19 +22,25 @@
                 <div id="recipes">
                     {% if recipes %}
                     {% for recipe,list in recipes.items() %}
-                    <div class = 'recipe'><a href='/recipe/{{ list["Image_Name"] }}/'>
-                        <div class = 'recipe_title'>{{ recipe }}</div>
-                        <div class = "recipe_image">
-                            <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
+                    <div class='recipe'>
+                        <div class="recipe_image">
+                            <a href='/recipe/{{ list["Image_Name"] }}/'>
+                                <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
+                            </a>
                         </div>
-                        </a>
-                        <div class="rating">
-                            {% for i in range(list['Rating']) %}
-                                <span class="star filled">&#9733;</span>
-                            {% endfor %}
-                            {% for i in range(5 - list['Rating']) %}
-                                <span class="star">&#9733;</span>
-                            {% endfor %}
+                        <div class="recipe-body">
+                            <div class='recipe_title'>
+                                <a href='/recipe/{{ list["Image_Name"] }}/'>{{ recipe }}</a>
+                            </div>
+            
+                            <div class="rating">
+                                {% for i in range(list['Rating']) %}
+                                    <span class="star filled">&#9733;</span>
+                                {% endfor %}
+                                {% for i in range(5 - list['Rating']) %}
+                                    <span class="star">&#9733;</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
