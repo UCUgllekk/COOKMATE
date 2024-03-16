@@ -105,13 +105,13 @@ class LikedView(MethodView):
             liked = user['liked']
             users = mongo.db.users
             for liked_recipe, data in liked.items():
-                # print(data)
                 if liked_recipe in user['rated']:
                     new_liked = {'Ingredients': data['Ingredients'],
                                  'Instructions': data['Instructions'],
                                  'Image_Name': data['Image_Name'],
                                  'Rating': user['rated'][liked_recipe]['Rating']}
-                    users.update_one({'email': user_email}, {'$set': {f'liked.{liked_recipe}': new_liked}})
+                    users.update_one({'email': user_email}, {'$set': {f'liked.{liked_recipe}':\
+                        new_liked}})
             print(user['liked'])
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
@@ -172,13 +172,11 @@ class RecipeView(MethodView):
             return render_template('login.html')
         recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
         user = mongo.db.users.find_one({"email": user_email})
-        rated_recipes = user['rated']
         user = mongo.db.users.find_one({"email": user_email})
         liked = user['liked']
         for like, listik in liked.items():
             if recipe_id == listik['Image_Name']:
                 recipe = (like, user['liked'][like])
-        print(type(recipe), recipe)
         if not recipe:
             return 'Recipe not found', 40
         return render_template('recipe.html', recipe=recipe)
@@ -218,8 +216,7 @@ def validate_password(password: str):
     if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*$", password)):
         return "Password should contain at least one of these symbols: #?!@$%^&*_-"
     return True
-    # return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
-    #     r"(?=.*?[#?!@$%^&*_-]).{8,}$", password))
+
 
 def validate_email(email:str):
     '''email'''
