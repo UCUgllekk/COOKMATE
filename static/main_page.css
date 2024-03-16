@@ -215,34 +215,34 @@ body, html {
   border-radius: 5%;
 }
 
-.no-option {
-  /* color: transparent; */
-  background-color: transparent;
-  border-color: transparent;
-  font: 300 30px Inter, sans-serif;
-  /* padding: 0; */
-  text-align: left;
-  padding-top: 10px;
-  margin-top: -10px;
-}
+  .no-option {
+    /* color: transparent; */
+    background-color: transparent;
+    border-color: transparent;
+    font: 300 30px Inter, sans-serif;
+    /* padding: 0; */
+    text-align: left;
+    padding-top: 10px;
+    margin-top: -10px;
+  }
 
-.no-option:not(:first-child) {
-  margin-top: 0;
-}
+  .no-option:not(:first-child) {
+    margin-top: 0;
+  }
 
-.find-meal-container {
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.find-meal {
-  font-family: Inter, sans-serif;
-  color: black;
-  border-radius: 80px;
-  background-color: #fff;
-  border: 4px solid #ffa552;
-  padding: 8px 33px;
-  font: 500 20px Inter, sans-serif;
-  text-decoration: none;
-}
+  .find-meal-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .find-meal {
+    font-family: Inter, sans-serif;
+    color: black;
+    border-radius: 80px;
+    background-color: #fff;
+    border: 4px solid #ffa552;
+    padding: 8px 33px;
+    font: 500 20px Inter, sans-serif;
+    text-decoration: none;
+  }
