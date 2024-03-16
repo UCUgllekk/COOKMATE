@@ -174,9 +174,14 @@ class RecipeView(MethodView):
         recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
         user = mongo.db.users.find_one({"email": user_email})
         rated_recipes = user['rated']
+        user = mongo.db.users.find_one({"email": user_email})
+        liked = user['liked']
+        for like, listik in liked.items():
+            if recipe_id == listik[0]['Image_Name']:
+                recipe = (like, user['liked'][like])
         if not recipe:
             return 'Recipe not found', 40
-        return render_template('recipe.html', recipe=recipe, rating=rated_recipes[recipe['Title']][0]['Rating'] if recipe['Title'] in rated_recipes else 0)
+        return render_template('recipe.html', recipe=recipe)
 
 class RateView(MethodView):
     '''RateView'''
