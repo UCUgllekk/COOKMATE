@@ -122,10 +122,34 @@ html, body {
 }
 
 .star {
-    font-size: 40px;
+    font-size: 2.5vw; /* Задаємо розмір шрифту відсотками від ширини вікна браузера */
     color: gray;
-  }
+    margin-top: -3.5em; /* Відступ від верху в em */
+}
 
-  .star.filled {
+.star.filled {
     color: gold;
+    margin-top: -3.5em; /* Відступ від верху в em */
+}
+
+.recipe_image {
+    margin-left: 8%; /* Відступ зліва відсотками */
+    margin-top: -1em; /* Відступ зверху в em */
+    margin-bottom: 1em; /* Відступ знизу в em */
+}
+
+.recipe_title {
+    text-align: center;
+    margin-top: 2em; /* Відступ від нижнього краю в em */
+    color: black;
+    font-family: Inter, sans-serif;
+    font-size: 1.25em; /* Розмір шрифту в em */
+}
+
+
+
+  .rating {
+    display: flex;
+    justify-content: center;
   }
+  
