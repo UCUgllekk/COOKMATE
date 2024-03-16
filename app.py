@@ -68,9 +68,9 @@ class SignUpView(MethodView):
     def post(self):
         '''SignUp'''
         email = request.form.get('email')
-        if validate_email(email):
+        if validate_email(email) is True:
             password = request.form.get('password')
-            if validate_password(password):
+            if validate_password(password) == True:
                 if not email or not password:
                     return render_template('sign_up.html', message='Please fill in all the fields')
                 if records.find_one({'email': email}):
@@ -81,7 +81,7 @@ class SignUpView(MethodView):
                 records.insert_one(user_input)
                 session['email'] = email
                 return redirect(url_for('liked'))
-            return render_template('sign_up.html', message='Wrong password form')
+            return render_template('sign_up.html', message=validate_password(password))
         return render_template('sign_up.html', message='Wrong email form')
 
 class IngredientsView(MethodView):
@@ -106,8 +106,11 @@ class LikedView(MethodView):
             user_email = session.get('email')
             user = mongo.db.users.find_one({"email": user_email})
             liked = user['liked']
+            for liked_recipe in liked:
+                if liked_recipe in user['rated']:
+                    liked[liked_recipe] = user['rated'][liked_recipe]
             return render_template('liked.html', recipes = liked)
-        return render_template('sign_up.html')
+        return render_template('login.html')
 
 class RatedView(MethodView):
     '''View Recipes'''
@@ -118,9 +121,8 @@ class RatedView(MethodView):
         if not user_email:
             return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
-        rated_recipes = user['liked']
+        rated_recipes = user['rated']
         rated_recipes = [mongo.db.recipes.find_one({"Title": recipe}) for recipe in rated_recipes]
-        print(rated_recipes)
         return render_template('rated.html', recipes=rated_recipes)
 
 class StoreDataView(MethodView):
@@ -132,7 +134,7 @@ class StoreDataView(MethodView):
         data = json.loads(data)
         print(f"{data=}")
         session['selected_ingredients'] = data
-        recipes = find_with_majority_ingredients(data, 0.5)
+        recipes = find_with_majority_ingredients(data, 0.5) if data else []
         print()
         print("stored")
         return "", 200
@@ -177,27 +179,36 @@ class RateView(MethodView):
         user_email = session.get('email')  # Get the email from the session
         if not user_email:
             return render_template('login.html')
-        print('Im in rate')
         data = request.data
         data = json.loads(data)
-        print(data)
         recipe = mongo.db.recipes.find_one({'Title': data['recipe']})
         users = mongo.db.users
         rating = int(data['rating'])
         rated_recipe = {'Ingredients': recipe['Ingredients'],
                         'Instructions': recipe['Instructions'],
-                        'Image_Name': recipe['Image_Name'],
+                        'Image_Name': recipe['Image_Name'] + '.jpg',
                         'Rating': rating}
-        print(recipe, rating)
-        users.update_one({'email': user_email}, {'$push': {f"rated.{recipe['Title']}": rated_recipe}})
-        user = users.find_one({"email": user_email})
-        print(user)
+        users.update_one({'email': user_email}, {'$push': \
+            {f"rated.{recipe['Title']}": rated_recipe}})
+        # user = users.find_one({"email": user_email})
+        # print(user)
         return 'Success', 200
 
 def validate_password(password: str):
     '''password'''
-    return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
-        r"(?=.*?[#?!@$%^&*-]).{8,}$", password))
+    if len(password) < 8:
+        return "Password should contain eight symbols"
+    if not bool(re.fullmatch(r"^(?=.*?[A-Z]).*", password)):
+        return "Password should contain at least one capital letter"
+    if not bool(re.fullmatch(r"^(?=.*?[a-z]).*", password)):
+        return "Password should contain at least one lowercase letter"
+    if not bool(re.fullmatch(r"^(?=.*?[0-9]).*", password)):
+        return "Password should contain at least one digit"
+    if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*", password)):
+        return "Password should contain at least one of these symbols: #?!@$%^&*_-"
+    return True
+    # return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
+    #     r"(?=.*?[#?!@$%^&*_-]).{8,}$", password))
 
 def validate_email(email:str):
     '''email'''

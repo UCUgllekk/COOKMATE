@@ -19,11 +19,11 @@
         <div class="div-5">Login</div>
         <form action="{{ url_for('log_in')}}" method="POST">
             {% block content %}
+                <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on">
+                <input type="password" name="password" class="div-7" placeholder="Password", autocomplete="off">
                 {% if message %}
                     <p style="color:red;"> {{ message }}</p>
                 {% endif %}
-                <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on">
-                <input type="password" name="password" class="div-7" placeholder="Password", autocomplete="off">
                 <form style="align-self: center;">
                     <button class="div-8">
                         Login
