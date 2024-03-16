@@ -139,34 +139,42 @@ html, body {
 }
 
 .star {
-    font-size: 2.5vw; /* Задаємо розмір шрифту відсотками від ширини вікна браузера */
+    font-size: 30px;
     color: gray;
-    margin-top: -3.5em; /* Відступ від верху в em */
+    margin-top: 1.2em;
 }
 
 .star.filled {
     color: gold;
-    margin-top: -3.5em; /* Відступ від верху в em */
+    margin-top: 1.2em;
 }
 
 .recipe_image {
-    margin-left: 8%; /* Відступ зліва відсотками */
-    margin-top: -1em; /* Відступ зверху в em */
-    margin-bottom: 1em; /* Відступ знизу в em */
+    margin-left: 8%;
+    margin-top: .5em;
+    margin-bottom: -0.5em;
 }
 
-.recipe_title {
+.recipe_title a {
+    display: inline-block;
     text-align: center;
-    margin-top: 2em; /* Відступ від нижнього краю в em */
+    margin-top: 2em;
     color: black;
     font-family: Inter, sans-serif;
-    font-size: 1.25em; /* Розмір шрифту в em */
+    font-size: 1.25em;
 }
 
-
-
-  .rating {
+.recipe {
     display: flex;
+    margin-bottom: 50px;
     justify-content: center;
-  }
-  
+}
+
+.recipe-body {
+    margin-left: 50px;
+    width: 400px;
+}
+
+.rating {
+    display: flex;
+}
