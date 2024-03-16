@@ -1,22 +1,31 @@
 var stars = document.querySelectorAll('.rating > .fa');
+var recipeElement = document.getElementById('recipe-title');
+var recipe = recipeElement.textContent;
+
 for (var i = 0; i < stars.length; i++) {
     stars[i].value = i
     stars[i].addEventListener('click', function() {
-        // Remove the 'checked' class from all stars
-        // Add the 'checked' class to the clicked star and all previous stars
         for (var k = 0; k < this.value%5 + 1; k++) {
-          console.log("checked", this.value - k)
           stars[this.value - k].classList.add("checked");
         }
         for (var k = 1; k < 5 - this.value; k++) {
-          console.log("unchecked", this.value + k)
           stars[this.value + k].classList.remove("checked");
         }
-        console.log("")
-        // Store the rating in the user's data
-        // This will depend on how you're storing user data
-        // For example, you might use localStorage:
-        localStorage.setItem('rating', i + 1);
+        var rating = 6-k
+        console.log(rating, recipe)
+
+        fetch('/rate', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            rating: rating,
+            recipe: recipe}),
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     });
     stars[i].addEventListener('mouseover', function(event) {
       for (var k = 1; k < this.value%5 + 1; k++) {

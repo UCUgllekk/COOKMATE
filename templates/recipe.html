@@ -18,7 +18,7 @@
         </a>
       </header>
       <section class="recipe-details">
-        <div class="recipe-title">{{recipe.Title}}</div>
+        <div class='recipe-title' id= "recipe-title">{{recipe.Title}}</div>
         <div class="ingredients-section">
           <div class="ingredients-column">
             <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + recipe.Image_Name + '.jpg') }}">
