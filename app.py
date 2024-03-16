@@ -133,7 +133,6 @@ class RatedView(MethodView):
             return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
         rated_recipes = user['rated']
-        print(rated_recipes)
         return render_template('rated.html', recipes=rated_recipes)
 
 class StoreDataView(MethodView):
