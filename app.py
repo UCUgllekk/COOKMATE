@@ -68,7 +68,7 @@ class SignUpView(MethodView):
     def post(self):
         '''SignUp'''
         email = request.form.get('email')
-        if validate_email(email) is True:
+        if validate_email(email):
             password = request.form.get('password')
             if validate_password(password) == True:
                 if not email or not password:
@@ -122,7 +122,7 @@ class RatedView(MethodView):
             return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
         rated_recipes = user['rated']
-        rated_recipes = [mongo.db.recipes.find_one({"Title": recipe}) for recipe in rated_recipes]
+        print(rated_recipes)
         return render_template('rated.html', recipes=rated_recipes)
 
 class StoreDataView(MethodView):
@@ -198,17 +198,15 @@ def validate_password(password: str):
     '''password'''
     if len(password) < 8:
         return "Password should contain eight symbols"
-    if not bool(re.fullmatch(r"^(?=.*?[A-Z]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[A-Z]).*$", password)):
         return "Password should contain at least one capital letter"
-    if not bool(re.fullmatch(r"^(?=.*?[a-z]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[a-z]).*$", password)):
         return "Password should contain at least one lowercase letter"
-    if not bool(re.fullmatch(r"^(?=.*?[0-9]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[0-9]).*$", password)):
         return "Password should contain at least one digit"
-    if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*$", password)):
         return "Password should contain at least one of these symbols: #?!@$%^&*_-"
-    return True
-    # return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
-    #     r"(?=.*?[#?!@$%^&*_-]).{8,}$", password))
+
 
 def validate_email(email:str):
     '''email'''

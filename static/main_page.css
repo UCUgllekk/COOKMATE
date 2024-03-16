@@ -1,233 +1,248 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-  * {
-    box-sizing: border-box;
-  }
-  
-  .main-container {
-    /* max-width: 1400px; */
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 16px;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  .steps-section {
-    display: flex;
-  }
+.main-container {
+  /* max-width: 1400px; */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
 
-  .step-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .step {
-    background-color: #ffa552;
-    padding: 90px;
-    border-radius: 20px;
-    text-align: center;
-    width: 80%;
-    margin: 30px;
-  }
-  
-  .step-number {
-    font-size: 60px;
-    color: #fff;
-    margin-bottom: 30px;
-  }
-  .step-number1 {
-    font-size: 60px;
-    color: #fff;
-    margin-bottom: 60px;
-  }
-  .number {
-    color: #AA9E9E;
-    margin-right: 15px;
-  }
-  .number.active{
-    color: #070101;
-  }
-  .step-title {
-    margin-top: 20px;
-    color: #7b3f14;
-    font-size: 35px;
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+}
 
-    .step-title1 {
-    margin-top: 30px;
-    color: #7b3f14;
-    font-size: 35px;
-  }
+.steps-section {
+  display: flex;
+}
 
-  .search-ingredients {
-    margin-top: 50px;
-    width: 100%;
-  }
+.step-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
 
-  .search-ingredients .search-header {
-    text-align: left;
-  }
-  
-  .search-header {
-    display: flex;
-    padding: 10px;
-    font-weight: bold;
-    color: #070101;
-    font-size: 50px;
-    font: 300 50px Inter, sans-serif;
-  }
-  
-  .search-title {
-    font-size: 80px;
-    font-weight: bold;
-    padding: 25px;
-  }
-  
-  .input-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffa552;
-    border-radius: 10px;
-    margin-top: 0px;
-    /* margin-bottom: 200px; */
-    padding: 20px;
-    width: 500px;
-    margin-left: 25px;
-  }
+.step {
+  background-color: #ffa552;
+  padding: 90px;
+  border-radius: 20px;
+  text-align: center;
+  width: 80%;
+  margin: 30px;
+}
 
-  .input-group input {
-    width: 110%;
-    font-size: 30px;
-    background: transparent;
-    border: 0;
-    color: white;
-    margin-left: 25px;
-  }
+.step-number {
+  font-size: 60px;
+  color: #fff;
+  margin-bottom: 30px;
+}
+.step-number1 {
+  font-size: 60px;
+  color: #fff;
+  margin-bottom: 60px;
+}
+.number {
+  color: #AA9E9E;
+  margin-right: 15px;
+}
+.number.active{
+  color: #070101;
+}
+.step-title {
+  margin-top: 20px;
+  color: #7b3f14;
+  font-size: 35px;
+}
 
-  .input-group input::placeholder {
-    color: white;
-  }
+  .step-title1 {
+  margin-top: 30px;
+  color: #7b3f14;
+  font-size: 35px;
+}
 
-  .input-group input:focus {
-    outline: none;
-  }
-  
-  .search-icon {
-    width: 30px;
-    height: auto;
-  }
-  
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
+.search-ingredients {
+  margin-top: 50px;
+  width: 100%;
+}
 
+.search-ingredients .search-header {
+  text-align: left;
+}
 
-  .row {
-    display: flex;
-  }
+.search-header {
+  display: flex;
+  padding: 10px;
+  font-weight: bold;
+  color: #070101;
+  font-size: 50px;
+  font: 300 50px Inter, sans-serif;
+}
 
-  #selected-ingredients {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    flex-direction: row-reverse;
-    margin-top: 105px;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    justify-content: flex-start
-  }
-  
-  .ingredients-section {
-    margin-left: 50px;
-    padding: 0px;
-    justify-content: space-between;
-  }
-  
-  .tag {
-    padding: 30px;
-    background-color:#DDDDDD;
-    border-radius: 1000px;
-    color: #070101;
-    font-size: 30px;
-    margin: 5px;
-  }
+.search-title {
+  font-size: 80px;
+  font-weight: bold;
+  padding: 25px;
+}
 
-  .tag select {
-    background: transparent;
-  }
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffa552;
+  border-radius: 10px;
+  margin-top: 0px;
+  /* margin-bottom: 200px; */
+  padding: 20px;
+  width: 500px;
+  margin-left: 25px;
+}
 
-  #suggestions {
-    height: 320px;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    /* justify-content: flex-start; */
-    align-items: left;
-    /* justify-content: space-between; */
-    margin-left: 60px;
-    /* transform: translateY(-200px); */
-  }
+.input-group input {
+  width: 110%;
+  font-size: 30px;
+  background: transparent;
+  border: 0;
+  color: white;
+  margin-left: 25px;
+}
 
-  .option {
-    /* color: transparent; */
-    background-color: transparent;
-    border-color: transparent;
-    font: 300 30px Inter, sans-serif;
-    /* padding: 0; */
-    text-align: left;
-    padding-top: 10px;
-    margin-top: -10px;
+.input-group input::placeholder {
+  color: white;
+}
 
-  }
-  /* Визначити клас для кожного елемента, крім першого */
-  .option:not(:first-child) {
-    margin-top: 0;
-  }
+.input-group input:focus {
+  outline: none;
+}
+
+.search-icon {
+  width: 30px;
+  height: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 
 
-  .option:hover {
-    /* color: gray; */
-    background-color: rgb(232, 232, 232);
-    border-radius: 5%;
-  }
+.row {
+  display: flex;
+}
 
-  .find-meal-container {
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
-  
-  .find-meal {
-    font-family: Inter, sans-serif;
-    color: black;
-    border-radius: 80px;
-    background-color: #fff;
-    border: 4px solid #ffa552;
-    padding: 8px 33px;
-    font: 500 20px Inter, sans-serif;
-    text-decoration: none;
-  }
+#selected-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: row-reverse;
+  margin-top: 105px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start
+}
+
+.ingredients-section {
+  margin-left: 50px;
+  padding: 0px;
+  justify-content: space-between;
+}
+
+.tag {
+  padding: 30px;
+  background-color:#DDDDDD;
+  border-radius: 1000px;
+  color: #070101;
+  font-size: 30px;
+  margin: 5px;
+}
+
+.tag select {
+  background: transparent;
+}
+
+#suggestions {
+  height: 320px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* justify-content: flex-start; */
+  align-items: left;
+  /* justify-content: space-between; */
+  margin-left: 60px;
+  /* transform: translateY(-200px); */
+}
+
+.option {
+  /* color: transparent; */
+  background-color: transparent;
+  border-color: transparent;
+  font: 300 30px Inter, sans-serif;
+  /* padding: 0; */
+  text-align: left;
+  padding-top: 10px;
+  margin-top: -10px;
+
+}
+/* Визначити клас для кожного елемента, крім першого */
+.option:not(:first-child) {
+  margin-top: 0;
+}
+
+
+.option:hover {
+  /* color: gray; */
+  background-color: rgb(232, 232, 232);
+  border-radius: 5%;
+}
+
+.no-option {
+  /* color: transparent; */
+  background-color: transparent;
+  border-color: transparent;
+  font: 300 30px Inter, sans-serif;
+  /* padding: 0; */
+  text-align: left;
+  padding-top: 10px;
+  margin-top: -10px;
+}
+
+.no-option:not(:first-child) {
+  margin-top: 0;
+}
+
+.find-meal-container {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.find-meal {
+  font-family: Inter, sans-serif;
+  color: black;
+  border-radius: 80px;
+  background-color: #fff;
+  border: 4px solid #ffa552;
+  padding: 8px 33px;
+  font: 500 20px Inter, sans-serif;
+  text-decoration: none;
+}

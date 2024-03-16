@@ -76,47 +76,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-        
 
-// Add an event listener for the 'input' event to the search bar
+function isAlphaSpace(text){
+    return /^[A-Z ]*$/i.test(text);
+}
+
 document.getElementById('search-bar').addEventListener('input', function() {
-    // Get the current value of the search bar
     var inputVal = this.value.toLowerCase();
     var suggestionsDiv = document.getElementById('suggestions');
-
-    // If the search bar is not empty
     if (inputVal) {
-        // Create a new XMLHttpRequest
-        var xhr = new XMLHttpRequest();
+        if (isAlphaSpace(inputVal)) {
+            var xhr = new XMLHttpRequest();
 
-        // Open a GET request to the '/search' route with the current value of the search bar as a query parameter
-        xhr.open('GET', '/search?query=' + inputVal, true);
+            xhr.open('GET', '/search?query=' + inputVal, true);
 
-        // Set the onload function of the XMLHttpRequest
-        xhr.onload = function() {
-            // Parse the response text as JSON
-            var suggestions = JSON.parse(this.responseText);
+            xhr.onload = function() {
+                var suggestions = JSON.parse(this.responseText);
 
-            // Clear the suggestions div
+                suggestionsDiv.innerHTML = '';
+                console.log(suggestions.length)
+                if (suggestions.length) {
+                suggestions.slice(0, 5).forEach(function(suggestion) {
+                    var p = document.createElement('button');
+
+                    p.textContent = suggestion;
+                    p.classList.add("option")
+
+                    suggestionsDiv.appendChild(p);
+                });
+                } else {
+                    console.log("no ingredients")
+                    var p = document.createElement('button');
+
+                    p.textContent = "No such ingredient";
+                    p.classList.add("no-option")
+
+                    suggestionsDiv.appendChild(p);
+                }
+            };
+
+            xhr.send();
+        } else {
             suggestionsDiv.innerHTML = '';
-            // For each suggestion
-            suggestions.slice(0, 5).forEach(function(suggestion) {
-                // Create a new p element
-                var p = document.createElement('button');
+            console.log("no ingredients")
+            var p = document.createElement('button');
 
-                // Set the text content of the p element to the suggestion
-                p.textContent = suggestion;
-                p.classList.add("option")
+            p.textContent = "No such ingredient";
+            p.classList.add("no-option")
 
-                // Add the p element to the suggestions div
-                suggestionsDiv.appendChild(p);
-            });
-        };
-
-        // Send the XMLHttpRequest
-        xhr.send();
+            suggestionsDiv.appendChild(p);
+        }
     } else {
-        // If the search bar is empty, clear the suggestions div
         suggestionsDiv.innerHTML = '';
     }
 });
