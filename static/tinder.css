@@ -137,6 +137,7 @@ body {
 }
 #like:hover {
   color: #eb882c;
+  cursor: pointer;
 }
 
 #dislike {
@@ -145,6 +146,7 @@ body {
 }
 #dislike:hover {
   color: #b6b4b4;
+  cursor: pointer;
 }
 
 .button {
@@ -173,6 +175,9 @@ body {
     margin-top: 25%;
     font: 500 20px Inter, sans-serif;
     text-decoration: none;
+}
+.find-meal:hover {
+  cursor:pointer;
 }
 .search-title {
     font-size: 40px;
