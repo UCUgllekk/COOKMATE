@@ -61,8 +61,6 @@ class SignUpView(MethodView):
     '''SignUp'''
     def get(self):
         '''SignUpPage'''
-        # if 'email' in session:
-        #     return redirect(url_for('Si'))
         return render_template('sign_up.html', message='')
 
     def post(self):
@@ -169,7 +167,7 @@ class RecipeView(MethodView):
     '''RecipeView'''
     def get(self, recipe_id):
         '''RecipePage'''
-        user_email = session.get('email')  # Get the email from the session
+        user_email = session.get('email')
         if not user_email:
             return render_template('login.html')
         recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
