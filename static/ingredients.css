@@ -116,7 +116,7 @@
 
   .ingredients-column {
     margin-top: 2%;
-    margin-left: 10%;
+    margin-left: 50px;
     display: flex;
     flex-direction: column;
     line-height: normal;
@@ -135,17 +135,18 @@
 
   @media (max-width: 991px) {
     .ingredients-column {
-      width: 100%;
+      width: 400px;
+      margin-left: 100px;
     }
 
     .ingredient-text {
-      margin-left: 10%;
+      margin-left: 100px;
     }
     .recipe-title2 {
       width: 80%;
     }
     .recipe-description {
-      width: 600px;
+      max-width: 500px;
     }
   }
 
@@ -188,7 +189,15 @@
     padding-right: 30px;
     font-family: Inter, sans-serif;
     font-size: 20px;
+    animation-name: expander;
+    animation-duration: 10s;
+    height: 0%;
   }
+
+  /* @keyframes expander {
+    from {height: 0%}
+    to {height: 100%}
+  } */
 
   .img-3 {
     width: 440px;
