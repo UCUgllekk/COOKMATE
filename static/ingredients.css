@@ -110,6 +110,7 @@
     .ingredients-section {
       flex-direction: column;
       align-items: stretch;
+      max-width: 650px;
       gap: 0px;
     }
   }
@@ -140,10 +141,11 @@
     }
 
     .ingredient-text {
-      margin-left: 100px;
+      margin-left: 120px;
+      max-width: 500px;
     }
     .recipe-title2 {
-      width: 80%;
+      max-width: 600px;
     }
     .recipe-description {
       max-width: 500px;
@@ -184,20 +186,20 @@
   .recipe-description {
     font-weight: 300;
     width: 800px;
-    font-family: Inter, sans-serif;
     padding-left: 8%;
     padding-right: 30px;
     font-family: Inter, sans-serif;
     font-size: 20px;
     animation-name: expander;
-    animation-duration: 10s;
-    height: 0%;
+    animation-duration: 0.2s;
+    transform-origin: top center;
+    animation-timing-function: ease-out;
   }
 
-  /* @keyframes expander {
-    from {height: 0%}
-    to {height: 100%}
-  } */
+  @keyframes expander {
+    from {transform: scaleY(0);}
+    to {transform: scaleY(1);}
+  }
 
   .img-3 {
     width: 440px;
