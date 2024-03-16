@@ -198,18 +198,16 @@ def validate_password(password: str):
     '''password'''
     if len(password) < 8:
         return "Password should contain eight symbols"
-    if not bool(re.fullmatch(r"^(?=.*?[A-Z]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[A-Z]).*$", password)):
         return "Password should contain at least one capital letter"
-    if not bool(re.fullmatch(r"^(?=.*?[a-z]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[a-z]).*$", password)):
         return "Password should contain at least one lowercase letter"
-    if not bool(re.fullmatch(r"^(?=.*?[0-9]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[0-9]).*$", password)):
         return "Password should contain at least one digit"
-    if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*", password)):
+    if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*$", password)):
         return "Password should contain at least one of these symbols: #?!@$%^&*_-"
-    return True
     # return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
     #     r"(?=.*?[#?!@$%^&*_-]).{8,}$", password))
-
 def validate_email(email:str):
     '''email'''
     return bool(re.fullmatch(r"^(?!\.)[a-z!#$%&'*+\-/=?^_`{|}~]+(?:\.[a-z!#$%&'*+\-/=?^_`"+\
