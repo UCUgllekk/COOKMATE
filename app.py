@@ -106,9 +106,14 @@ class LikedView(MethodView):
             user_email = session.get('email')
             user = mongo.db.users.find_one({"email": user_email})
             liked = user['liked']
-            for liked_recipe in liked:
+            users = mongo.db.users
+            for liked_recipe, data in liked.items():
                 if liked_recipe in user['rated']:
-                    liked[liked_recipe] = user['rated'][liked_recipe]
+                    new_liked = {'Ingredients': data[0]['Ingredients'],
+                                 'Instructions': data[0]['Instructions'],
+                                 'Image_Name': data[0]['Image_Name'],
+                                 'Rating': user['rated'][liked_recipe]}
+                    users.update_one({'email': user_email}, {'$push': {f'liked.{liked_recipe}': new_liked}})
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
 
@@ -116,7 +121,6 @@ class RatedView(MethodView):
     '''View Recipes'''
     def get(self):
         '''Recipes'''
-        print('im in recipeview get')
         user_email = session.get('email')
         if not user_email:
             return render_template('login.html')
@@ -156,8 +160,8 @@ class StoreLikedRecipesView(MethodView):
                                        'Image_Name': f"{meal[0]}.jpg",
                                        'Rating': 0}
                 users.update_one({'email': user_email}, {'$push': {f'liked.{meal[1]}': liked_meal}})
-            user = users.find_one({"email": user_email})
-            print(user)
+            # user = users.find_one({"email": user_email})
+            # print(user)
         return "", 200
 
 class RecipeView(MethodView):
@@ -167,7 +171,11 @@ class RecipeView(MethodView):
         user_email = session.get('email')  # Get the email from the session
         if not user_email:
             return render_template('login.html')
-        recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
+        user = mongo.db.users.find_one({"email": user_email})
+        liked = user['liked']
+        for like, listik in liked.items():
+            if recipe_id == listik[0]['Image_Name']:
+                recipe = (like, user['liked'][like])
         if not recipe:
             return 'Recipe not found', 40
         return render_template('recipe.html', recipe=recipe)
