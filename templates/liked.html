@@ -22,9 +22,9 @@
             <div class="list-liked">
                 {% if recipes %}
                 {% for recipe,list in recipes.items() %}
-                <div class = 'recipe'><a href='/recipe/{{ list[0]["Image_Name"] }}/'>
+                <div class = 'recipe'><a href='/recipe/{{ list["Image_Name"] }}/'>
                     <div class = 'recipe_title'>{{ recipe }}</div>
-                    <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list[0]['Image_Name']) }}">
+                    <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
                     </a>
                 </div>
                 {% endfor %}

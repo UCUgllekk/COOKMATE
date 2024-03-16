@@ -22,15 +22,15 @@
                 <div id="recipes">
                     {% if recipes %}
                     {% for recipe,list in recipes.items() %}
-                    <div class = 'recipe'><a href='/recipe/{{ list[0]["Image_Name"] }}/'>
+                    <div class = 'recipe'><a href='/recipe/{{ list["Image_Name"] }}/'>
                         <div class = 'recipe_title'>{{ recipe }}</div>
-                        <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list[0]['Image_Name']) }}">
+                        <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
                         </a>
                         <div class="rating">
-                            {% for i in range(list[0]['Rating']) %}
+                            {% for i in range(list['Rating']) %}
                                 <span class="star filled">&#9733;</span>
                             {% endfor %}
-                            {% for i in range(5 - list[0]['Rating']) %}
+                            {% for i in range(5 - list['Rating']) %}
                                 <span class="star">&#9733;</span>
                             {% endfor %}
                         </div>

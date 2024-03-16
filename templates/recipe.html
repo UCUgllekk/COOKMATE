@@ -21,17 +21,17 @@
         <div class='recipe-title' id= "recipe-title">{{ recipe[0] }}</div>
         <div class="ingredients-section">
           <div class="ingredients-column">
-            <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + recipe[1][0]['Image_Name']) }}">
+            <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + recipe[1]['Image_Name']) }}">
           </div>
           <div class="ingredient-text">
-            {% for ingradient in recipe[1][0]['Ingredients'].split('; ')%}
+            {% for ingradient in recipe[1]['Ingredients'].split('; ')%}
               <p> • {{ ingradient }}</p>
             {% endfor %}
           </div>
         </div>
         <div class="recipe-title">Recipe</div>
         <div class="recipe-txt">
-          {% for rec in recipe[1][0]['Instructions'].split('; ') %}
+          {% for rec in recipe[1]['Instructions'].split('; ') %}
             {% if '. ' in rec %}
             {% for i in rec.split('. ') %}
               <p> • {{ i.capitalize() }}</p>
@@ -42,10 +42,10 @@
           {% endfor %}
         </div>
         <div class="rating">
-          {% for i in range(recipe[1][0]['Rating']) %}
+          {% for i in range(recipe[1]['Rating']) %}
             <span class="fa fa-star filled"></span>
           {% endfor %}
-          {% for i in range(5 - recipe[1][0]['Rating']) %}
+          {% for i in range(5 - recipe[1]['Rating']) %}
             <span class="fa fa-star"></span>
           {% endfor %}
       </div>
