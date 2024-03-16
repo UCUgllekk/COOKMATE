@@ -9,6 +9,9 @@ for (var i = 0; i < recipes.length; i++){
     new_recipes.push(recipes[i])
   }
 }
+
+
+
 recipes = new_recipes
 if (!recipes.length) {
   // var h1 = document.createElement("h1")
@@ -58,7 +61,7 @@ var liked_recipes = []
 console.log(recipes)
 
 let cardCount = -4;
-
+var card = ""
 
 function appendNewCard() {
   cardCount += 4;
@@ -70,12 +73,13 @@ function appendNewCard() {
     }
     
   } else {
-  const card = new Card({
+  card = new Card({
     imageUrl: recipes[cardCount],
     onDismiss: appendNewCard,
     onLike: () => {
       like.style.animationPlayState = 'running';
       like.classList.toggle('trigger');
+      console.log("liked")
     },
     onDislike: () => {
       dislike.style.animationPlayState = 'running';
@@ -101,4 +105,12 @@ function appendNewCard() {
 
 appendNewCard();
 
+function onLike() {
+  card.dismiss(1)
+  console.log("liked")
+}
 
+function onDislike() {
+  card.dismiss(-1)
+  console.log("liked")
+}

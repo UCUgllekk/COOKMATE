@@ -1,14 +1,17 @@
 
-console.log(liked_recipes.length)
+console.log(liked_recipes.length, liked_recipes.slice(2, -2).split("], ["))
 if (liked_recipes != "[]") {
-    new_liked_recipes = liked_recipes.slice(2, -2).split("], [");
-    liked_recipe = []
-    for (var i = 0; i < new_liked_recipes.length; i++) {
-        if (new_liked_recipes[i].slice(1, -1).split('", "')) {
-        liked_recipes.push(new_liked_recipes[i].slice(1, -1).split('", "'));
+    liked_recipes = liked_recipes.slice(2, -2).split("], [");
+    var new_liked_recipes = [];
+    // liked_recipes.push(["asd", "asdf"]);
+    console.log(liked_recipes);
+    for (var i = 0; i < liked_recipes.length; i++) {
+        if (liked_recipes[i].slice(1, -1).split('", "')) {
+        new_liked_recipes.push(liked_recipes[i].slice(1, -1).split('", "'));
         }
-    }
-    console.log(liked_recipes)
+    };
+    liked_recipes = new_liked_recipes
+    console.log(liked_recipes);
     for (var i = 0; i < liked_recipes.length; i ++) {
         ingredients_section = document.createElement("div");
         ingredients_section.classList.add("ingredients-section")

@@ -75,7 +75,7 @@ class Card {
       this.element.style.transform = `translate(${this.#offsetX}px, ${this.#offsetY}px) rotate(${rotate}deg)`;
       // dismiss card
       if (Math.abs(this.#offsetX) > this.element.clientWidth * 0.7) {
-        this.#dismiss(this.#offsetX > 0 ? 1 : -1);
+        this.dismiss(this.#offsetX > 0 ? 1 : -1);
       }
     }
   
@@ -108,18 +108,18 @@ class Card {
       this.element.style.transform = '';
     }
   
-    #dismiss = (direction) => {
+    dismiss = (direction) => {
       this.#startPoint = null;
       document.removeEventListener('mouseup', this.#handleMoveUp);
       document.removeEventListener('mousemove', this.#handleMouseMove);
       document.removeEventListener('touchend', this.#handleTouchEnd);
       document.removeEventListener('touchmove', this.#handleTouchMove);
-      this.element.style.transition = 'transform 1s';
+      this.element.style.transition = 'transform 5s';
       this.element.style.transform = `translate(${direction * window.innerWidth}px, ${this.#offsetY}px) rotate(${90 * direction}deg)`;
       this.element.classList.add('dismissing');
       setTimeout(() => {
         this.element.remove();
-      }, 1000);
+      }, 5000);
       if (typeof this.onDismiss === 'function') {
         this.onDismiss();
       }
