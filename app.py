@@ -151,22 +151,24 @@ class StoreLikedRecipesView(MethodView):
             for meal in liked_recipes:
                 liked_meal = {'Ingredients': meal[2],
                                        'Instructions': meal[3],
-                                       'Image_Name': f"{meal[0]}.jpg"}
-                # user['liked'].append(liked_meal)
+                                       'Image_Name': f"{meal[0]}.jpg",
+                                       'Rating': 0}
                 users.update_one({'email': user_email}, {'$push': {f'liked.{meal[1]}': liked_meal}})
-            users.find_one({"email": user_email})
+            user = users.find_one({"email": user_email})
+            print(user)
         return "", 200
 
 class RecipeView(MethodView):
     '''RecipeView'''
     def get(self, recipe_id):
         '''RecipePage'''
+        user_email = session.get('email')  # Get the email from the session
+        if not user_email:
+            return render_template('login.html')
         recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
-        print(recipe)
         if not recipe:
-            return 'Recipe not found', 404
-        counter = 0
-        return render_template('recipe.html', recipe=recipe, counter = counter)
+            return 'Recipe not found', 40
+        return render_template('recipe.html', recipe=recipe)
 
 class RateView(MethodView):
     '''RateView'''
@@ -175,29 +177,22 @@ class RateView(MethodView):
         user_email = session.get('email')  # Get the email from the session
         if not user_email:
             return render_template('login.html')
-
-        rating = request.form.get('rating')
-        recipe = request.form.get('recipe')
-        user = mongo.db.users.find_one({"email": user_email})
-        user['rated'] = (recipe, rating)
-        mongo.db.users.save(user)
+        print('Im in rate')
+        data = request.data
+        data = json.loads(data)
+        print(data)
+        recipe = mongo.db.recipes.find_one({'Title': data['recipe']})
+        users = mongo.db.users
+        rating = int(data['rating'])
+        rated_recipe = {'Ingredients': recipe['Ingredients'],
+                        'Instructions': recipe['Instructions'],
+                        'Image_Name': recipe['Image_Name'],
+                        'Rating': rating}
+        print(recipe, rating)
+        users.update_one({'email': user_email}, {'$push': {f"rated.{recipe['Title']}": rated_recipe}})
+        user = users.find_one({"email": user_email})
+        print(user)
         return 'Success', 200
-
-# class RateView(MethodView):
-#     '''Rating'''
-#     def post(self):
-#         '''Ra'''
-#         print('im in rateview post')
-#         user_email = session.get('email')
-#         if not user_email:
-#             return render_template('login.html')
-#         recipe_id = request.form.get('recipe_id')
-#         rating = request.form.get('rating')
-#         user = mongo.db.users.find_one({"email": user_email})
-#         user['rated'] = [meal for meal in user['rated'] if meal['id'] != recipe_id]
-#         user['rated'].append({'id': recipe_id, 'rating': rating})
-#         mongo.db.users.save(user)
-#         return 'Success', 200
 
 def validate_password(password: str):
     '''password'''
@@ -239,7 +234,6 @@ app.add_url_rule('/store_liked_recipes', view_func=StoreLikedRecipesView.as_view
 app.add_url_rule('/rated', view_func=RatedView.as_view('recipes'))
 app.add_url_rule('/rate', view_func=RateView.as_view('rate'))
 app.add_url_rule('/recipe/<recipe_id>/', view_func=RecipeView.as_view('recipe'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
