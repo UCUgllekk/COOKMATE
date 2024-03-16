@@ -42,11 +42,11 @@
           {% endfor %}
         </div>
         <div class="rating">
-          {% for i in range(recipe[1]['Rating']) %}
-            <span class="fa fa-star filled"></span>
+          {% for i in range(rating) %}
+              <span class="fa fa-star checked"></span>
           {% endfor %}
-          {% for i in range(5 - recipe[1]['Rating']) %}
-            <span class="fa fa-star"></span>
+          {% for i in range(5 - rating) %}
+              <span class="fa fa-star"></span>
           {% endfor %}
       </div>
       </section>

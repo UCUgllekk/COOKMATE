@@ -172,6 +172,9 @@ class RecipeView(MethodView):
         user_email = session.get('email')  # Get the email from the session
         if not user_email:
             return render_template('login.html')
+        recipe = mongo.db.recipes.find_one({"Image_Name": recipe_id[:-4]})
+        user = mongo.db.users.find_one({"email": user_email})
+        rated_recipes = user['rated']
         user = mongo.db.users.find_one({"email": user_email})
         liked = user['liked']
         for like, listik in liked.items():
