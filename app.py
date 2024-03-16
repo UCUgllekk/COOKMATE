@@ -106,8 +106,11 @@ class LikedView(MethodView):
             user_email = session.get('email')
             user = mongo.db.users.find_one({"email": user_email})
             liked = user['liked']
+            for liked_recipe in liked:
+                if liked_recipe in user['rated']:
+                    liked[liked_recipe] = user['rated'][liked_recipe]
             return render_template('liked.html', recipes = liked)
-        return render_template('sign_up.html')
+        return render_template('login.html')
 
 class RatedView(MethodView):
     '''View Recipes'''
@@ -118,9 +121,8 @@ class RatedView(MethodView):
         if not user_email:
             return render_template('login.html')
         user = mongo.db.users.find_one({"email": user_email})
-        rated_recipes = user['liked']
+        rated_recipes = user['rated']
         rated_recipes = [mongo.db.recipes.find_one({"Title": recipe}) for recipe in rated_recipes]
-        print(rated_recipes)
         return render_template('rated.html', recipes=rated_recipes)
 
 class StoreDataView(MethodView):
@@ -177,21 +179,19 @@ class RateView(MethodView):
         user_email = session.get('email')  # Get the email from the session
         if not user_email:
             return render_template('login.html')
-        print('Im in rate')
         data = request.data
         data = json.loads(data)
-        print(data)
         recipe = mongo.db.recipes.find_one({'Title': data['recipe']})
         users = mongo.db.users
         rating = int(data['rating'])
         rated_recipe = {'Ingredients': recipe['Ingredients'],
                         'Instructions': recipe['Instructions'],
-                        'Image_Name': recipe['Image_Name'],
+                        'Image_Name': recipe['Image_Name'] + '.jpg',
                         'Rating': rating}
-        print(recipe, rating)
-        users.update_one({'email': user_email}, {'$push': {f"rated.{recipe['Title']}": rated_recipe}})
-        user = users.find_one({"email": user_email})
-        print(user)
+        users.update_one({'email': user_email}, {'$push': \
+            {f"rated.{recipe['Title']}": rated_recipe}})
+        # user = users.find_one({"email": user_email})
+        # print(user)
         return 'Success', 200
 
 def validate_password(password: str):
