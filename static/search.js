@@ -119,7 +119,9 @@ document.getElementById('search-bar').addEventListener('input', function() {
 });
 
 document.getElementById('find_meal_button').addEventListener('click', function() {
-    this.innerHTML = "finding a meal<p>.</p><p>.</p>"
+    if (selected_ingredients.length) {
+        this.innerHTML = "finding a meal<p>.</p><p>.</p>"
+    };
     fetch('/store_data', {
         method: 'POST',
         headers: {
@@ -129,8 +131,8 @@ document.getElementById('find_meal_button').addEventListener('click', function()
     })
     .then(response => {
         if (response.ok) {
-            this.innerHTML = "find a meal"
             window.location.href = '/tinder';
+            this.innerHTML = "find a meal"
         }
     })
     .catch((error) => {
