@@ -68,9 +68,9 @@ class SignUpView(MethodView):
     def post(self):
         '''SignUp'''
         email = request.form.get('email')
-        if validate_email(email):
+        if validate_email(email) is True:
             password = request.form.get('password')
-            if validate_password(password):
+            if validate_password(password) == True:
                 if not email or not password:
                     return render_template('sign_up.html', message='Please fill in all the fields')
                 if records.find_one({'email': email}):
@@ -81,7 +81,7 @@ class SignUpView(MethodView):
                 records.insert_one(user_input)
                 session['email'] = email
                 return redirect(url_for('liked'))
-            return render_template('sign_up.html', message='Wrong password form')
+            return render_template('sign_up.html', message=validate_password(password))
         return render_template('sign_up.html', message='Wrong email form')
 
 class IngredientsView(MethodView):
@@ -132,7 +132,7 @@ class StoreDataView(MethodView):
         data = json.loads(data)
         print(f"{data=}")
         session['selected_ingredients'] = data
-        recipes = find_with_majority_ingredients(data, 0.5)
+        recipes = find_with_majority_ingredients(data, 0.5) if data else []
         print()
         print("stored")
         return "", 200
@@ -196,8 +196,19 @@ class RateView(MethodView):
 
 def validate_password(password: str):
     '''password'''
-    return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
-        r"(?=.*?[#?!@$%^&*-]).{8,}$", password))
+    if len(password) < 8:
+        return "Password should contain eight symbols"
+    if not bool(re.fullmatch(r"^(?=.*?[A-Z]).*", password)):
+        return "Password should contain at least one capital letter"
+    if not bool(re.fullmatch(r"^(?=.*?[a-z]).*", password)):
+        return "Password should contain at least one lowercase letter"
+    if not bool(re.fullmatch(r"^(?=.*?[0-9]).*", password)):
+        return "Password should contain at least one digit"
+    if not bool(re.fullmatch(r"^(?=.*?[#?!@$%^&*_-]).*", password)):
+        return "Password should contain at least one of these symbols: #?!@$%^&*_-"
+    return True
+    # return bool(re.fullmatch(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])"+\
+    #     r"(?=.*?[#?!@$%^&*_-]).{8,}$", password))
 
 def validate_email(email:str):
     '''email'''
