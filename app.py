@@ -63,7 +63,7 @@ class LogoutView(MethodView):
         '''LogoutPage'''
         if 'email' in session:
             session.pop('email', None)
-        return redirect(url_for('main_page'))
+        return redirect(url_for('log_in'))
 
 class SignUpView(MethodView):
     '''SignUp'''
