@@ -106,7 +106,7 @@ for (var i = 0; i < expandButtons.length; i ++) {
         for (var line of split_instructions) {
             for (var sym of line) {
                 if (/^[A-Z]*$/i.test(sym)) {
-                    instructions += " • " + line + '.<br \>';
+                    instructions += " • " + line + '<br \>';
                     break;
                 };
             };
