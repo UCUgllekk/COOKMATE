@@ -102,6 +102,7 @@ for (var i = 0; i < expandButtons.length; i ++) {
         const recipeDescription = document.createElement('div');
         recipeDescription.classList.add('recipe-description');
         var instructions = "";
+        console.log(liked_recipes[this.value][3])
         split_instructions = liked_recipes[this.value][3].trim().split(/\.$|\.\s|;\s/);
         for (var line of split_instructions) {
             for (var sym of line) {
