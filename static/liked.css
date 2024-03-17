@@ -83,6 +83,14 @@ html, body {
     margin-bottom: 25px;
 }
 
+.no-liked {
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-top: 100px;
+    margin-left: 50px;
+}
+
 .links {
     text-align: right;
 }

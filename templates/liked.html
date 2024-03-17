@@ -30,11 +30,12 @@
                     <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
                     </a>
                 </div>
+            </div>
                 {% endfor %}
                 {% else %}
-                <div class = 'No_liked'><h2>You have not liked any recipes yet</h2></div>
+                    <div class = 'no-liked'><h2>You have not liked any recipes yet</h2></div>
                 {% endif %}
-            </div>
+            <!-- </div> -->
         </div>
     </div>
   </body>

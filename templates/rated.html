@@ -35,7 +35,6 @@
                             <div class='recipe_title'>
                                 <a href='/recipe/{{ list["Image_Name"] }}/'>{{ recipe }}</a>
                             </div>
-            
                             <div class="rating">
                                 {% for i in range(list['Rating']) %}
                                     <span class="star filled">&#9733;</span>
@@ -48,7 +47,7 @@
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class = 'No_liked'><h2>You have not rated any recipes yet</h2></div>
+                        <div class = 'no-liked'><h2>You have not rated any recipes yet</h2></div>
                     {% endif %}
             </div>
         </div>
