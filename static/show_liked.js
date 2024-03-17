@@ -102,22 +102,14 @@ for (var i = 0; i < expandButtons.length; i ++) {
         const recipeDescription = document.createElement('div');
         recipeDescription.classList.add('recipe-description');
         var instructions = "";
-        split_instructions = liked_recipes[this.value][3].trim().split("; ");
-        for (var k = 0; k < split_instructions.length; k++) {
-            console.log(split_instructions[k]);
-            if (split_instructions[k].includes(".")) {
-                split_lines = split_instructions[k].split(".")
-                for (var j = 0; j < split_lines.length; j++) {
-                    console.log(split_lines[j]);
-                    if (split_lines[j].trim()) {
-                        instructions += " • " + split_lines[j] + '.<br \>';
-                    };
+        split_instructions = liked_recipes[this.value][3].trim().split(/\.$|\.\s|;\s/);
+        for (var line of split_instructions) {
+            for (var sym of line) {
+                if (/^[A-Z]*$/i.test(sym)) {
+                    instructions += " • " + line + '.<br \>';
+                    break;
                 };
-            } else {
-                if (split_instructions[k].trim()) {
-                    instructions += " • " + split_instructions[k] + '.<br \>';
-                };
-            }
+            };
         };
         recipeDescription.innerHTML = instructions;
         const findMealContainers = document.getElementsByClassName('find-meal-container');
