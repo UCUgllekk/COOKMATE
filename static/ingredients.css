@@ -132,7 +132,7 @@
     font-weight: 300;
     font-size: 20px;
     font-family: Inter, sans-serif;
-    max-width: 300px;
+    max-width: 400px;
   }
 
   @media (max-width: 991px) {
@@ -142,7 +142,7 @@
     }
 
     .ingredient-text {
-      margin-left: 120px;
+      margin-left: 100px;
       max-width: 500px;
     }
     .recipe-title2 {
@@ -180,14 +180,14 @@
     font: 500 20px Inter, sans-serif;
     text-align: left; /* Вирівнюємо текст ліворуч */
     padding: 20px;
-    padding-left: 7%;
+    padding-left: 55px;
   }
 
 
   .recipe-description {
     font-weight: 300;
     width: 800px;
-    padding-left: 8%;
+    padding-left: 50px;
     padding-right: 30px;
     font-family: Inter, sans-serif;
     font-size: 20px;

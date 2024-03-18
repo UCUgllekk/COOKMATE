@@ -141,7 +141,7 @@ class StoreDataView(MethodView):
         data = request.data
         data = json.loads(data)
         session['selected_ingredients'] = data
-        recipes = find_with_majority_ingredients(data, 0.5) if data else []
+        recipes = find_with_majority_ingredients(data, 0.05) if data else []
         return "", 200
 
 class StoreLikedRecipesView(MethodView):
@@ -230,10 +230,11 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
         doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
         if len(common_ingredients) / len(doc_ingredients) > amount:
-            matching_docs.append(doc['Image_Name'])
-            matching_docs.append(doc['Title'])
-            matching_docs.append(doc['Ingredients'])
-            matching_docs.append(doc['Instructions'])
+            if all(key_name in doc for key_name in ['Image_Name', 'Title', 'Ingredients', 'Instructions']):
+                matching_docs.append(doc['Image_Name'])
+                matching_docs.append(doc['Title'])
+                matching_docs.append(doc['Ingredients'])
+                matching_docs.append(doc['Instructions'])
     return matching_docs
 
 app.add_url_rule('/', view_func=MainView.as_view('main_page'))

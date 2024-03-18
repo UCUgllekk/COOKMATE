@@ -35,13 +35,14 @@ if (liked_recipes != "[]") {
         img.classList.add("img-3");
         column_div.append(img);
 
-        var textdiv = document.createElement("div")
-        textdiv.classList.add("ingredient-text")
-        ingredients = liked_recipes[i][2].split("; ")
-        for (var k of Array(ingredients.length).keys()) {
-            ingredients[k] = " • " + ingredients[k] + "<br />"
+        var textdiv = document.createElement("div");
+        textdiv.classList.add("ingredient-text");
+        ingredients = liked_recipes[i][2].split("; ");
+        var ul_ingr = document.createElement("ul");
+        for (var ingredient of ingredients) {
+            ul_ingr.innerHTML += "<li>" + ingredient + "</li>";
         }
-        textdiv.innerHTML = ingredients.join("")
+        textdiv.append(ul_ingr)
 
         var show_recipe = document.createElement("a")
         // show_recipe.id = 
@@ -91,8 +92,7 @@ for (var i = 0; i < expandButtons.length; i ++) {
     expandButtons[i].addEventListener('click', function() {
         const recipeTitle = document.createElement('div');
         recipeTitle.classList.add('recipe-title2');
-        
-        // console.log(liked_recipes[i][3])
+
         console.log(this.value)
         recipeTitle.innerText = 'Recipe';
         recipeTitle.style.fontWeight = 'bold';
@@ -101,18 +101,17 @@ for (var i = 0; i < expandButtons.length; i ++) {
 
         const recipeDescription = document.createElement('div');
         recipeDescription.classList.add('recipe-description');
-        var instructions = "";
-        console.log(liked_recipes[this.value][3])
-        split_instructions = liked_recipes[this.value][3].trim().split(/\.$|\.\s|;\s/);
-        for (var line of split_instructions) {
-            for (var sym of line) {
-                if (/^[A-Z]*$/i.test(sym)) {
-                    instructions += " • " + line + '<br \>';
-                    break;
+        split_instructions = liked_recipes[this.value][3].trim().split(/\n/);
+        var ul = document.createElement("ul");
+        for (var part of split_instructions) {
+            for (line of part.split(/\.$|(?<!F|tsp|tbsp|Tbsp|Tsp)\.|; /))
+                if (/[A-Z]+/i.test(line)) {
+                    line = line.trim()
+                    ul.innerHTML += `<li>${line.charAt(0).toUpperCase() + line.slice(1)}</li>`;
                 };
-            };
+            ul.innerHTML += "<p></p>";
         };
-        recipeDescription.innerHTML = instructions;
+        recipeDescription.append(ul);
         const findMealContainers = document.getElementsByClassName('find-meal-container');
         findMealContainers[this.value].parentNode.insertBefore(recipeTitle, findMealContainers[this.value].nextSibling);
         findMealContainers[this.value].parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
@@ -120,13 +119,10 @@ for (var i = 0; i < expandButtons.length; i ++) {
         // Remove the button after clicking
         expandButtons_dict[this.value].parentNode.removeChild(expandButtons_dict[this.value]);
 
-
-        // Add CSS styles to ingredient-text class
         const ingredientText = document.querySelectorAll('.ingredient-text');
         ingredientText.forEach(item => {
         item.style.overflowWrap = 'break-word';
         item.style.listStyleType = 'disc';
-        // window.location.href = `/ingredients#${recipeTitle.id}`
         });
     });
 }
