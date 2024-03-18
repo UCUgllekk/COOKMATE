@@ -5,7 +5,7 @@ document.getElementById('search-form').addEventListener('submit', function(event
     var suggestionsDiv = document.getElementById('suggestions');
     var suggestions = Array.from(suggestionsDiv.getElementsByTagName('button'));
     console.log()
-    if (suggestions.length > 0 && suggestions[0].textContent != "No such ingredient") {
+    if (suggestions.length > 0 && suggestions[0].classList.contains("option")) {
         var shortestSuggestion = suggestions[0]
 
         var searchBar = document.getElementById('search-bar');
@@ -26,21 +26,22 @@ document.getElementById('search-form').addEventListener('submit', function(event
             document.getElementById('selected-ingredients').appendChild(ingredientDiv);
         }
     };
-    document.getElementById('search-bar').value = "";
-    document.getElementById('suggestions').innerHTML = "";
+    searchBar.value = "";
+    searchBar.focus()
+    suggestionsDiv.innerHTML = "";
 });
 
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
+        if (event.target.id == "search-form" || event.target.classList.contains("search-icon")) {
+            document.getElementById('search-bar').focus()
+        }
         if (event.target.classList.contains('option')) {
-            console.log("option")
-            console.log(event.target)
 
             var suggestion = event.target.innerText;
-            console.log(suggestion)
-            if (suggestion.length > 0) {
+            var searchBar = document.getElementById('search-bar');
 
-                var searchBar = document.getElementById('search-bar');
+            if (suggestion.length > 0) {
                 searchBar.value = suggestion;
 
                 var selectedIngredients = Array.from(document.getElementById('selected-ingredients').getElementsByTagName('div'));
@@ -58,8 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('selected-ingredients').appendChild(ingredientDiv);
                 }
             };
-            document.getElementById('search-bar').value = "";
-            document.getElementById('suggestions').innerHTML = "";
+            searchBar.value = "";
+            console.log(event.target)
+            event.target.parentNode.innerHTML = "";
+            searchBar.focus();
         }
     });
 });

@@ -132,6 +132,7 @@
     font-weight: 300;
     font-size: 20px;
     font-family: Inter, sans-serif;
+    max-width: 300px;
   }
 
   @media (max-width: 991px) {
