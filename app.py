@@ -215,7 +215,6 @@ def validate_password(password: str):
         return "Password should contain at least one of these symbols: #?!@$%^&*_-"
     return True
 
-
 def validate_email(email:str):
     '''email'''
     return bool(re.fullmatch(r"^(?!\.)[a-z!#$%&'*+\-/=?^_`{|}~]+(?:\.[a-z!#$%&'*+\-/=?^_`"+\
