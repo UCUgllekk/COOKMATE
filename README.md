@@ -1,8 +1,8 @@
-## COOKMATE
+# COOKMATE
 
 ---
 
-# Install all dependencies:
+## Install all dependencies:
 1. Activate virtual environment
     for MacOS \ Linux:
     ```
