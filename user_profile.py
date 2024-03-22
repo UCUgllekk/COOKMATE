@@ -34,21 +34,6 @@ class LikedView(MethodView):
                 liked = dict(sorted(liked.items()))
             elif sort_type == 'amount':
                 liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'])))
-            elif sort_type == '1 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 1}
-            elif sort_type == '2 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 2}
-            elif sort_type == '3 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 3}
-            elif sort_type == '4 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 4}
-            elif sort_type == '5 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 5}
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
 
