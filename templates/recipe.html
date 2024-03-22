@@ -41,7 +41,7 @@
             {% endif %}
           {% endfor %}
         </div>
-        <div class="rating">
+        <div class="rating" rating="{{ recipe[1]['Rating'] }}">
           {% for i in range(recipe[1]['Rating']) %}
               <span class="fa fa-star checked"></span>
           {% endfor %}

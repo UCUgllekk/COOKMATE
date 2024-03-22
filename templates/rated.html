@@ -23,7 +23,7 @@
                 <a href="/liked">Liked</a>
                 <a class="active" href="/rated">Rated</a>
                 <div class="buttons">
-                    <form action="{{ url_for('recipes') }}" method="post">
+                    <form action="{{ url_for('rated') }}" method="post">
                         <button class="sort" type="submit" name='knopka' value="1 star">1<span class="star filled">&#9733;</span></button>
                         <button class="sort" type="submit" name='knopka' value="2 star">2<span class="star filled">&#9733;</span></button>
                         <button class="sort" type="submit" name='knopka' value="3 star">3<span class="star filled">&#9733;</span></button>

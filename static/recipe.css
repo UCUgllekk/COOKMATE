@@ -175,9 +175,6 @@
       cursor: pointer;
     }
 
-    .rating > .fa:hover {
-        color: gold;
-    }
     .rating > .fa.checked {
       color: gold;
     }

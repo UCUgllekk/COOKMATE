@@ -46,6 +46,7 @@ class RatedView(MethodView):
     '''View Recipes'''
     def get(self):
         '''Recipes'''
+        session['sort_type'] = ""
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
@@ -71,7 +72,10 @@ class RatedView(MethodView):
                 rated = user['rated']
                 return render_template('rated.html', recipes = rated)
             sort_type = request.form.get('knopka')
-            if sort_type == '1 star':
+            print(session['sort_type'])
+            if sort_type == session['sort_type']:
+                sort_type = ""
+            elif sort_type == '1 star':
                 rated = {name:parameters for name,parameters in rated.items() \
                     if parameters['Rating'] == 1}
             elif sort_type == '2 star':
@@ -86,6 +90,7 @@ class RatedView(MethodView):
             elif sort_type == '5 star':
                 rated = {name:parameters for name,parameters in rated.items() \
                     if parameters['Rating'] == 5}
+            session['sort_type'] = sort_type
             return render_template('rated.html', recipes = rated)
         return render_template('login.html')
 
