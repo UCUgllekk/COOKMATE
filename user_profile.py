@@ -52,7 +52,7 @@ class RatedView(MethodView):
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
-            rated = user['liked']
+            rated = user['rated']
             sort_type = request.form.get('knopka')
             if sort_type == '1 star':
                 rated = {name:parameters for name,parameters in rated.items() \
