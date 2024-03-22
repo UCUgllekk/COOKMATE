@@ -21,6 +21,15 @@
             <div class="links">
                 <a href="/liked">Liked</a>
                 <a class="active" href="/rated">Rated</a>
+                <div class="buttons">
+                    <form action="{{ url_for('recipes') }}" method="post">
+                        <button class="sort" type="submit" name='knopka' value="1 star"><span class="star filled">1 &#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="2 star"><span class="star filled">2 &#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="3 star"><span class="star filled">3 &#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="4 star"><span class="star filled">4 &#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="5 star"><span class="star filled">5 &#9733;</span></button>
+                    </form>
+                </div>
             </div>
                 <div id="recipes">
                     {% if recipes %}

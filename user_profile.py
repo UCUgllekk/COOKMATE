@@ -23,6 +23,35 @@ class LikedView(MethodView):
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
 
+    def post(self):
+        '''Like'''
+        if 'email' in session:
+            user_email = session.get('email')
+            user = users.find_one({"email": user_email})
+            liked = user['liked']
+            sort_type = request.form.get('knopka')
+            if sort_type == 'name':
+                liked = dict(sorted(liked.items()))
+            elif sort_type == 'amount':
+                liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'])))
+            elif sort_type == '1 star':
+                liked = {name:parameters for name,parameters in liked.items() \
+                    if parameters['Rating'] == 1}
+            elif sort_type == '2 star':
+                liked = {name:parameters for name,parameters in liked.items() \
+                    if parameters['Rating'] == 2}
+            elif sort_type == '3 star':
+                liked = {name:parameters for name,parameters in liked.items() \
+                    if parameters['Rating'] == 3}
+            elif sort_type == '4 star':
+                liked = {name:parameters for name,parameters in liked.items() \
+                    if parameters['Rating'] == 4}
+            elif sort_type == '5 star':
+                liked = {name:parameters for name,parameters in liked.items() \
+                    if parameters['Rating'] == 5}
+            return render_template('liked.html', recipes = liked)
+        return render_template('login.html')
+
 class RatedView(MethodView):
     '''View Recipes'''
     def get(self):
@@ -33,6 +62,31 @@ class RatedView(MethodView):
         user = users.find_one({"email": user_email})
         rated_recipes = user['rated']
         return render_template('rated.html', recipes=rated_recipes)
+
+    def post(self):
+        '''Like'''
+        if 'email' in session:
+            user_email = session.get('email')
+            user = users.find_one({"email": user_email})
+            rated = user['liked']
+            sort_type = request.form.get('knopka')
+            if sort_type == '1 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 1}
+            elif sort_type == '2 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 2}
+            elif sort_type == '3 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 3}
+            elif sort_type == '4 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 4}
+            elif sort_type == '5 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 5}
+            return render_template('rated.html', recipes = rated)
+        return render_template('login.html')
 
 class RateView(MethodView):
     '''RateView'''

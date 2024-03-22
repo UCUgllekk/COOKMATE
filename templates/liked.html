@@ -22,6 +22,13 @@
                 <a class="active" href="/liked">Liked</a>
                 <a href="/rated">Rated</a>
             </div>
+            <div class="buttons">
+                <form action="{{ url_for('liked') }}" method="post">
+                    <button class="sort" type="submit" name='knopka' value="name">Sort by name</button>
+                    <button class="sort" type="submit" name='knopka' value="date">Sort by date</button>
+                    <button class="sort" type="submit" name='knopka' value="amount">Sort by amount of ingredients</button>
+                </form>
+            </div>
             <div class="list-liked">
                 {% if recipes %}
                 {% for recipe,list in recipes.items() %}
