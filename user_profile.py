@@ -110,6 +110,6 @@ class RateView(MethodView):
                         'Rating': rating}
         users.update_one({'email': user_email}, {'$set': \
             {f"liked.{recipe['Title']}.Rating": rating}})
-        users.update_one({'email': user_email}, {'$set': \
+        users.update_one({'email': user_email}, {'$set' if rating else '$unset': \
             {f"rated.{recipe['Title']}": rated_recipe}})
         return 'Success', 200

@@ -1,21 +1,22 @@
 var stars = document.querySelectorAll('.rating > .fa');
 var recipeElement = document.getElementById('recipe-title');
 var recipe = recipeElement.textContent;
-var stars_div = document.getElementsByClassName("rating")[0];
-if (stars_div.rating == undefined) {
-  stars_div.rating = 0
+var stars_div = document.querySelector(".rating");
+var rating = stars_div.getAttribute("rating")
+if (rating == undefined) {
+  rating = 0;
 }
 for (var i = 0; i < stars.length; i++) {
     stars[i].value = i;
     stars[i].addEventListener('click', function() {
       console.log(this.value)
-      console.log(stars_div.rating)
-      if (this.value + 1 == stars_div.rating) {
+      console.log(rating)
+      if (this.value + 1 == rating) {
         for (var k = 0; k < 5; k++) {
           stars[k].classList.remove("checked");
           stars[k].style.color = "";
         }
-        stars_div.rating = 0;
+        rating = 0;
       } else {
         for (var k = 0; k < this.value%5 + 1; k++) {
           stars[this.value - k].classList.add("checked");
@@ -23,7 +24,7 @@ for (var i = 0; i < stars.length; i++) {
         for (var k = 1; k < 5 - this.value; k++) {
           stars[this.value + k].classList.remove("checked");
         }
-        stars_div.rating = this.value + 1;
+        rating = this.value + 1;
       }
       console.log(recipe)
 
@@ -33,7 +34,7 @@ for (var i = 0; i < stars.length; i++) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          rating: stars_div.rating,
+          rating: rating,
           recipe: recipe}),
       })
       .catch((error) => {

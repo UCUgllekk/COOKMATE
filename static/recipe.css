@@ -170,6 +170,9 @@
     .recipe_image {
         border-radius: 5%;
     }
+    .rating {
+      user-select: none;
+    }
     .rating > .fa {
       font-size: 25px;
       cursor: pointer;
