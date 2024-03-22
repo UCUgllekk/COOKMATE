@@ -25,17 +25,16 @@ class LikedView(MethodView):
 
     def post(self):
         '''Like'''
-        if 'email' in session:
-            user_email = session.get('email')
-            user = users.find_one({"email": user_email})
-            liked = user['liked']
-            sort_type = request.form.get('knopka')
-            if sort_type == 'name':
-                liked = dict(sorted(liked.items()))
-            elif sort_type == 'amount':
-                liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'])))
-            return render_template('liked.html', recipes = liked)
-        return render_template('login.html')
+        user_email = session.get('email')
+        user = users.find_one({"email": user_email})
+        liked = user['liked']
+        sort_type = request.form.get('knopka')
+        if sort_type == 'name':
+            liked = dict(sorted(liked.items()))
+        elif sort_type == 'amount':
+            liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'])))
+        return render_template('liked.html', recipes = liked)
+
 
 class RatedView(MethodView):
     '''View Recipes'''
@@ -73,21 +72,20 @@ class RatedView(MethodView):
             return render_template('rated.html', recipes = rated)
         return render_template('login.html')
 
+
 class RateView(MethodView):
     '''RateView'''
     def post(self):
         '''Set Rate'''
-        if 'email' in session:
-            user_email = session.get('email')
-            data = request.data
-            data = json.loads(data)
-            recipe = dbrecipes.find_one({'Title': data['recipe']})
-            rating = int(data['rating'])
-            rated_recipe = {'Ingredients': recipe['Ingredients'],
-                            'Instructions': recipe['Instructions'],
-                            'Image_Name': recipe['Image_Name'] + '.jpg',
-                            'Rating': rating}
-            users.update_one({'email': user_email}, {'$set': \
-                {f"rated.{recipe['Title']}": rated_recipe}})
-            return 'Success', 200
-        return render_template('login.html')
+        user_email = session.get('email')
+        data = request.data
+        data = json.loads(data)
+        recipe = dbrecipes.find_one({'Title': data['recipe']})
+        rating = int(data['rating'])
+        rated_recipe = {'Ingredients': recipe['Ingredients'],
+                        'Instructions': recipe['Instructions'],
+                        'Image_Name': recipe['Image_Name'] + '.jpg',
+                        'Rating': rating}
+        users.update_one({'email': user_email}, {'$set': \
+            {f"rated.{recipe['Title']}": rated_recipe}})
+        return 'Success', 200
