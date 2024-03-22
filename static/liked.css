@@ -154,4 +154,22 @@ html, body {
     font-family: Inter, sans-serif;
     font-size: 20px;
     padding-bottom: 15px;
+    word-break: break-all;
+}
+
+.fa-xmark:before {
+    content: "\f00d";
+}
+
+.deleter {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.title-deleter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 274px;
 }

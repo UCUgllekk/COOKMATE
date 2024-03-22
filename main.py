@@ -33,7 +33,7 @@ app.add_url_rule('/tinder', view_func=TinderView.as_view('tinder'))
 app.add_url_rule('/liked', view_func=LikedView.as_view('liked'))
 app.add_url_rule('/store_data', view_func=StoreDataView.as_view('store_data'))
 app.add_url_rule('/store_liked_recipes', view_func=StoreLikedRecipesView.as_view('store_liked_recipes'))
-app.add_url_rule('/rated', view_func=RatedView.as_view('recipes'))
+app.add_url_rule('/rated', view_func=RatedView.as_view('rated'))
 app.add_url_rule('/rate', view_func=RateView.as_view('rate'))
 app.add_url_rule('/recipe/<recipe_id>/', view_func=RecipeView.as_view('recipe'))
 

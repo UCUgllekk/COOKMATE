@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Liked</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='liked.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="wrapper">
@@ -32,9 +33,18 @@
             <div class="list-liked">
                 {% if recipes %}
                 {% for recipe,list in recipes.items() %}
-                <div class = 'recipe'><a href='/recipe/{{ list["Image_Name"] }}/'>
-                    <div class = 'recipe_title'>{{ recipe }}</div>
-                    <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
+                
+                <div class = 'recipe'>
+                    <div class="title-deleter">
+                        <a href='/recipe/{{ list["Image_Name"] }}/'>
+                            <div class = 'recipe_title'>{{ recipe }}</div>
+                        </a>
+                        <form action="{{ url_for('liked') }}" method="post">
+                            <button class="deleter" type="submit" name='knopka' value='delete:{{ recipe }}'><i class="fa fa-xmark"></i></button>
+                        </form>
+                    </div>
+                    <a href='/recipe/{{ list["Image_Name"] }}/'>
+                        <img class="recipe_image" src="{{ url_for('static', filename='Food Images/' + list['Image_Name']) }}">
                     </a>
                 </div>
                 {% endfor %}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rated</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='rated.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="wrapper">
@@ -22,7 +23,7 @@
                 <a href="/liked">Liked</a>
                 <a class="active" href="/rated">Rated</a>
                 <div class="buttons">
-                    <form action="{{ url_for('recipes') }}" method="post">
+                    <form action="{{ url_for('rated') }}" method="post">
                         <button class="sort" type="submit" name='knopka' value="1 star"><span class="star filled">1 &#9733;</span></button>
                         <button class="sort" type="submit" name='knopka' value="2 star"><span class="star filled">2 &#9733;</span></button>
                         <button class="sort" type="submit" name='knopka' value="3 star"><span class="star filled">3 &#9733;</span></button>
@@ -53,6 +54,9 @@
                                 {% endfor %}
                             </div>
                         </div>
+                        <form action="{{ url_for('rated') }}" method="post">
+                            <button class="deleter" type="submit" name='knopka' value='delete:{{ recipe }}'><i class="fa fa-xmark"></i></button>
+                        </form>
                     </div>
                     {% endfor %}
                     {% else %}

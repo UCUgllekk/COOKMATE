@@ -172,7 +172,7 @@ html, body {
 
 .recipe-body {
     margin-left: 50px;
-    width: 400px;
+    width: 200px;
 }
 
 .rating {
@@ -184,4 +184,17 @@ html, body {
     font-family: sans-serif;
     font-size: large;
     margin-top: 100px;
+}
+
+.fa-xmark:before {
+    content: "\f00d";
+}
+
+.deleter {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-left: 30px;
+    margin-right: 140px;
 }

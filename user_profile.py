@@ -11,15 +11,8 @@ class LikedView(MethodView):
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
+            print(users.user_email.liked)
             liked = user['liked']
-            for liked_recipe, data in liked.items():
-                if liked_recipe in user['rated']:
-                    new_liked = {'Ingredients': data['Ingredients'],
-                                 'Instructions': data['Instructions'],
-                                 'Image_Name': data['Image_Name'],
-                                 'Rating': user['rated'][liked_recipe]['Rating']}
-                    users.update_one({'email': user_email}, {'$set': {f'liked.{liked_recipe}':\
-                        new_liked}})
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
 
@@ -29,11 +22,23 @@ class LikedView(MethodView):
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
             liked = user['liked']
+            if request.form.get('knopka').startswith("delete:"):
+                recipe_title = request.form.get('knopka')[7:]
+                if recipe_title not in liked:
+                    return render_template('liked.html', recipes = liked)
+                users.update_one({'email': user_email}
+                        , {'$unset': {f'liked.{recipe_title}': liked[recipe_title]}})
+                if recipe_title in user['rated']:
+                    users.update_one({'email': user_email}
+                        , {'$unset': {f'rated.{recipe_title}': user['rated'][recipe_title]}})
+                user = users.find_one({"email": user_email})
+                liked = user['liked']
+                return render_template('liked.html', recipes = liked)
             sort_type = request.form.get('knopka')
             if sort_type == 'name':
                 liked = dict(sorted(liked.items()))
             elif sort_type == 'amount':
-                liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'])))
+                liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'].split("; "))))
             elif sort_type == '1 star':
                 liked = {name:parameters for name,parameters in liked.items() \
                     if parameters['Rating'] == 1}
@@ -68,7 +73,18 @@ class RatedView(MethodView):
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
-            rated = user['liked']
+            rated = user['rated']
+            if request.form.get('knopka').startswith("delete:"):
+                recipe_title = request.form.get('knopka')[7:]
+                if recipe_title not in rated or recipe_title not in user['liked']:
+                    return render_template('liked.html', recipes = rated)
+                users.update_one({'email': user_email}
+                            , {'$set': {f"liked.{recipe_title}.Rating": 0}})
+                users.update_one({'email': user_email}
+                            , {'$unset': {f'rated.{recipe_title}': user['rated'][recipe_title]}})
+                user = users.find_one({"email": user_email})
+                rated = user['rated']
+                return render_template('rated.html', recipes = rated)
             sort_type = request.form.get('knopka')
             if sort_type == '1 star':
                 rated = {name:parameters for name,parameters in rated.items() \
@@ -103,6 +119,8 @@ class RateView(MethodView):
                         'Instructions': recipe['Instructions'],
                         'Image_Name': recipe['Image_Name'] + '.jpg',
                         'Rating': rating}
+        users.update_one({'email': user_email}, {'$set': \
+            {f"liked.{recipe['Title']}.Rating": rating}})
         users.update_one({'email': user_email}, {'$set': \
             {f"rated.{recipe['Title']}": rated_recipe}})
         return 'Success', 200
