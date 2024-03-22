@@ -29,7 +29,7 @@ class StoreDataView(MethodView):
         data = json.loads(data)
         session['selected_ingredients'] = data
         recipes = find_with_majority_ingredients(data, 0.4) if data else []
-        return "", 200
+        return "Success", 200
 
 class StoreLikedRecipesView(MethodView):
     '''StoreLikedRecipes'''
@@ -47,21 +47,21 @@ class StoreLikedRecipesView(MethodView):
                                        'Image_Name': f"{meal[0]}.jpg",
                                        'Rating': 0}
                 users.update_one({'email': user_email}, {'$set': {f'liked.{meal[1]}': liked_meal}})
-        return "", 200
+        return "Success", 200
 
 class RecipeView(MethodView):
     '''RecipeView'''
     def get(self, recipe_id):
         '''RecipePage'''
-        user_email = session.get('email')
-        if not user_email:
-            return render_template('login.html')
-        recipe = dbrecipes.find_one({"Image_Name": recipe_id[:-4]})
-        user = users.find_one({"email": user_email})
-        liked = user['liked']
-        for like, listik in liked.items():
-            if recipe_id == listik['Image_Name']:
-                recipe = (like, user['liked'][like])
-        if not recipe:
-            return 'Recipe not found', 40
-        return render_template('recipe.html', recipe=recipe)
+        if 'email' in session:
+            user_email = session.get('email')
+            recipe = dbrecipes.find_one({"Image_Name": recipe_id[:-4]})
+            user = users.find_one({"email": user_email})
+            liked = user['liked']
+            for like, listik in liked.items():
+                if recipe_id == listik['Image_Name']:
+                    recipe = (like, user['liked'][like])
+            if not recipe:
+                return 'Recipe not found', 40
+            return render_template('recipe.html', recipe=recipe)
+        return render_template('login.html')

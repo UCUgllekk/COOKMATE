@@ -39,21 +39,6 @@ class LikedView(MethodView):
                 liked = dict(sorted(liked.items()))
             elif sort_type == 'amount':
                 liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'].split("; "))))
-            elif sort_type == '1 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 1}
-            elif sort_type == '2 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 2}
-            elif sort_type == '3 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 3}
-            elif sort_type == '4 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 4}
-            elif sort_type == '5 star':
-                liked = {name:parameters for name,parameters in liked.items() \
-                    if parameters['Rating'] == 5}
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
 
@@ -61,12 +46,12 @@ class RatedView(MethodView):
     '''View Recipes'''
     def get(self):
         '''Recipes'''
-        user_email = session.get('email')
-        if not user_email:
-            return render_template('login.html')
-        user = users.find_one({"email": user_email})
-        rated_recipes = user['rated']
-        return render_template('rated.html', recipes=rated_recipes)
+        if 'email' in session:
+            user_email = session.get('email')
+            user = users.find_one({"email": user_email})
+            rated_recipes = user['rated']
+            return render_template('rated.html', recipes=rated_recipes)
+        return render_template('login.html')
 
     def post(self):
         '''Like'''
@@ -104,13 +89,12 @@ class RatedView(MethodView):
             return render_template('rated.html', recipes = rated)
         return render_template('login.html')
 
+
 class RateView(MethodView):
     '''RateView'''
     def post(self):
         '''Set Rate'''
         user_email = session.get('email')
-        if not user_email:
-            return render_template('login.html')
         data = request.data
         data = json.loads(data)
         recipe = dbrecipes.find_one({'Title': data['recipe']})
