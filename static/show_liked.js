@@ -112,12 +112,14 @@ for (var i = 0; i < expandButtons.length; i ++) {
             ul.innerHTML += "<p></p>";
         };
         recipeDescription.append(ul);
-        const findMealContainers = document.getElementsByClassName('find-meal-container');
-        findMealContainers[this.value].parentNode.insertBefore(recipeTitle, findMealContainers[this.value].nextSibling);
-        findMealContainers[this.value].parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
+        console.log(expandButtons_dict[this.value].parentNode.nextSibling)
+        expandButtons_dict[this.value].parentNode.parentNode.insertBefore(recipeTitle, expandButtons_dict[this.value].parentNode.nextSibling);
+        expandButtons_dict[this.value].parentNode.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
         expandButtons_dict[this.value].scrollIntoView({ behavior: 'smooth', block: 'start' });
         // Remove the button after clicking
-        expandButtons_dict[this.value].parentNode.removeChild(expandButtons_dict[this.value]);
+        console.log(expandButtons_dict[this.value].parentNode)
+        expandButtons_dict[this.value].parentNode.remove()
+        console.log(expandButtons_dict)
 
         const ingredientText = document.querySelectorAll('.ingredient-text');
         ingredientText.forEach(item => {
