@@ -86,8 +86,7 @@
   
   @media (max-width: 991px) {
     .recipe-title {
-      max-width: 100%;
-      width: 600px;
+      width: calc(100% - 40px) ;
       padding: 8px 20px;
     }
   }
@@ -110,7 +109,7 @@
     .ingredients-section {
       flex-direction: column;
       align-items: stretch;
-      max-width: 650px;
+      width: 90%;
       gap: 0px;
     }
   }
