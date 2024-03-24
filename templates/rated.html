@@ -23,12 +23,13 @@
                 <a href="/liked">Liked</a>
                 <a class="active" href="/rated">Rated</a>
                 <div class="buttons">
+                    <img class = 'filter' src="https://cdn-icons-png.flaticon.com/128/1659/1659021.png" alt="filter-1">
                     <form action="{{ url_for('rated') }}" method="post">
-                        <button class="sort" type="submit" name='knopka' value="1 star">1<span class="star filled">&#9733;</span></button>
-                        <button class="sort" type="submit" name='knopka' value="2 star">2<span class="star filled">&#9733;</span></button>
-                        <button class="sort" type="submit" name='knopka' value="3 star">3<span class="star filled">&#9733;</span></button>
-                        <button class="sort" type="submit" name='knopka' value="4 star">4<span class="star filled">&#9733;</span></button>
-                        <button class="sort" type="submit" name='knopka' value="5 star">5<span class="star filled">&#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="1 star"><span class="star filled">&#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="2 star"><span class="star filled">&#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="3 star"><span class="star filled">&#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="4 star"><span class="star filled">&#9733;</span></button>
+                        <button class="sort" type="submit" name='knopka' value="5 star"><span class="star filled">&#9733;</span></button>
                     </form>
                 </div>
             </div>
