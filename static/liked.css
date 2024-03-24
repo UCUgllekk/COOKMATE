@@ -173,3 +173,80 @@ html, body {
     justify-content: space-between;
     max-width: 274px;
 }
+
+.buttons {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: row; /* Ensure buttons are laid out horizontally */
+    justify-content: center; /* Center align buttons horizontally */
+}
+
+.sort {
+    font-family: Inter, sans-serif;
+    color: black;
+    border-radius: 80px;
+    background-color: #fff;
+    border: 4px solid #ffa552;
+    padding: 8px 33px;
+    font: 500 20px Inter, sans-serif;
+    text-decoration: none;
+    margin: 0 10px; /* Adjust spacing between buttons */
+}
+
+@media only screen and (max-width: 600px) {
+    .list-liked {
+        padding: 15px; /* Adjust padding for smaller screens */
+        width: auto; /* Allow width to adjust to the screen size */
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+
+    .list-liked-item {
+        margin-bottom: 20px; /* Adjust margin for smaller screens */
+        width: calc(100% - 40px); /* Set width of items to fit container width with margin */
+    }
+
+    .list-liked-item img {
+        width: 100%; /* Make images fill the container width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .list-liked-content {
+        padding: 5px 0 10px 0; /* Adjust padding for smaller screens */
+    }
+
+    .list-liked-item h2 {
+        font-size: 18px; /* Decrease font size for smaller screens */
+        height: auto; /* Allow height to adjust */
+    }
+    .buttons {
+        justify-content: center; /* Center align buttons horizontally */
+        margin-top: 20px; /* Adjust margin for smaller screens */
+        margin-bottom: 20px; /* Adjust margin for smaller screens */
+        flex-wrap: wrap; /* Allow buttons to wrap onto new lines */
+    }
+
+    .sort {
+        font-size: 14px; /* Decrease font size for smaller screens */
+        padding: 8px 20px; /* Adjust padding for smaller screens */
+        margin: 5px; /* Adjust margin for smaller screens */
+    }
+
+    .title {
+        margin-top: 40px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .list-liked {
+        width: 600px; /* Maintain the width for larger screens */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Three items per row */
+        grid-gap: 70px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+}
