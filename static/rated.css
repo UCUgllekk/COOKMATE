@@ -212,6 +212,10 @@ html, body {
     background: none;
     border: none;
     cursor: pointer;
+    border-radius: 80px;
+    background-color: #fff;
+    border: 2px solid black;
+    padding: 0.5px 15px;
 }
 
 .buttons button:hover {
@@ -221,6 +225,7 @@ html, body {
 .filter {
     height: 30px;
     margin-top: 10px;
+    padding: 10px;
 }
 .buttons [title]::after {
     content: attr(title);
@@ -241,6 +246,38 @@ html, body {
     opacity: 1;
 }
 
+@media only screen and (max-width: 600px) {
+    .title {
+        margin-top: 20px; /* Adjust margin for smaller screens */
+    }
+
+    .links {
+        text-align: center; /* Center align navigation links */
+    }
+
+    .links a {
+        display: block; /* Make navigation links full-width */
+        margin-bottom: 10px; /* Add space between navigation links */
+    }
+
+    .buttons {
+        justify-content: center; /* Center align buttons horizontally */
+        margin-top: 20px; /* Adjust margin for smaller screens */
+        margin-bottom: 20px; /* Adjust margin for smaller screens */
+        flex-wrap: wrap; /* Allow buttons to wrap onto new lines */
+    }
+    .buttons button {
+        font-size: 5px; /* Decrease the font size of the buttons */
+        padding: 5px 10px; /* Adjust padding for smaller buttons */
+    }
+
+    .sort {
+        font-size: 5px; /* Decrease font size for smaller screens */
+        padding: 8px 20px; /* Adjust padding for smaller screens */
+        margin: 5px; /* Adjust margin for smaller screens */
+    }
+}
+
 @media only screen and (min-width: 600px) {
     .list-rated {
         width: 600px; /* Maintain the width for larger screens */
@@ -251,3 +288,4 @@ html, body {
         justify-content: center;
     }
 }
+
