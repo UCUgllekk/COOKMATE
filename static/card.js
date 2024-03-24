@@ -74,7 +74,10 @@ class Card {
       const rotate = this.#offsetX * 0.1;
       this.element.style.transform = `translate(${this.#offsetX}px, ${this.#offsetY}px) rotate(${rotate}deg)`;
       // dismiss card
-      if (Math.abs(this.#offsetX) > this.element.clientWidth * 0.7) {
+      console.log(this.element)
+      console.log(Math.abs(this.#offsetX))
+      console.log(document.body.clientWidth ** 0.7);
+      if (Math.abs(this.#offsetX) > document.body.clientWidth ** 0.7) {
         this.dismiss(this.#offsetX > 0 ? 1 : -1);
       }
     }
@@ -119,7 +122,7 @@ class Card {
       this.element.classList.add('dismissing');
       setTimeout(() => {
         this.element.remove();
-      }, 5000);
+      }, 1200);
       if (typeof this.onDismiss === 'function') {
         this.onDismiss();
       }
