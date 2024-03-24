@@ -145,7 +145,7 @@ html, body {
 }
 
 .star.filled {
-    color: gold;
+    color: #ffa552;
     margin-top: 1.2em;
 }
 
@@ -157,7 +157,7 @@ html, body {
 
 .recipe_title a {
     display: inline-block;
-    text-align: center;
+    text-align: left;
     margin-top: 2em;
     color: black;
     font-family: Inter, sans-serif;
@@ -197,4 +197,57 @@ html, body {
     margin-top: 1em;
     margin-left: 30px;
     margin-right: 140px;
+}
+
+.buttons {
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    opacity: 0.8;
+}
+
+.filter {
+    height: 30px;
+    margin-top: 10px;
+}
+.buttons [title]::after {
+    content: attr(title);
+    display: inline-block;
+    position: relative;
+    bottom: -1em;
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.buttons [title]:hover::after {
+    opacity: 1;
+}
+
+@media only screen and (min-width: 600px) {
+    .list-rated {
+        width: 600px; /* Maintain the width for larger screens */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Three items per row */
+        /* grid-gap: 70px; */
+        margin: 0 auto;
+        justify-content: center;
+    }
 }
