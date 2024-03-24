@@ -6,6 +6,8 @@
   <title>Login/Signup</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn-icons-png.flaticon.com/128/2767/2767146.png">
+
 </head>
 <body>
   <main class="main-container">
@@ -21,11 +23,14 @@
         <form action="{{ url_for('log_in')}}" method="POST">
             {% block content %}
                 <!-- <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on"> -->
-                <input type="email" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on" value="{{ email }}" required>
-                <input type="password" id="password" class="div-7" placeholder="Password", autocomplete="off" name="password" required>
-                <button type="button" id="togglePassword" aria-label="Toggle password visibility" >
-                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                </button>
+                <input type="email" name="email" class="div-6" placeholder="Email" autocomplete="off" autofocus="on" value="{{ email }}" required>
+                <div class="input-container"> <!-- Added container for password input and toggle button -->
+                    <input type="password" id="password" class="div-7" placeholder="Password" autocomplete="off" name="password" required>
+                    <button type="button" id="togglePassword" aria-label="Toggle password visibility">
+                        <i class="fa fa-eye" aria-hidden="true"></i> <!-- First icon -->
+                        <i class="fa-eye-slash" aria-hidden="true"></i> <!-- Second icon -->
+                    </button>
+                </div>
                 {% if message %}
                     <p style="color:red;"> {{ message }}</p>
                 {% endif %}
