@@ -36,5 +36,5 @@ def find_with_majority_ingredients(ingredient_list, amount: float):
                 matching_docs.append(doc['Title'])
                 matching_docs.append(doc['Ingredients'])
                 matching_docs.append(doc['Instructions'])
-    print(matching_docs)
+    # print(matching_docs)
     return matching_docs

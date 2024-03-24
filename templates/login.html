@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login/Signup</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <main class="main-container">
@@ -19,8 +20,12 @@
         <div class="div-5">Login</div>
         <form action="{{ url_for('log_in')}}" method="POST">
             {% block content %}
-                <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on">
-                <input type="password" name="password" class="div-7" placeholder="Password", autocomplete="off">
+                <!-- <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on"> -->
+                <input type="email" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on" value="{{ email }}" required>
+                <input type="password" id="password" class="div-7" placeholder="Password", autocomplete="off" name="password" required>
+                <button type="button" id="togglePassword" aria-label="Toggle password visibility" >
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
                 {% if message %}
                     <p style="color:red;"> {{ message }}</p>
                 {% endif %}
@@ -41,5 +46,6 @@
 
 </div>
 </div>
+<script src="{{ url_for('static', filename = 'password_eye.js')}}"></script>
 </body>
 </html>

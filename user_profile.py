@@ -72,7 +72,7 @@ class RatedView(MethodView):
                 rated = user['rated']
                 return render_template('rated.html', recipes = rated)
             sort_type = request.form.get('knopka')
-            print(session['sort_type'])
+            # print(session['sort_type'])
             if sort_type == session['sort_type']:
                 sort_type = ""
             elif sort_type == '1 star':
