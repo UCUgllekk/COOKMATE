@@ -229,3 +229,27 @@ html, body {
   }
 }
   
+
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button#togglePassword {
+  float: right;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.fa-eye, .fa-eye-slash {
+  font-size: 18px;
+}
