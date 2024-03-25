@@ -4,48 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login/Signup</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='sign_up.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn-icons-png.flaticon.com/128/2767/2767146.png">
+
 </head>
 <body>
   <main class="main-container">
     <header class="header">
-      <a href="/">
-          <img height="91px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc277e0ff378357bda8086eaad29fc23d7c18641518cfe14a929ebc7c8492b5b?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Logo">
-      </a>
+    <a href="/">
+        <img height="91px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc277e0ff378357bda8086eaad29fc23d7c18641518cfe14a929ebc7c8492b5b?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Logo">
+    </a>
     </header>
 <div class="div">
-  <div class="div-2">
+<div class="div-2">
     <div class="column">
+        <div class="div-5">Sign up</div>
         <form action="{{ url_for('sign_up') }}" method="POST">
-          {% block content %}
-            <div class="div-5">Sign up</div>
-            <div class="input">
-              <!-- <input type="text" name="email" class="div-6" placeholder="Email", autofocus="on", autocomplete="off"> -->
-              <input type="email" name="email" class="div-6" placeholder="Email", autofocus="on", autocomplete="off" value="{{ email }}" required>
-              <!-- <input type="password" name="password" class="div-7" placeholder="Password", autocomplete="off"> -->
-              <input type="password" id="password" class="div-7" placeholder="Password", autocomplete="off" name="password" required>
-              <button type="button" id="togglePassword" aria-label="Toggle password visibility">
-                  <i class="fa fa-eye-slash" aria-hidden="true"></i>
-              </button>
-            </div>
-            {% if message %}
-            <p style="color:red;"> {{ message }}</p>
-            {% endif %}
-            <form style="align-self: center;">
-              <button class="div-8">Sign up</button>
+            {% block content %}
+                <!-- <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on"> -->
+                <input type="email" name="email" class="div-6" placeholder="Email" autocomplete="off" autofocus="on" value="{{ email }}" required>
+                <div class="input-container"> <!-- Added container for password input and toggle button -->
+                    <input type="password" id="password" class="div-7" placeholder="Password" autocomplete="off" name="password" required>
+                    <button type="button" id="togglePassword" aria-label="Toggle password visibility">
+                        <i class="fa fa-eye" aria-hidden="true"></i> <!-- First icon -->
+                        <i class="fa-eye-slash" aria-hidden="true"></i> <!-- Second icon -->
+                    </button>
+                </div>
+                {% if message %}
+                    <p style="color:red;"> {{ message }}</p>
+                {% endif %}
+                <form style="align-self: center;">
+                    <button class="div-8">
+                      Sign up
+                    </button>
+                </form>
             </form>
-          </form>
-          {% endblock %}
+            {% endblock %}
     </div>
     <div class="column-2">
-      <div class="div-11">Already have an account?</div>
-      <a href="/login">
+    <div class="div-11">Already have an account?</div>
+    <a href="/login">
         <button class="div-10">Login Now</button>
-      </a>
+    </a>
     </div>
-  </div>
+
+</div>
 </div>
 <script src="{{ url_for('static', filename = 'password_eye.js')}}"></script>
 </body>
 </html>
+
