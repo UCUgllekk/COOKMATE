@@ -109,7 +109,7 @@ html, body {
   }
 
   .div-8 {
-    display: flex;
+    /* display: flex;
     border-radius: 80px;
     background-color: #555;
     align-self: center;
@@ -119,8 +119,20 @@ html, body {
     padding: 8px 36px;
     font: 500 20px Inter, sans-serif;
     margin: 0 auto;
-    margin-top: 20px;
-
+    margin-top: 20px; */
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    padding: 8px 33px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 80px;
+    text-decoration: none;
+    margin: 0 auto;
+    margin-top: 30px;
+    font: 500 20px Inter, sans-serif;
   }
 
   .div-2 {
@@ -213,14 +225,16 @@ html, body {
   }
 
   .div-10 {
-    font-family: Inter, sans-serif;
-    color: #fff;
-    border-radius: 80px;
-    background-color: #555;
     padding: 8px 33px;
-    font: 500 20px Inter, sans-serif;
-    text-align: center;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 80px;
+    text-decoration: none;
     margin-top: 40px;
+    margin-right: 10px;
+    font: 500 20px Inter, sans-serif;
   }
 
   @media (max-width: 991px) {
