@@ -22,13 +22,11 @@
         <div class="div-5">Login</div>
         <form action="{{ url_for('log_in')}}" method="POST">
             {% block content %}
-                <!-- <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on"> -->
                 <input type="email" name="email" class="div-6" placeholder="Email" autocomplete="off" autofocus="on" value="{{ email }}" required>
-                <div class="input-container"> <!-- Added container for password input and toggle button -->
+                <div class="input-container">
                     <input type="password" id="password" class="div-7" placeholder="Password" autocomplete="off" name="password" required>
                     <button type="button" id="togglePassword" aria-label="Toggle password visibility">
-                        <i class="fa fa-eye" aria-hidden="true"></i> <!-- First icon -->
-                        <i class="fa-eye-slash" aria-hidden="true"></i> <!-- Second icon -->
+                        <i class="fa-eye-slash" aria-hidden="true"></i>
                     </button>
                 </div>
                 {% if message %}
