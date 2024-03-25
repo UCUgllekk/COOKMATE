@@ -206,6 +206,7 @@ html, body {
     display: flex;
     flex-direction: row;
     align-items: end;
+    justify-content: center;
 }
 
 .buttons button {
