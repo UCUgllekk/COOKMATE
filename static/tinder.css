@@ -184,6 +184,7 @@ body {
     font-weight: bold;
     padding: 25px;
     text-align: center;
+    font-family: Inter, sans-serif;
 }
 
 @keyframes animation1 {
