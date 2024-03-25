@@ -225,15 +225,6 @@ html, body {
 }
 
 .div-10 {
-  /* font-family: Inter, sans-serif;
-  color: #fff;
-  border-radius: 80px;
-  background-color: #555;
-  padding: 8px 33px;
-  font: 500 20px Inter, sans-serif;
-  text-align: center;
-  margin-top: 40px; */
-  padding: 8px 33px;
   background-color: #555;
   color: white;
   border: none;
@@ -241,8 +232,9 @@ html, body {
   border-radius: 80px;
   text-decoration: none;
   margin-top: 40px;
-  margin-right: 10px;
+  text-align: center;
   font: 500 20px Inter, sans-serif;
+  padding: 8px 33px;
 }
 
 @media (max-width: 991px) {
