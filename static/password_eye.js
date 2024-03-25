@@ -10,4 +10,5 @@ togglePassword.addEventListener('click', function (e) {
     console.log(this)
     console.log(this.getElementsByTagName("i")[0])
     this.getElementsByTagName("i")[0].classList = eyeStyle;
+    password.focus()
 });
