@@ -130,14 +130,12 @@
     font-family: Inter, sans-serif;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 767px) {
     .ingredients-column {
       width: 100%;
       margin: 0 auto;
       margin-top: 4%;
     }
-
-
     .ingredient-text ul {
       width: 93%;
       padding-left: 7%;
@@ -166,7 +164,7 @@
     .recipe-details {
       width: 80%;
     }
-  }
+}
 
   .find-meal-container {
     text-align: center;
