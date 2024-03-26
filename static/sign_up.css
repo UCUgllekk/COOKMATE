@@ -251,6 +251,6 @@ html, body {
   margin-top: 35px;
 }
 
-.fa-eye, .fa-eye-slash {
-  font-size: 18px;
+.fa.fa-eye, .fa.fa-eye-slash {
+  font-size: 20px;
 }
