@@ -130,7 +130,7 @@
     font-family: Inter, sans-serif;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 991px) {
     .ingredients-column {
       width: 100%;
       margin: 0 auto;
