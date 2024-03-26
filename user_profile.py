@@ -70,28 +70,30 @@ class RatedView(MethodView):
                             , {'$unset': {f'rated.{recipe_title}': user['rated'][recipe_title]}})
                 user = users.find_one({"email": user_email})
                 rated = user['rated']
-                return render_template('rated.html', recipes = rated)
-            sort_type = request.form.get('knopka')
-            # print(session['sort_type'])
-            if sort_type == session['sort_type']:
-                sort_type = ""
-            elif sort_type == '1 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 1}
-            elif sort_type == '2 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 2}
-            elif sort_type == '3 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 3}
-            elif sort_type == '4 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 4}
-            elif sort_type == '5 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 5}
-            session['sort_type'] = sort_type
+
+            else:
+                sort_type = request.form.get('knopka')
+                if sort_type == session['sort_type']:
+                    sort_type = ""
+                elif sort_type == '1 star':
+                    rated = {name:parameters for name,parameters in rated.items() \
+                        if parameters['Rating'] == 1}
+                elif sort_type == '2 star':
+                    rated = {name:parameters for name,parameters in rated.items() \
+                        if parameters['Rating'] == 2}
+                elif sort_type == '3 star':
+                    rated = {name:parameters for name,parameters in rated.items() \
+                        if parameters['Rating'] == 3}
+                elif sort_type == '4 star':
+                    rated = {name:parameters for name,parameters in rated.items() \
+                        if parameters['Rating'] == 4}
+                elif sort_type == '5 star':
+                    rated = {name:parameters for name,parameters in rated.items() \
+                        if parameters['Rating'] == 5}
+                session['sort_type'] = sort_type
+
             return render_template('rated.html', recipes = rated)
+
         return render_template('login.html')
 
 
