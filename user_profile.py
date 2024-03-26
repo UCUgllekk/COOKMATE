@@ -22,6 +22,7 @@ class LikedView(MethodView):
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
             liked = user['liked']
+            deleting = False
             if request.form.get('knopka').startswith("delete:"):
                 recipe_title = request.form.get('knopka')[7:]
                 if recipe_title not in liked:
@@ -33,12 +34,16 @@ class LikedView(MethodView):
                         , {'$unset': {f'rated.{recipe_title}': user['rated'][recipe_title]}})
                 user = users.find_one({"email": user_email})
                 liked = user['liked']
-                return render_template('liked.html', recipes = liked)
-            sort_type = request.form.get('knopka')
+                deleting = True
+            if not deleting:
+                sort_type = request.form.get('knopka')
+            else:
+                sort_type = session["sort_type"] if "sort_type" in session else ""
             if sort_type == 'name':
                 liked = dict(sorted(liked.items()))
             elif sort_type == 'amount':
                 liked = dict(sorted(liked.items(), key=lambda x: len(x[1]['Ingredients'].split("; "))))
+            session['sort_type'] = sort_type
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')
 
@@ -59,6 +64,7 @@ class RatedView(MethodView):
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
+            deleting = False
             rated = user['rated']
             if request.form.get('knopka').startswith("delete:"):
                 recipe_title = request.form.get('knopka')[7:]
@@ -70,30 +76,30 @@ class RatedView(MethodView):
                             , {'$unset': {f'rated.{recipe_title}': user['rated'][recipe_title]}})
                 user = users.find_one({"email": user_email})
                 rated = user['rated']
-
-            else:
+                deleting = True
+            if not deleting:
                 sort_type = request.form.get('knopka')
                 if sort_type == session['sort_type']:
                     sort_type = ""
-                elif sort_type == '1 star':
-                    rated = {name:parameters for name,parameters in rated.items() \
-                        if parameters['Rating'] == 1}
-                elif sort_type == '2 star':
-                    rated = {name:parameters for name,parameters in rated.items() \
-                        if parameters['Rating'] == 2}
-                elif sort_type == '3 star':
-                    rated = {name:parameters for name,parameters in rated.items() \
-                        if parameters['Rating'] == 3}
-                elif sort_type == '4 star':
-                    rated = {name:parameters for name,parameters in rated.items() \
-                        if parameters['Rating'] == 4}
-                elif sort_type == '5 star':
-                    rated = {name:parameters for name,parameters in rated.items() \
-                        if parameters['Rating'] == 5}
-                session['sort_type'] = sort_type
-
+            else:
+                sort_type = session["sort_type"] if "sort_type" in session else ""
+            if sort_type == '1 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 1}
+            elif sort_type == '2 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 2}
+            elif sort_type == '3 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 3}
+            elif sort_type == '4 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 4}
+            elif sort_type == '5 star':
+                rated = {name:parameters for name,parameters in rated.items() \
+                    if parameters['Rating'] == 5}
+            session['sort_type'] = sort_type
             return render_template('rated.html', recipes = rated)
-
         return render_template('login.html')
 
 
