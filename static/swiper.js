@@ -81,7 +81,7 @@ function appendNewCard() {
   }
   const counter = document.createElement("div");
   counter.classList.add("counter");
-  counter.innerText = (recipes.length - cardCount) / 4;
+  counter.innerText = `Recipes left: ${(recipes.length - cardCount) / 4}`;
 
 
   // Create title for the card
