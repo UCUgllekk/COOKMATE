@@ -277,6 +277,9 @@ html, body {
         padding: 8px 20px; /* Adjust padding for smaller screens */
         margin: 5px; /* Adjust margin for smaller screens */
     }
+    .header img {
+        height: 60px;
+    }
 }
 
 @media only screen and (min-width: 600px) {

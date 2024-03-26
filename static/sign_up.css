@@ -39,6 +39,9 @@ html, body {
   .img {
     margin-left: 10px;
   }
+  .header img {
+    height: 60px;
+  }
 }
 
 .img-2 {
