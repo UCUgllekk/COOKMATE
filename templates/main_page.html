@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe Steps</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='main_page.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="shortcut icon" href="#">
 </head>
 <body>
@@ -21,7 +22,7 @@
       <article class="step">
         <div class="step-number1">1</div>
         <div style="height: 60px;">
-          <a href="/#find_meal_button">
+          <a href="/#search-title">
           <img width="220px" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d3e41d964c39eb464ac280aa3aec7d6b78d243ee90b0c7a6b8eb06a2a00c33a4?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Ingredients list">
           </a>
         </div>
@@ -38,30 +39,11 @@
         <h3 class="step-title">Cook with the detailed recipe</h3>
       </article>
     </section>
-    <!-- <aside class="search-ingredients">
-      <div class="search-header">
-        <div class="number active">1</div>
-        <div class="number">2</div>
-        <div class="number">3</div>
-      </div>
-      <h2 class="search-title">Choose your <br> ingredients</h2>
-      <form class="input-group" id="search-form">
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4295edfeb8397e09642439a4471b1d1024a71466603be46ee89612408822000?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Search icon" class="search-icon">
-        <input type="text" id="search-bar" placeholder="Type here..." aria-label="Type here to search ingredients"  autocomplete="off">
-      </form>
-      <div id="suggestions"></div>
-      <div id="selected-ingredients"></div>
-      <a href="/tinder"><button id="find_recipes">Find Recipes</button></a>
-    </aside> -->
+    <a href="/#search-title" class="arrow-link"><i class="fa fa-solid fa-arrow-down"></i></a>
     <aside class="search-ingredients">
-      <div class="search-header">
-        <div class="number active">1</div>
-        <div class="number">2</div>
-        <div class="number">3</div>
-      </div>
       <div class="ingredients-section row">
         <div>
-          <h2 class="search-title">Choose your <br> ingredients</h2>
+          <h2 id="search-title" class="search-title">Choose your <br> ingredients</h2>
           <form class="input-group" id="search-form">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4295edfeb8397e09642439a4471b1d1024a71466603be46ee89612408822000?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Search icon" class="search-icon">
             <input type="text" id="search-bar" placeholder="Search ingredients...", autocomplete="off">
