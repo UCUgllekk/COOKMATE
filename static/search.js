@@ -9,12 +9,9 @@ document.getElementById('search-form').addEventListener('submit', function(event
         var shortestSuggestion = suggestions[0]
 
         var searchBar = document.getElementById('search-bar');
-        searchBar.value = shortestSuggestion.textContent;
 
-        var selectedIngredients = Array.from(document.getElementById('selected-ingredients').getElementsByTagName('div'));
-        console.log(shortestSuggestion.textContent)
-        var alreadySelected = selectedIngredients.some(function(ingredientDiv) {
-            return ingredientDiv.textContent === shortestSuggestion.textContent;
+        var alreadySelected = selected_ingredients.some(function(ingredient) {
+            return ingredient === shortestSuggestion.textContent;
         });
 
         if (!alreadySelected) {
@@ -42,12 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var searchBar = document.getElementById('search-bar');
 
             if (suggestion.length > 0) {
-                searchBar.value = suggestion;
-
-                var selectedIngredients = Array.from(document.getElementById('selected-ingredients').getElementsByTagName('div'));
-                console.log(suggestion)
-                var alreadySelected = selectedIngredients.some(function(ingredientDiv) {
-                    return ingredientDiv.textContent === suggestion;
+                var alreadySelected = selected_ingredients.some(function(ingredient) {
+                    return ingredient === suggestion;
                 });
 
                 if (!alreadySelected) {
@@ -55,12 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     ingredientDiv.textContent = suggestion;
                     ingredientDiv.classList.add("tag");
                     selected_ingredients.push(suggestion);
-                    console.log(selected_ingredients);
                     document.getElementById('selected-ingredients').appendChild(ingredientDiv);
                 }
             };
             searchBar.value = "";
-            console.log(event.target)
             event.target.parentNode.innerHTML = "";
             searchBar.focus();
         }
@@ -84,24 +75,22 @@ document.getElementById('search-bar').addEventListener('input', function() {
                 var suggestions = JSON.parse(this.responseText);
 
                 suggestionsDiv.innerHTML = '';
-                console.log(suggestions.length)
                 if (suggestions.length) {
                 suggestions.slice(0, 5).forEach(function(suggestion) {
-                    var p = document.createElement('button');
+                    var button = document.createElement('button');
 
-                    p.textContent = suggestion;
-                    p.classList.add("option")
+                    button.textContent = suggestion;
+                    button.classList.add("option")
 
-                    suggestionsDiv.appendChild(p);
+                    suggestionsDiv.appendChild(button);
                 });
                 } else {
-                    console.log("no ingredients")
-                    var p = document.createElement('button');
+                    var button = document.createElement('button');
 
-                    p.textContent = "No such ingredient";
-                    p.classList.add("no-option")
+                    button.textContent = "No such ingredient";
+                    button.classList.add("no-option")
 
-                    suggestionsDiv.appendChild(p);
+                    suggestionsDiv.appendChild(button);
                 }
             };
 
@@ -142,4 +131,3 @@ document.getElementById('find_meal_button').addEventListener('click', function()
         console.error('Error:', error);
     });
 });
-
