@@ -319,7 +319,11 @@ body, html {
         font-size: 40px;
         padding-left: 0px;
       }
-  
+
+      .header img {
+        height: 60px;
+        margin-left: 3%;
+      }
   
       .search-ingredients .search-header {
         font-size: 50px;

@@ -32,6 +32,9 @@
       justify-content: space-between;
       gap: 100%;
     }
+    .header img {
+      height: 60px;
+    }
   }
 
     .content-section {
