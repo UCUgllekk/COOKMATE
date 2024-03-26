@@ -60,7 +60,7 @@ html, body {
     top: 20px;
     right: 20px;
     padding: 10px;
-    background-color: #ffa552; /* Red */
+    background-color: #ffa552;
     color: white;
     border: none;
     cursor: pointer;
@@ -179,8 +179,8 @@ html, body {
     margin-top: 40px;
     margin-bottom: 40px;
     display: flex;
-    flex-direction: row; /* Ensure buttons are laid out horizontally */
-    justify-content: center; /* Center align buttons horizontally */
+    flex-direction: row;
+    justify-content: center;
 }
 
 .sort {
@@ -192,47 +192,47 @@ html, body {
     padding: 8px 33px;
     font: 500 20px Inter, sans-serif;
     text-decoration: none;
-    margin: 0 10px; /* Adjust spacing between buttons */
+    margin: 0 10px;
 }
 
 @media only screen and (max-width: 600px) {
     .list-liked {
-        padding: 15px; /* Adjust padding for smaller screens */
-        width: auto; /* Allow width to adjust to the screen size */
+        padding: 15px;
+        width: auto;
         display: flex;
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items horizontally */
+        flex-direction: column;
+        align-items: center;
     }
 
     .list-liked-item {
-        margin-bottom: 20px; /* Adjust margin for smaller screens */
-        width: calc(100% - 40px); /* Set width of items to fit container width with margin */
+        margin-bottom: 20px;
+        width: calc(100% - 40px);
     }
 
     .list-liked-item img {
-        width: 100%; /* Make images fill the container width */
-        height: auto; /* Maintain aspect ratio */
+        width: 100%;
+        height: auto;
     }
 
     .list-liked-content {
-        padding: 5px 0 10px 0; /* Adjust padding for smaller screens */
+        padding: 5px 0 10px 0;
     }
 
     .list-liked-item h2 {
-        font-size: 18px; /* Decrease font size for smaller screens */
-        height: auto; /* Allow height to adjust */
+        font-size: 18px;
+        height: auto;
     }
     .buttons {
-        justify-content: center; /* Center align buttons horizontally */
-        margin-top: 20px; /* Adjust margin for smaller screens */
-        margin-bottom: 20px; /* Adjust margin for smaller screens */
-        flex-wrap: wrap; /* Allow buttons to wrap onto new lines */
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
     }
 
     .sort {
-        font-size: 14px; /* Decrease font size for smaller screens */
-        padding: 8px 20px; /* Adjust padding for smaller screens */
-        margin: 5px; /* Adjust margin for smaller screens */
+        font-size: 14px;
+        padding: 8px 20px;
+        margin: 5px;
     }
 
     .title {
@@ -245,9 +245,9 @@ html, body {
 
 @media only screen and (min-width: 600px) {
     .list-liked {
-        width: 600px; /* Maintain the width for larger screens */
+        width: 600px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr); /* Three items per row */
+        grid-template-columns: repeat(4, 1fr);
         grid-gap: 70px;
         margin: 0 auto;
         justify-content: center;
