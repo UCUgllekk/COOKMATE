@@ -1,19 +1,14 @@
 var selected_ingredients = []
 document.getElementById('search-form').addEventListener('submit', function(event) {
     event.preventDefault();
-
     var suggestionsDiv = document.getElementById('suggestions');
     var suggestions = Array.from(suggestionsDiv.getElementsByTagName('button'));
-    console.log()
     if (suggestions.length > 0 && suggestions[0].classList.contains("option")) {
-        var shortestSuggestion = suggestions[0]
-
+        var shortestSuggestion = suggestions[0];
         var searchBar = document.getElementById('search-bar');
-
         var alreadySelected = selected_ingredients.some(function(ingredient) {
             return ingredient === shortestSuggestion.textContent;
         });
-
         if (!alreadySelected) {
             var ingredientDiv = document.createElement('div');
             ingredientDiv.textContent = shortestSuggestion.textContent;
@@ -28,34 +23,32 @@ document.getElementById('search-form').addEventListener('submit', function(event
     suggestionsDiv.innerHTML = "";
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener('click', function(event) {
-        if (event.target.id == "search-form" || event.target.classList.contains("search-icon")) {
-            document.getElementById('search-bar').focus()
-        }
-        if (event.target.classList.contains('option')) {
+document.addEventListener('click', function(event) {
+    if (event.target.id == "search-form" || event.target.classList.contains("search-icon")) {
+        document.getElementById('search-bar').focus()
+    }
+    if (event.target.classList.contains('option')) {
 
-            var suggestion = event.target.innerText;
-            var searchBar = document.getElementById('search-bar');
+        var suggestion = event.target.innerText;
+        var searchBar = document.getElementById('search-bar');
 
-            if (suggestion.length > 0) {
-                var alreadySelected = selected_ingredients.some(function(ingredient) {
-                    return ingredient === suggestion;
-                });
+        if (suggestion.length > 0) {
+            var alreadySelected = selected_ingredients.some(function(ingredient) {
+                return ingredient === suggestion;
+            });
 
-                if (!alreadySelected) {
-                    var ingredientDiv = document.createElement('div');
-                    ingredientDiv.textContent = suggestion;
-                    ingredientDiv.classList.add("tag");
-                    selected_ingredients.push(suggestion);
-                    document.getElementById('selected-ingredients').appendChild(ingredientDiv);
-                }
-            };
-            searchBar.value = "";
-            event.target.parentNode.innerHTML = "";
-            searchBar.focus();
-        }
-    });
+            if (!alreadySelected) {
+                var ingredientDiv = document.createElement('div');
+                ingredientDiv.textContent = suggestion;
+                ingredientDiv.classList.add("tag");
+                selected_ingredients.push(suggestion);
+                document.getElementById('selected-ingredients').appendChild(ingredientDiv);
+            }
+        };
+        searchBar.value = "";
+        event.target.parentNode.innerHTML = "";
+        searchBar.focus();
+    }
 });
 
 function isAlphaSpace(text){
