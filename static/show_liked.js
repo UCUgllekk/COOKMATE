@@ -104,8 +104,8 @@ for (var i = 0; i < expandButtons.length; i ++) {
         split_instructions = liked_recipes[this.value][3].trim().split(/\n/);
         var ul = document.createElement("ul");
         for (var part of split_instructions) {
-            for (line of part.split(/\.$|(?<!F|tsp|tbsp|Tbsp|Tsp)\.|; /))
-                if (/[A-Z]+/i.test(line)) {
+            for (line of part.split(/\. |\.$; /))
+                if (/[A-Z]+/i.test(line) && !["F", "tsp", "tbsp", "Tbsp", "Tsp"].some((el) => line.endsWith(el + "."))) {
                     line = line.trim()
                     ul.innerHTML += `<li>${line.charAt(0).toUpperCase() + line.slice(1)}</li>`;
                 };

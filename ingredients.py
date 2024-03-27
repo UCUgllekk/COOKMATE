@@ -28,7 +28,11 @@ class StoreDataView(MethodView):
         data = request.data
         data = json.loads(data)
         session['selected_ingredients'] = data
-        recipes = find_with_majority_ingredients(data, 0.4) if data else []
+        coeff_recipes = find_with_majority_ingredients(data, 0.4) if data else []
+        print(coeff_recipes)
+        recipes = sorted(coeff_recipes, key=lambda el: el[0], reverse=True)
+        recipes = sum((el[1:] for el in recipes), [])
+        print(recipes)
         return "Success", 200
 
 class StoreLikedRecipesView(MethodView):

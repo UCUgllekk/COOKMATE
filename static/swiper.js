@@ -12,32 +12,23 @@ for (var i = 0; i < recipes.length; i++){
 
 
 
-recipes = new_recipes
+recipes = new_recipes;
 if (!recipes.length) {
-  // var h1 = document.createElement("h1")
-  // h1.classList.add("search-title")
-  // h1.innerText = "Choose your meal"
-  // var emptydiv = document.createElement("div")
-  // emptydiv.style("width: 250px;")
-  // innerText = "&nbsp;"
-  // document.getElementsByClassName("icon-container")[0].classList.add("removed")
-  // document.getElementsByClassName("find-meal-container")[0].classList.add("removed")
-  var textdiv = document.createElement("div")
-  var h1 = document.createElement("h1")
-  h1.innerText = "No recipes."
-  textdiv.append(h1)
-  // document.getElementsByClassName("main-container")[0].append(textdiv)
-  swiper.innerHTML = ""
-  swiper.style = "display: flex; justify-content: center; align-items: center;"
-  // swiper.style.justify-content = "center";
-  swiper.append(textdiv)
-  document.getElementById("ingredients_button").innerText = "main page"
-  document.getElementById("ingredients_button").id = "main_page"
+  var textdiv = document.createElement("div");
+  var h1 = document.createElement("h1");
+  h1.innerText = "No recipes.";
+  textdiv.append(h1);
+  swiper.innerHTML = "";
+  swiper.style = "display: flex; justify-content: center; align-items: center;";
+  swiper.append(textdiv);
+  document.getElementById("ingredients_button").innerText = "main page";
+  document.getElementById("ingredients_button").id = "main_page";
   document.getElementById('main_page').addEventListener('click', function() {
-    window.location.href = "/"
+    window.location.href = "/";
   });
-  // document.getElementById("swiper").innerText = "No recipes."
-  console.log("removed")
+  console.log("removed");
+  like.remove();
+  dislike.remove();
 } else{
   document.getElementById('ingredients_button').addEventListener('click', function() {
     fetch('/store_liked_recipes', {
@@ -67,11 +58,8 @@ function appendNewCard() {
   cardCount += 4;
   if (recipes.length <= cardCount) {
     console.log("no recipes left")
-    const elements = document.getElementsByClassName("meal-title");
-    if (elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-    
+    document.querySelector(".meal-title").remove()
+    document.querySelector(".counter").remove();
   } else {
   card = new Card({
     imageUrl: recipes[cardCount],
@@ -87,19 +75,24 @@ function appendNewCard() {
     }
   });
   swiper.append(card.element);
+  if (cardCount != 0) {
+    document.querySelector(".meal-title").remove();
+    document.querySelector(".counter").remove();
+  }
+  const counter = document.createElement("div");
+  counter.classList.add("counter");
+  counter.innerText = `Recipes left: ${(recipes.length - cardCount) / 4}`;
 
-  const elements = document.getElementsByClassName("meal-title");
-    while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-    }
 
   // Create title for the card
   const title = document.createElement('div');
   title.innerText = recipes[cardCount + 1];
   title.classList.add("meal-title");
 
+
   // Append title after the card element
-  document.getElementsByClassName("main-container")[0].insertBefore(title, document.getElementsByClassName("find-meal-container")[0]);
+  document.querySelector(".main-container").insertBefore(counter, document.querySelector(".icon-container"));
+  document.querySelector(".main-container").insertBefore(title, document.querySelector(".find-meal-container"));
   }
 }
 

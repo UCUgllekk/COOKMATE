@@ -21,19 +21,16 @@ def validate_email(email:str):
     return bool(re.fullmatch(r"^(?!\.)[a-z!#$%&'*+\-/=?^_`{|}~]+(?:\.[a-z!#$%&'*+\-/=?^_`"+\
         r"{|}~]{1,64})*@[a-z]{1,255}(\.(gmail|ucu|com|org|edu|gov|net|ua))+", email))
 
-def find_with_majority_ingredients(ingredient_list, amount: float):
+def find_with_majority_ingredients(ingredient_list, amount: float) -> list:
     '''Find recipes by ingredients'''
     all_docs = dbrecipes.find({}, {"Cleaned_Ingredients": 1, "Image_Name": 1, \
         "Title": 1, "Ingredients": 1, 'Instructions': 1})
-    matching_docs = []
+    coeff_recipes = []
     for doc in all_docs:
         doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
         if len(common_ingredients) / len(doc_ingredients) > amount:
             if all(key_name in doc for key_name in ['Image_Name', \
                 'Title', 'Ingredients', 'Instructions']):
-                matching_docs.append(doc['Image_Name'])
-                matching_docs.append(doc['Title'])
-                matching_docs.append(doc['Ingredients'])
-                matching_docs.append(doc['Instructions'])
-    return matching_docs
+                coeff_recipes.append([len(common_ingredients) / len(doc_ingredients), doc['Image_Name'], doc['Title'], doc['Ingredients'], doc['Instructions']])
+    return coeff_recipes
