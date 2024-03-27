@@ -153,6 +153,7 @@ html, body {
     margin-left: 8%;
     margin-top: .5em;
     margin-bottom: -0.5em;
+    max-width: 100%;
 }
 
 .recipe_title a {
@@ -194,15 +195,12 @@ html, body {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin-top: 1em;
-    margin-left: 30px;
-    margin-right: 140px;
 }
 
 .buttons {
     text-align: right;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5%;
     display: flex;
     flex-direction: row;
     align-items: end;
@@ -226,7 +224,7 @@ html, body {
 .filter {
     height: 30px;
     margin-top: 10px;
-    padding: 10px;
+    padding-right: 10px;
 }
 .buttons [title]::after {
     content: attr(title);
@@ -247,40 +245,87 @@ html, body {
     opacity: 1;
 }
 
+.form {
+    display: block;
+    margin-top: 0em;
+    unicode-bidi: isolate;
+}
+
 @media only screen and (max-width: 600px) {
+    .recipe {
+        width: auto;
+    }
     .title {
-        margin-top: 20px; /* Adjust margin for smaller screens */
-    }
-
-    .links {
-        text-align: center; /* Center align navigation links */
-    }
-
-    .links a {
-        display: block; /* Make navigation links full-width */
-        margin-bottom: 10px; /* Add space between navigation links */
-    }
-
-    .buttons {
-        justify-content: center; /* Center align buttons horizontally */
-        margin-top: 20px; /* Adjust margin for smaller screens */
-        margin-bottom: 20px; /* Adjust margin for smaller screens */
-        flex-wrap: wrap; /* Allow buttons to wrap onto new lines */
-    }
-    .buttons button {
-        font-size: 5px; /* Decrease the font size of the buttons */
-        padding: 5px 10px; /* Adjust padding for smaller buttons */
-    }
-
-    .sort {
-        font-size: 5px; /* Decrease font size for smaller screens */
-        padding: 8px 20px; /* Adjust padding for smaller screens */
-        margin: 5px; /* Adjust margin for smaller screens */
+        margin-top: 40px;
     }
     .header img {
         height: 60px;
     }
+    .list-rated {
+        padding: 15px;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .recipe_image {
+        align-self: center;
+        max-width: 110%;
+    }
+
+    .list-rated-item {
+        margin-bottom: 20px;
+        width: calc(100% - 40px);
+    }
+
+    .list-rated-item .thumbnail img {
+        width: 100%;
+        height: auto;
+    }
+
+    .list-rated-content {
+        padding: 5px 0 10px 0;
+    }
+
+    .list-rated-content h2 {
+        font-size: 18px;
+        height: auto;
+    }
+
+    .buttons {
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 0.5px 1px;
+    }
+
+    .buttons button {
+        padding: 3px 8px; /* Reduced padding */
+        font-size: 8px; /* Adjusted font size */
+    }
+
+    .sort {
+        font-size: 14px;
+        padding: 8px 20px;
+        margin: 0px;
+    }
+
+    .title {
+        margin-top: 40px;
+    }
+    .star {
+        font-size: 15px;
+    }
+    .filter {
+        height: 28px;
+    }
+
+    .recipe_title a {
+        font-size: 15px;
+    }
 }
+
 
 @media only screen and (min-width: 600px) {
     .list-rated {
