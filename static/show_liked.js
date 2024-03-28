@@ -5,7 +5,6 @@ if(typeof(String.prototype.trim) === "undefined")
         return String(this).replace(/^\s+|\s+$/g, '');
     };
 }
-console.log(liked_recipes.length, liked_recipes.slice(2, -2).split("], ["))
 if (liked_recipes != "[]") {
     liked_recipes = liked_recipes.slice(2, -2).split("], [");
     var new_liked_recipes = [];
@@ -93,7 +92,6 @@ for (var i = 0; i < expandButtons.length; i ++) {
         const recipeTitle = document.createElement('div');
         recipeTitle.classList.add('recipe-title2');
 
-        console.log(this.value)
         recipeTitle.innerText = 'Recipe';
         recipeTitle.style.fontWeight = 'bold';
         recipeTitle.style.border = 'none'; // Remove the borderf
@@ -112,15 +110,11 @@ for (var i = 0; i < expandButtons.length; i ++) {
             ul.innerHTML += "<p></p>";
         };
         recipeDescription.append(ul);
-        console.log(expandButtons_dict[this.value].parentNode.nextSibling)
         expandButtons_dict[this.value].parentNode.parentNode.insertBefore(recipeTitle, expandButtons_dict[this.value].parentNode.nextSibling);
         expandButtons_dict[this.value].parentNode.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
         expandButtons_dict[this.value].scrollIntoView({ behavior: 'smooth', block: 'start' });
         // Remove the button after clicking
-        console.log(expandButtons_dict[this.value].parentNode)
         expandButtons_dict[this.value].parentNode.remove()
-        console.log(expandButtons_dict)
-
         const ingredientText = document.querySelectorAll('.ingredient-text');
         ingredientText.forEach(item => {
         item.style.overflowWrap = 'break-word';

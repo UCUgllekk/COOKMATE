@@ -90,7 +90,6 @@ document.getElementById('search-bar').addEventListener('input', function() {
             xhr.send();
         } else {
             suggestionsDiv.innerHTML = '';
-            console.log("no ingredients")
             var p = document.createElement('button');
 
             p.textContent = "No such ingredient";

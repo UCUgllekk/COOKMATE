@@ -49,15 +49,12 @@ if (!recipes.length) {
   });
 }
 var liked_recipes = []
-console.log(recipes)
-
 let cardCount = -4;
 var card = ""
 
 function appendNewCard() {
   cardCount += 4;
   if (recipes.length <= cardCount) {
-    console.log("no recipes left")
     document.querySelector(".meal-title").remove()
     document.querySelector(".counter").remove();
   } else {
@@ -67,8 +64,7 @@ function appendNewCard() {
     onLike: () => {
       like.style.animationPlayState = 'running';
       like.classList.toggle('trigger');
-      console.log("liked")
-    },
+      },
     onDislike: () => {
       dislike.style.animationPlayState = 'running';
       dislike.classList.toggle('trigger');
@@ -100,10 +96,8 @@ appendNewCard();
 
 function onLike() {
   card.dismiss(1)
-  console.log("liked")
 }
 
 function onDislike() {
   card.dismiss(-1)
-  console.log("liked")
 }

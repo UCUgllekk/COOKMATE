@@ -125,8 +125,6 @@ class Card {
       }
       if (typeof this.onLike === 'function' && direction === 1) {
         liked_recipes.push(recipes.slice(cardCount - 4, cardCount))
-        console.log(cardCount)
-        console.log(liked_recipes)
         this.onLike();
       }
       if (typeof this.onDislike === 'function' && direction === -1) {
@@ -149,8 +147,5 @@ class Card {
             console.error('Error:', error);
         });
       }
-      // if (recipes.length <= cardCount) {
-      //   document.hre
-      // }
     }
   }

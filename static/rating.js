@@ -9,8 +9,6 @@ if (rating == undefined) {
 for (var i = 0; i < stars.length; i++) {
     stars[i].value = i;
     stars[i].addEventListener('click', function() {
-      console.log(this.value)
-      console.log(rating)
       if (this.value + 1 == rating) {
         for (var k = 0; k < 5; k++) {
           stars[k].classList.remove("checked");
@@ -26,8 +24,6 @@ for (var i = 0; i < stars.length; i++) {
         }
         rating = this.value + 1;
       }
-      console.log(recipe)
-
       fetch('/rate', {
         method: 'POST',
         headers: {
