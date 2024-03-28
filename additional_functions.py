@@ -1,6 +1,7 @@
 '''validate functions for program'''
 import re
 from __init__ import dbrecipes
+from math import ceil
 
 def validate_password(password: str):
     '''password'''
@@ -32,5 +33,5 @@ def find_with_majority_ingredients(ingredient_list, amount: float) -> list:
         if len(common_ingredients) / len(doc_ingredients) > amount:
             if all(key_name in doc for key_name in ['Image_Name', \
                 'Title', 'Ingredients', 'Instructions']):
-                coeff_recipes.append([len(common_ingredients) / len(doc_ingredients), doc['Image_Name'], doc['Title'], doc['Ingredients'], doc['Instructions']])
+                coeff_recipes.append([ceil(len(common_ingredients) / len(doc_ingredients) * 10) / 10, doc['Image_Name'], doc['Title'], doc['Ingredients'], doc['Instructions']])
     return coeff_recipes
