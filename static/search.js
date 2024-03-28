@@ -17,10 +17,10 @@ document.getElementById('search-form').addEventListener('submit', function(event
             console.log(selected_ingredients);
             document.getElementById('selected-ingredients').appendChild(ingredientDiv);
         }
+        searchBar.value = "";
+        searchBar.focus();
+        suggestionsDiv.innerHTML = "";
     };
-    searchBar.value = "";
-    searchBar.focus()
-    suggestionsDiv.innerHTML = "";
 });
 
 document.addEventListener('click', function(event) {
@@ -52,7 +52,7 @@ document.addEventListener('click', function(event) {
 });
 
 function isAlphaSpace(text){
-    return /^[A-Z ]*$/i.test(text);
+    return /^[A-Z ]*$/i.test(text) && /[A-Z]{1}/i.test(text);
 }
 
 document.getElementById('search-bar').addEventListener('input', function() {
