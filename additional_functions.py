@@ -30,7 +30,7 @@ def find_with_majority_ingredients(ingredient_list, amount: float) -> list:
     for doc in all_docs:
         doc_ingredients = doc['Cleaned_Ingredients'][2:-2].split("', '")
         common_ingredients = set(doc_ingredients) & set(ingredient_list)
-        if len(common_ingredients) / len(doc_ingredients) > amount:
+        if len(common_ingredients) / len(doc_ingredients) >= amount:
             if all(key_name in doc for key_name in ['Image_Name', \
                 'Title', 'Ingredients', 'Instructions']):
                 coeff_recipes.append([ceil(len(common_ingredients) / len(doc_ingredients) * 10) / 10, doc['Image_Name'], doc['Title'], doc['Ingredients'], doc['Instructions']])
