@@ -21,12 +21,8 @@ document.getElementById('search-form').addEventListener('submit', function(event
             ingredient_deleter.innerHTML += `<button class="deleter" id='deleter:${shortestSuggestion.textContent}'><i class="fa fa-xmark"></i></button>`;
             selected_ingredients_div.appendChild(ingredient_deleter)
             document.getElementById(`deleter:${shortestSuggestion.textContent}`).addEventListener("click", function() {
-                console.log(this.id.slice(8));
-                console.log(selected_ingredients)
                 const ind = selected_ingredients.indexOf(this.id.slice(8));
-                console.log(ind)
                 selected_ingredients.splice(ind, 1);
-                console.log(selected_ingredients_div.getElementsByClassName("ingredient_deleter"))
                 selected_ingredients_div.getElementsByClassName("ingredient_deleter")[ind].remove();
             });
         }
@@ -51,11 +47,21 @@ document.addEventListener('click', function(event) {
             });
 
             if (!alreadySelected) {
+                var ingredient_deleter = document.createElement('div');
+                ingredient_deleter.className = "ingredient_deleter";
                 var ingredientDiv = document.createElement('div');
                 ingredientDiv.textContent = suggestion;
                 ingredientDiv.classList.add("tag");
                 selected_ingredients.push(suggestion);
-                document.getElementById('selected-ingredients').appendChild(ingredientDiv);
+                const selected_ingredients_div = document.getElementById('selected-ingredients');
+                ingredient_deleter.appendChild(ingredientDiv);
+                ingredient_deleter.innerHTML += `<button class="deleter" id='deleter:${suggestion}'><i class="fa fa-xmark"></i></button>`;
+                selected_ingredients_div.appendChild(ingredient_deleter)
+                document.getElementById(`deleter:${suggestion}`).addEventListener("click", function() {
+                    const ind = selected_ingredients.indexOf(this.id.slice(8));
+                    selected_ingredients.splice(ind, 1);
+                    selected_ingredients_div.getElementsByClassName("ingredient_deleter")[ind].remove();
+                });
             }
         };
         searchBar.value = "";
