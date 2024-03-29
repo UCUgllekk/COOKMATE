@@ -18,3 +18,4 @@ watchdog==4.0.0
 Werkzeug==3.0.1
 WTForms==3.1.2
 watchdog==4.0.0
+Flask-Session==0.8.0
