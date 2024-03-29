@@ -47,6 +47,20 @@ if (!recipes.length) {
     });
   });
 }
+
+window.addEventListener('beforeunload', function() {
+  fetch('/store_liked_recipes', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(liked_recipes),
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+});
+
 var liked_recipes = []
 let cardCount = -4;
 var card = ""

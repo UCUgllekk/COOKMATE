@@ -56,7 +56,7 @@ class RatedView(MethodView):
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
             rated_recipes = user['rated']
-            return render_template('rated.html', recipes=rated_recipes)
+            return render_template('rated.html', recipes=rated_recipes, filtered=False)
         return render_template('login.html')
 
     def post(self):
@@ -69,7 +69,7 @@ class RatedView(MethodView):
             if request.form.get('knopka').startswith("delete:"):
                 recipe_title = request.form.get('knopka')[7:]
                 if recipe_title not in rated or recipe_title not in user['liked']:
-                    return render_template('liked.html', recipes = rated)
+                    return render_template('liked.html', recipes = rated, filtered=False)
                 users.update_one({'email': user_email}
                             , {'$set': {f"liked.{recipe_title}.Rating": 0}})
                 users.update_one({'email': user_email}
@@ -79,10 +79,10 @@ class RatedView(MethodView):
                 deleting = True
             if not deleting:
                 sort_type = request.form.get('knopka')
-                if sort_type == session['sort_type']:
+                if sort_type == session['sort_type'] or not rated:
                     sort_type = ""
             else:
-                sort_type = session["sort_type"] if "sort_type" in session else ""
+                sort_type = session["sort_type"] if "sort_type" in session and rated else ""
             if sort_type == '1 star':
                 rated = {name:parameters for name,parameters in rated.items() \
                     if parameters['Rating'] == 1}
@@ -99,8 +99,8 @@ class RatedView(MethodView):
                 rated = {name:parameters for name,parameters in rated.items() \
                     if parameters['Rating'] == 5}
             session['sort_type'] = sort_type
-            return render_template('rated.html', recipes = rated)
-        return render_template('login.html')
+            return render_template('rated.html', recipes = rated, filtered=len(user['rated']) > len(rated))
+        return render_template('login.html', filtered=False)
 
 
 class RateView(MethodView):

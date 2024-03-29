@@ -110,9 +110,9 @@ for (var i = 0; i < expandButtons.length; i ++) {
         recipeDescription.append(ul);
         expandButtons_dict[this.value].parentNode.parentNode.insertBefore(recipeTitle, expandButtons_dict[this.value].parentNode.nextSibling);
         expandButtons_dict[this.value].parentNode.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
-        expandButtons_dict[this.value].scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Remove the button after clicking
         expandButtons_dict[this.value].parentNode.remove()
+        recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Remove the button after clicking
         const ingredientText = document.querySelectorAll('.ingredient-text');
         ingredientText.forEach(item => {
         item.style.overflowWrap = 'break-word';
