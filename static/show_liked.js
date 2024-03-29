@@ -9,14 +9,12 @@ if (liked_recipes != "[]") {
     liked_recipes = liked_recipes.slice(2, -2).split("], [");
     var new_liked_recipes = [];
     // liked_recipes.push(["asd", "asdf"]);
-    console.log(liked_recipes);
     for (var i = 0; i < liked_recipes.length; i++) {
         if (liked_recipes[i].slice(1, -1).split('", "')) {
         new_liked_recipes.push(liked_recipes[i].slice(1, -1).split('", "'));
         }
     };
     liked_recipes = new_liked_recipes
-    console.log(liked_recipes);
     for (var i = 0; i < liked_recipes.length; i ++) {
         ingredients_section = document.createElement("div");
         ingredients_section.classList.add("ingredients-section")

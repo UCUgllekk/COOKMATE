@@ -26,7 +26,6 @@ if (!recipes.length) {
   document.getElementById('main_page').addEventListener('click', function() {
     window.location.href = "/";
   });
-  console.log("removed");
   like.remove();
   dislike.remove();
 } else{
