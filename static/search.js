@@ -122,10 +122,10 @@ document.getElementById('search-bar').addEventListener('input', function() {
 //     this.appendChild(hint_div)
 // });
 
-document.getElementById('select_hint').addEventListener('mouseleave', function() {
-    const hint_div = this.querySelector(".hint");
-    this.removeChild(hint_div)
-});
+// document.getElementById('select_hint').addEventListener('mouseleave', function() {
+//     const hint_div = this.querySelector(".hint");
+//     this.removeChild(hint_div)
+// });
 
 document.getElementById('find_meal_button').addEventListener('click', function() {
     if (selected_ingredients.length) {
