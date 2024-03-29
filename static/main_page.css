@@ -153,7 +153,7 @@ body, html {
   flex-wrap: wrap;
   align-items: flex-start;
   flex-direction: row-reverse;
-  margin-top: 9%;
+  margin-top: 4.83em;
   flex-wrap: wrap;
   align-content: flex-start;
   justify-content: flex-start
@@ -173,6 +173,7 @@ body, html {
   font-size: 30px;
   margin: 5px;
   margin-right: 25px;
+  border-top-right-radius: 300px;
 }
 
 .tag select {
@@ -384,3 +385,32 @@ body, html {
   .arrow-link:active {
     color: #ffa552;
   }
+#select_hint {
+  width: 20px;
+}
+.hint {
+  width: 200px;
+  border-color: black;
+  border-radius: 5%;
+  border-width: 2px;
+  border: solid;
+  padding: 10px;
+  position: absolute;
+  background-color: white;
+}
+.deleter {
+  background-color: transparent;
+  margin-left: -50px;
+  margin-right: 25px;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+}
+.fa-xmark:before {
+  content: "\f00d";
+}
+.ingredient_deleter {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}

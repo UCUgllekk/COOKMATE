@@ -1,4 +1,4 @@
-var selected_ingredients = []
+var selected_ingredients = [];
 document.getElementById('search-form').addEventListener('submit', function(event) {
     event.preventDefault();
     var suggestionsDiv = document.getElementById('suggestions');
@@ -10,12 +10,25 @@ document.getElementById('search-form').addEventListener('submit', function(event
             return ingredient === shortestSuggestion.textContent;
         });
         if (!alreadySelected) {
+            var ingredient_deleter = document.createElement('div');
+            ingredient_deleter.className = "ingredient_deleter";
             var ingredientDiv = document.createElement('div');
             ingredientDiv.textContent = shortestSuggestion.textContent;
             ingredientDiv.classList.add("tag");
             selected_ingredients.push(shortestSuggestion.textContent);
-            console.log(selected_ingredients);
-            document.getElementById('selected-ingredients').appendChild(ingredientDiv);
+            const selected_ingredients_div = document.getElementById('selected-ingredients');
+            ingredient_deleter.appendChild(ingredientDiv);
+            ingredient_deleter.innerHTML += `<button class="deleter" id='deleter:${shortestSuggestion.textContent}'><i class="fa fa-xmark"></i></button>`;
+            selected_ingredients_div.appendChild(ingredient_deleter)
+            document.getElementById(`deleter:${shortestSuggestion.textContent}`).addEventListener("click", function() {
+                console.log(this.id.slice(8));
+                console.log(selected_ingredients)
+                const ind = selected_ingredients.indexOf(this.id.slice(8));
+                console.log(ind)
+                selected_ingredients.splice(ind, 1);
+                console.log(selected_ingredients_div.getElementsByClassName("ingredient_deleter"))
+                selected_ingredients_div.getElementsByClassName("ingredient_deleter")[ind].remove();
+            });
         }
         searchBar.value = "";
         searchBar.focus();
@@ -100,6 +113,18 @@ document.getElementById('search-bar').addEventListener('input', function() {
     } else {
         suggestionsDiv.innerHTML = '';
     }
+});
+
+document.getElementById('select_hint').addEventListener('mouseenter', function() {
+    const hint_div = document.createElement("div");
+    hint_div.textContent = "Start typing the ingredient you want to select. Under the search bar there will be suggestions. To pick the first one press Enter. To pick the any of suggested click on the right suggestion with mouse."
+    hint_div.classList = "hint";
+    this.appendChild(hint_div)
+});
+
+document.getElementById('select_hint').addEventListener('mouseleave', function() {
+    const hint_div = this.querySelector(".hint");
+    this.removeChild(hint_div)
 });
 
 document.getElementById('find_meal_button').addEventListener('click', function() {
