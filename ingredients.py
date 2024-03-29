@@ -5,43 +5,40 @@ from flask.views import MethodView
 from __init__ import users, dbrecipes
 from additional_functions import find_with_majority_ingredients
 
-recipes = []
-liked_recipes = []
 
 class TinderView(MethodView):
     '''Tinder'''
     def get(self):
         '''open tinder'''
-        return render_template('tinder.html', recipes=recipes)
+        return render_template('tinder.html', recipes=session["recipes"])
 
 class IngredientsView(MethodView):
     '''Ingredients'''
     def get(self):
         '''open ingredients'''
-        return render_template('ingredients.html', liked_recipes=liked_recipes)
+        return render_template('ingredients.html', liked_recipes=session["liked_recipes"])
 
 class StoreDataView(MethodView):
     '''StoreData'''
     def post(self):
         '''Storing Data'''
-        global recipes
         data = request.data
         data = json.loads(data)
-        session['selected_ingredients'] = data
         coeff_recipes = find_with_majority_ingredients(data, 0.41) if data else []
         recipes = sorted(coeff_recipes, key=lambda el: el[3].count("; "), reverse=True)
         recipes = sorted(recipes, key=lambda el: el[0], reverse=True)
         recipes = sum((el[1:] for el in recipes), [])
+        session["recipes"] = recipes
         return "Success", 200
 
 class StoreLikedRecipesView(MethodView):
     '''StoreLikedRecipes'''
     def post(self):
         '''Storing liked recipes'''
-        global liked_recipes
         data = request.data
         data = json.loads(data)
         liked_recipes = data
+        session["liked_recipes"] = liked_recipes
         user_email = session.get('email')
         if user_email:
             for meal in liked_recipes:
