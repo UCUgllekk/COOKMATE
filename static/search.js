@@ -115,12 +115,12 @@ document.getElementById('search-bar').addEventListener('input', function() {
     }
 });
 
-document.getElementById('select_hint').addEventListener('mouseenter', function() {
-    const hint_div = document.createElement("div");
-    hint_div.textContent = "Start typing the ingredient you want to select. Under the search bar there will be suggestions. To pick the first one press Enter. To pick the any of suggested click on the right suggestion with mouse."
-    hint_div.classList = "hint";
-    this.appendChild(hint_div)
-});
+// document.getElementById('select_hint').addEventListener('mouseenter', function() {
+//     const hint_div = document.createElement("div");
+//     hint_div.textContent = "Start typing the ingredient you want to select. Under the search bar there will be suggestions. To pick the first one press Enter. To pick the any of suggested click on the right suggestion with mouse."
+//     hint_div.classList = "hint";
+//     this.appendChild(hint_div)
+// });
 
 document.getElementById('select_hint').addEventListener('mouseleave', function() {
     const hint_div = this.querySelector(".hint");
