@@ -133,6 +133,20 @@ document.getElementById('search-bar').addEventListener('input', function() {
 //     this.removeChild(hint_div)
 // });
 
+document.getElementById("search-bar-img").addEventListener("click", function() {
+    document.getElementById("search-title").scrollIntoView({behavior: "smooth"})
+    setTimeout(function() {
+        document.getElementById("search-bar").focus()
+    }, 500)
+});
+
+document.querySelector(".arrow-link").addEventListener("click", function() {
+    document.getElementById("search-title").scrollIntoView({behavior: "smooth"})
+    setTimeout(function() {
+        document.getElementById("search-bar").focus()
+    }, 500)
+});
+
 document.getElementById('find_meal_button').addEventListener('click', function() {
     if (selected_ingredients.length) {
         this.innerHTML = "finding a meal<p>.</p><p>.</p>"
