@@ -204,7 +204,7 @@ html, body {
     padding: 8px 33px;
     font: 500 20px Inter, sans-serif;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 5px 10px;
 }
 
 @media only screen and (max-width: 600px) {
