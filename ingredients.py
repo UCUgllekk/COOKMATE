@@ -10,13 +10,13 @@ class TinderView(MethodView):
     '''Tinder'''
     def get(self):
         '''open tinder'''
-        return render_template('tinder.html', recipes=session["recipes"])
+        return render_template('tinder.html', recipes=session.get("recipes", []))
 
 class IngredientsView(MethodView):
     '''Ingredients'''
     def get(self):
         '''open ingredients'''
-        return render_template('ingredients.html', liked_recipes=session["liked_recipes"])
+        return render_template('ingredients.html', liked_recipes=session.get("liked_recipes", []))
 
 class StoreDataView(MethodView):
     '''StoreData'''
