@@ -422,6 +422,10 @@ body, html {
   border: none;
   cursor: pointer;
 }
+
+.deleter:hover {
+  color: rgb(71, 71, 71);
+}
 .fa-xmark:before {
   content: "\f00d";
 }

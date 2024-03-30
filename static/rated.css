@@ -210,6 +210,10 @@ img.recipe_image {
     cursor: pointer;
 }
 
+.deleter:hover {
+    color: rgb(71, 71, 71);
+}
+
 .buttons {
     text-align: right;
     margin-top: 20px;
