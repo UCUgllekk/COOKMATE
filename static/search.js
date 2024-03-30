@@ -88,14 +88,18 @@ document.getElementById('search-bar').addEventListener('input', function() {
 
                 suggestionsDiv.innerHTML = '';
                 if (suggestions.length) {
-                suggestions.slice(0, 5).forEach(function(suggestion) {
-                    var button = document.createElement('button');
+                    if (document.getElementById('search-bar').value.toLowerCase() == inputVal) {
+                        suggestions.slice(0, 5).forEach(function(suggestion) {
+                            var button = document.createElement('button');
 
-                    button.textContent = suggestion;
-                    button.classList.add("option")
+                            button.textContent = suggestion;
+                            button.classList.add("option")
 
-                    suggestionsDiv.appendChild(button);
-                });
+                            suggestionsDiv.appendChild(button);
+                        });
+                    } else {
+                        document.getElementById('search-bar').dispatchEvent(new Event("input", {bubbles: true}))
+                    }
                 } else {
                     var button = document.createElement('button');
 
