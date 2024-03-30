@@ -158,6 +158,10 @@ body {
     padding: 5px 12px;
 }
 
+.counter {
+  text-align: center;
+  font-family: Inter, sans-serif;
+}
 
 .find-meal-container {
     text-align: center;
