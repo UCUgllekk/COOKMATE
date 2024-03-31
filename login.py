@@ -27,8 +27,7 @@ class LoginView(MethodView):
                 session.pop('failed_login_attempt_email', None)
                 session['email'] = user_val
                 return redirect(url_for('liked'))
-            else:
-                session['failed_login_attempt_email'] = email
+            session['failed_login_attempt_email'] = email
             return render_template('login.html', message='Wrong Password!', email=email)
         return render_template('login.html', message='User does not exist!', email=email)
 
@@ -44,7 +43,6 @@ class SignUpView(MethodView):
     '''SignUp'''
     def get(self):
         '''SignUpPage'''
-        # email = session.get('failed_signup_attempt_email', '')
         return render_template('sign_up.html', message='', email='')
 
     def post(self):
