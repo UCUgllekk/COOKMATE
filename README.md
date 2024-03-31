@@ -10,7 +10,7 @@
     ```
     for Windows:
     ```
-    venv_for_project/bin/activate.bat
+    venv_for_project/bin/activate
     ```
 
 2. Install requirements
