@@ -56,6 +56,9 @@ class SignUpView(MethodView):
                 if not email or not password:
                     return render_template('sign_up.html', message='Please fill in all the fields',\
                         email=email)
+                # print(user_input,'\n')
+                print('\n',users,'\n')
+                print(users.find_one({'email': email}))
                 if users.find_one({'email': email}):
                     session['failed_signup_attempt_email'] = email
                     return render_template('sign_up.html', message='User already exists!',\
