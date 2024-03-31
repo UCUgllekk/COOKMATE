@@ -1,5 +1,4 @@
 .main-container {
-    /* max-width: 1400px; */
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -14,7 +13,6 @@
   width: 100%;
   align-items: start;
   justify-content: space-between;
-  /* gap: 20px; */
   color: #000;
   margin: 5px 10px 0 0;
 }
@@ -82,7 +80,6 @@
 }
 
 .ingredients-section {
-  /* width: 90%; */
   align-content: center;
   display: flex;
   gap: 5%;

@@ -106,7 +106,6 @@ body, html {
   background-color: #ffa552;
   border-radius: 10px;
   margin-top: 0px;
-  /* margin-bottom: 200px; */
   padding: 20px;
   width: 500px;
   margin-left: 25px;
@@ -190,42 +189,33 @@ body, html {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  /* justify-content: flex-start; */
   align-items: left;
-  /* justify-content: space-between; */
   margin-left: 60px;
-  /* transform: translateY(-200px); */
 }
 
 .option {
-  /* color: transparent; */
   background-color: transparent;
   border-color: transparent;
   font: 300 30px Inter, sans-serif;
-  /* padding: 0; */
   text-align: left;
   padding-top: 10px;
   margin-top: -10px;
   color: black;
 }
-/* Ð’Ð¸Ð·Ð½Ð°Ñ‡Ð¸Ñ‚Ð¸ ÐºÐ»Ð°Ñ Ð´Ð»Ñ ÐºÐ¾Ð¶Ð½Ð¾Ð³Ð¾ ÐµÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°, ÐºÑ€Ñ–Ð¼ Ð¿ÐµÑ€ÑˆÐ¾Ð³Ð¾ */
 .option:not(:first-child) {
   margin-top: 0;
 }
 
 
 .option:hover {
-  /* color: gray; */
   background-color: rgb(232, 232, 232);
   border-radius: 5%;
 }
 
   .no-option {
-    /* color: transparent; */
     background-color: transparent;
     border-color: transparent;
     font: 300 30px Inter, sans-serif;
-    /* padding: 0; */
     text-align: left;
     padding-top: 10px;
     margin-top: -10px;
@@ -340,47 +330,47 @@ body, html {
       } 
   
       .input-group {
-        width: 100%; /* Full width on mobile */
-        padding: 10px; /* Smaller padding */
-        margin: 0 10px; /* Adjusted margins */
+        width: 100%; 
+        padding: 10px; 
+        margin: 0 10px; 
       }
     
       .input-group input {
-        font-size: 18px; /* Smaller font size */
-        padding: 10px 0; /* Adjusted padding */
-        width: 100%; /* Full width */
-        margin-left: 0; /* Reset margin */
+        font-size: 18px; 
+        padding: 10px 0; 
+        width: 100%; 
+        margin-left: 0; 
       }
     
       .row,
       .ingredients-section,
       #suggestions {
-        flex-direction: column; /* Stack elements vertically */
-        align-items:flex-start; /* Center align items */
-        padding: 0 10px; /* Adjusted padding */
+        flex-direction: column; 
+        align-items:flex-start; 
+        padding: 0 10px; 
         
       }
   
       #selected-ingredients {
-        flex-direction: row; /* Stack elements vertically */
-        align-items:flex-start; /* Center align items */
-        padding: 0 10px; /* Adjusted padding */
+        flex-direction: row; 
+        align-items:flex-start; 
+        padding: 0 10px; 
         margin-top: 0;
       }
     
       .tag {
-        font-size: 20px; /* Smaller font size for tags */
-        padding: 15px; /* Smaller padding */
+        font-size: 20px; 
+        padding: 15px; 
       }
     
       .option,
       .no-option {
-        font-size: 20px; /* Smaller font size for options */
+        font-size: 20px; 
       }
     
       .find-meal {
-        font-size: 16px; /* Smaller font size for buttons */
-        padding: 6px 16px; /* Smaller padding */
+        font-size: 16px; 
+        padding: 6px 16px; 
       }
       .arrow-link {
         display: none;
