@@ -12,7 +12,6 @@ class LikedView(MethodView):
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
-            print(users.user_email.liked)
             liked = user['liked']
             return render_template('liked.html', recipes = liked)
         return render_template('login.html')

@@ -1,6 +1,6 @@
 '''setting up for program'''
 import secrets
-from flask import Flask, session, config
+from flask import Flask, session
 from flask_session import Session
 from flask_pymongo import PyMongo
 
@@ -15,6 +15,7 @@ app.config.update(
     SESSION_COOKIE_SAMESITE='None',
     SESSION_COOKIE_SECURE=True
 )
+
 secret_key = secrets.token_hex(16)
 app.secret_key = secret_key
 
