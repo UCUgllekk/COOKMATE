@@ -9,6 +9,7 @@ class LoginView(MethodView):
     '''Login'''
     def get(self):
         '''LoginPage'''
+        session["sort_type"] = ""
         if 'email' in session:
             return redirect(url_for('liked'))
         email = session.get('failed_login_attempt_email', '')

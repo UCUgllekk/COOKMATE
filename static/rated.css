@@ -156,6 +156,13 @@ html, body {
     max-width: 100%;
 }
 
+img.recipe_image {
+    border: solid;
+    border-color: black !important;
+    border-radius: 5%;
+}
+
+
 .recipe_title a {
     display: inline-block;
     text-align: left;
@@ -163,6 +170,12 @@ html, body {
     color: black;
     font-family: Inter, sans-serif;
     font-size: 1.25em;
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.recipe_title a:hover {
+    color: #04437d;
 }
 
 .recipe {
@@ -195,6 +208,10 @@ html, body {
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+.deleter:hover {
+    color: rgb(71, 71, 71);
 }
 
 .buttons {

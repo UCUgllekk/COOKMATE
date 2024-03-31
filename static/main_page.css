@@ -74,8 +74,11 @@ body, html {
 }
 
 .search-ingredients {
-  margin-top: 100px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  min-height: 100vh;
 }
 
 .search-ingredients .search-header {
@@ -163,6 +166,7 @@ body, html {
   margin-left: 50px;
   padding: 0px;
   justify-content: space-between;
+  height: 70vh;
 }
 
 .tag {
@@ -204,7 +208,7 @@ body, html {
   margin-top: -10px;
   color: black;
 }
-/* Визначити клас для кожного елемента, крім першого */
+/* Ð’Ð¸Ð·Ð½Ð°Ñ‡Ð¸Ñ‚Ð¸ ÐºÐ»Ð°Ñ Ð´Ð»Ñ ÐºÐ¾Ð¶Ð½Ð¾Ð³Ð¾ ÐµÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°, ÐºÑ€Ñ–Ð¼ Ð¿ÐµÑ€ÑˆÐ¾Ð³Ð¾ */
 .option:not(:first-child) {
   margin-top: 0;
 }
@@ -305,7 +309,12 @@ body, html {
         font-size: 25px;
         text-align: center;
       }
-  
+
+      .search-ingredients {
+        display: block;
+        min-height: unset !important;
+        margin-top: 100px;
+      }
       .search-header {
         font-size: 35px;
         padding-left: 25px;
@@ -373,11 +382,18 @@ body, html {
         font-size: 16px; /* Smaller font size for buttons */
         padding: 6px 16px; /* Smaller padding */
       }
+      .arrow-link {
+        display: none;
+      }
+      .ingredients-section {
+        height: unset;
+      }
     }
   .arrow-link {
     color: #7b3f14;
     font-size: 55px;
-    margin-top: 100px
+    margin-top: 100px;
+    cursor: pointer;
   }
   .arrow-link:hover {
     color: #ffa552;
@@ -406,6 +422,10 @@ body, html {
   border: none;
   cursor: pointer;
 }
+
+.deleter:hover {
+  color: rgb(71, 71, 71);
+}
 .fa-xmark:before {
   content: "\f00d";
 }
@@ -413,4 +433,7 @@ body, html {
   display: flex;
   flex-direction: row;
   align-items: start;
+}
+#search-bar-img {
+  cursor: pointer;
 }

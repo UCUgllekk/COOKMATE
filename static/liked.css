@@ -152,10 +152,13 @@ html, body {
 }
 .recipe_title {
     color: black;
+    min-width: 240px;
     font-family: Inter, sans-serif;
     font-size: 20px;
     padding-bottom: 15px;
-    word-break: break-all;
+    word-break: break-word;
+    height: 40px;
+    min-width: 240px;
 }
 
 .fa-xmark:before {
@@ -166,6 +169,10 @@ html, body {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    margin-left: 10px;
+}
+.deleter:hover {
+    color: rgb(71, 71, 71);
 }
 
 .title-deleter {
@@ -173,6 +180,10 @@ html, body {
     flex-direction: row;
     justify-content: space-between;
     max-width: 274px;
+}
+
+.title-deleter a {
+    text-decoration: none;
 }
 
 .buttons {
@@ -193,7 +204,7 @@ html, body {
     padding: 8px 33px;
     font: 500 20px Inter, sans-serif;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 5px 10px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -244,3 +255,12 @@ html, body {
     }
 }
 
+.recipe_image {
+    border-color: black !important;
+    border: solid;
+    border-radius: 5%;
+}
+
+.recipe_title:hover {
+    color:#04437d;
+}
