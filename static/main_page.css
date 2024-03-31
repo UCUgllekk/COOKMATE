@@ -287,23 +287,23 @@ body, html {
         padding-left: 2%;
         padding-right: 2%;
       }
-    
+
       .header {
         max-width: 100%;
         flex-wrap: wrap;
       }
-    
+
       .steps-section,
       .step-section {
         flex-direction: column;
         align-content: center;
       }
-    
+
       .step {
         width: 85%;
         padding: 45px;
       }
-    
+
       .step-title,
       .step-title1 {
         font-size: 25px;
@@ -319,11 +319,10 @@ body, html {
         font-size: 35px;
         padding-left: 25px;
       }
-  
       .number {
         font-size: 35px;;
       }
-    
+
       .search-title {
         font-size: 40px;
         padding-left: 0px;
@@ -333,51 +332,46 @@ body, html {
         height: 60px;
         margin-left: 3%;
       }
-  
       .search-ingredients .search-header {
         font-size: 50px;
         text-align: start;
-      } 
-  
+      }
       .input-group {
         width: 100%; /* Full width on mobile */
         padding: 10px; /* Smaller padding */
         margin: 0 10px; /* Adjusted margins */
       }
-    
       .input-group input {
         font-size: 18px; /* Smaller font size */
         padding: 10px 0; /* Adjusted padding */
         width: 100%; /* Full width */
         margin-left: 0; /* Reset margin */
       }
-    
       .row,
       .ingredients-section,
       #suggestions {
         flex-direction: column; /* Stack elements vertically */
         align-items:flex-start; /* Center align items */
         padding: 0 10px; /* Adjusted padding */
-        
       }
-  
+
       #selected-ingredients {
         flex-direction: row; /* Stack elements vertically */
         align-items:flex-start; /* Center align items */
         padding: 0 10px; /* Adjusted padding */
         margin-top: 0;
       }
-    
+
       .tag {
         font-size: 20px; /* Smaller font size for tags */
         padding: 15px; /* Smaller padding */
       }
-    
+
       .option,
       .no-option {
         font-size: 20px; /* Smaller font size for options */
       }
-    
+
       .find-meal {
         font-size: 16px; /* Smaller font size for buttons */
         padding: 6px 16px; /* Smaller padding */
