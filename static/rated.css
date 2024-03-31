@@ -18,7 +18,6 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
     display: block;
@@ -60,7 +59,7 @@ html, body {
     top: 20px;
     right: 20px;
     padding: 10px;
-    background-color: #ffa552; /* Red */
+    background-color: #ffa552; 
     color: white;
     border: none;
     cursor: pointer;
@@ -318,8 +317,8 @@ img.recipe_image {
     }
 
     .buttons button {
-        padding: 3px 8px; /* Reduced padding */
-        font-size: 8px; /* Adjusted font size */
+        padding: 3px 8px; 
+        font-size: 8px; 
     }
 
     .sort {
@@ -346,10 +345,9 @@ img.recipe_image {
 
 @media only screen and (min-width: 600px) {
     .list-rated {
-        width: 600px; /* Maintain the width for larger screens */
+        width: 600px; 
         display: grid;
-        grid-template-columns: repeat(4, 1fr); /* Three items per row */
-        /* grid-gap: 70px; */
+        grid-template-columns: repeat(4, 1fr); 
         margin: 0 auto;
         justify-content: center;
     }

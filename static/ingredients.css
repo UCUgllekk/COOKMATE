@@ -1,5 +1,4 @@
 .main-container {
-  /* max-width: 1400px; */
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -78,7 +77,7 @@
     font-weight: 400;
     font-size: 25px;
     font-family: Inter, sans-serif;
-    margin: 0 auto; /* Центруємо блок по горизонталі */
+    margin: 0 auto; 
     margin-top: 30px;
   }
   
@@ -190,13 +189,12 @@
 
   .recipe-title2 {
     font-weight: bold;
-    margin-left: 0; /* Забираємо відступи зліва */
-    /* margin-right: 1120px; */
+    margin-left: 0; 
     width: 800px;
-    border: none; /* Видаляємо рамку */
+    border: none; 
     align-items: flex-start;
     font: 500 20px Inter, sans-serif;
-    text-align: left; /* Вирівнюємо текст ліворуч */
+    text-align: left; 
     padding: 20px;
     padding-left: 55px;
   }
