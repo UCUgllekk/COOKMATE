@@ -43,20 +43,24 @@ class SignUpView(MethodView):
     '''SignUp'''
     def get(self):
         '''SignUpPage'''
-        email = session.get('failed_signup_attempt_email', '')
-        return render_template('sign_up.html', message='', email=email)
+        # email = session.get('failed_signup_attempt_email', '')
+        return render_template('sign_up.html', message='', email='')
 
     def post(self):
         '''SignUp'''
         email = request.form.get('email')
+
         if validate_email(email):
             password = request.form.get('password')
-            if validate_password(password) == True:
+
+            if validate_password(password) is True:
                 if not email or not password:
-                    return render_template('sign_up.html', message='Please fill in all the fields', email=email)
+                    return render_template('sign_up.html', message='Please fill in all the fields',\
+                        email=email)
                 if users.find_one({'email': email}):
                     session['failed_signup_attempt_email'] = email
-                    return render_template('sign_up.html', message='User already exists!', email=email)
+                    return render_template('sign_up.html', message='User already exists!',\
+                        email=email)
                 hashed = generate_password_hash(password, method='scrypt')
                 user_input = {'email': email, 'password': hashed, 'liked': {}, \
                     'rated': {}}
@@ -64,9 +68,9 @@ class SignUpView(MethodView):
                 session.pop('failed_signup_attempt_email', None)
                 session['email'] = email
                 return redirect(url_for('liked'))
-            else:
-                session['failed_signup_attempt_email'] = email
-            return render_template('sign_up.html', message=validate_password(password), email=email)
-        else:
+
             session['failed_signup_attempt_email'] = email
+            return render_template('sign_up.html', message=validate_password(password), email=email)
+
+        session['failed_signup_attempt_email'] = email
         return render_template('sign_up.html', message='Wrong email form', email=email)
