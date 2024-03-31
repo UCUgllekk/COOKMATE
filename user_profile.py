@@ -1,6 +1,6 @@
 '''user profile'''
 import json
-from flask import render_template, session, request
+from flask import render_template, session, request, redirect, url_for
 from flask.views import MethodView
 from __init__ import users, dbrecipes
 
@@ -8,6 +8,7 @@ class LikedView(MethodView):
     '''Liked'''
     def get(self):
         '''open liked'''
+        session["sort_type"] = ""
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
@@ -51,12 +52,16 @@ class RatedView(MethodView):
     '''View Recipes'''
     def get(self):
         '''Recipes'''
-        session['sort_type'] = ""
+        if "sort_type" not in session:
+            session["sort_type"] = ""
         if 'email' in session:
             user_email = session.get('email')
             user = users.find_one({"email": user_email})
             rated_recipes = user['rated']
-            return render_template('rated.html', recipes=rated_recipes, filtered=False)
+            if session["sort_type"] and session["sort_type"][0].isnumeric():
+                rated_recipes = {name:parameters for name,parameters in rated_recipes.items() \
+                    if parameters['Rating'] == int(session["sort_type"][0])}
+            return render_template('rated.html', recipes=rated_recipes, filtered=len(user['rated']) > len(rated_recipes))
         return render_template('login.html')
 
     def post(self):
@@ -80,26 +85,12 @@ class RatedView(MethodView):
             if not deleting:
                 sort_type = request.form.get('knopka')
                 if sort_type == session['sort_type'] or not rated:
-                    sort_type = ""
+                    session['sort_type'] = ""
+                    return redirect(url_for("rated"))
             else:
                 sort_type = session["sort_type"] if "sort_type" in session and rated else ""
-            if sort_type == '1 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 1}
-            elif sort_type == '2 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 2}
-            elif sort_type == '3 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 3}
-            elif sort_type == '4 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 4}
-            elif sort_type == '5 star':
-                rated = {name:parameters for name,parameters in rated.items() \
-                    if parameters['Rating'] == 5}
             session['sort_type'] = sort_type
-            return render_template('rated.html', recipes = rated, filtered=len(user['rated']) > len(rated))
+            return redirect(url_for("rated"))
         return render_template('login.html', filtered=False)
 
 

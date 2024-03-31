@@ -1,5 +1,5 @@
 '''app.py'''
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, session
 from flask.views import MethodView
 
 from __init__ import app, ingredients
@@ -12,6 +12,7 @@ class MainView(MethodView):
     '''MainPage'''
     def get(self):
         '''open_main_page'''
+        session["sort_type"] = ""
         return render_template('main_page.html')
 
 class SearchView(MethodView):

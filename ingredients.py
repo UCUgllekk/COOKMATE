@@ -42,11 +42,12 @@ class StoreLikedRecipesView(MethodView):
         user_email = session.get('email')
         if user_email:
             for meal in liked_recipes:
-                liked_meal = {'Ingredients': meal[2],
-                                       'Instructions': meal[3],
-                                       'Image_Name': f"{meal[0]}.jpg",
-                                       'Rating': 0}
-                users.update_one({'email': user_email}, {'$set': {f'liked.{meal[1]}': liked_meal}})
+                if meal[1] not in users.find_one({"email": user_email})["liked"]:
+                    liked_meal = {'Ingredients': meal[2],
+                                        'Instructions': meal[3],
+                                        'Image_Name': f"{meal[0]}.jpg",
+                                        'Rating': 0}
+                    users.update_one({'email': user_email}, {'$set': {f'liked.{meal[1]}': liked_meal}})
         return "Success", 200
 
 class RecipeView(MethodView):
