@@ -1,3 +1,36 @@
+function my_split(text, splitter, forgotten_endings) {
+    var start_i = 0
+    var splitted_text = [];
+    var lower_text = text.toLowerCase()
+    if (!text.includes(".")) {
+        splitter = ";"
+    }
+    for (var k in text) {
+        i = parseInt(k);
+        if (text[i] == splitter) {
+            var to_split = true;
+            for (ending of forgotten_endings) {
+                if (lower_text.slice(Math.max(0, i - ending.length), i) == ending && !/^\s*[A-Z]/.test(text.slice(i + 1))) {
+                    to_split = false;
+                    break;
+                }
+            }
+            if (to_split) {
+                if (i + 1 < text.length && text[i + 1] == ")") {
+                    splitted_text.push(text.slice(start_i, i + 2))
+                    start_i = i + 2;
+                } else {
+                    splitted_text.push(text.slice(start_i, i))
+                    start_i = i + 1;
+                }
+                
+            }
+        }
+    }
+    splitted_text.push(text.slice(start_i, i + 1))
+    return splitted_text
+}
+
 if(typeof(String.prototype.trim) === "undefined")
 {
     String.prototype.trim = function() 
@@ -99,12 +132,23 @@ for (var i = 0; i < expandButtons.length; i ++) {
         recipeDescription.classList.add('recipe-description');
         split_instructions = liked_recipes[this.value][3].trim().split(/\n/);
         var ul = document.createElement("ul");
+        // for (var part of split_instructions) {
+        //     for (line of part.split(/\. |\.$; /)) {
+        //         if (/[A-Z]+/i.test(line) && !["F", "tsp", "tbsp", "Tbsp", "Tsp"].some((el) => line.endsWith(el + "."))) {
+        //             line = line.trim()
+        //             ul.innerHTML += `<li>${line.charAt(0).toUpperCase() + line.slice(1)}</li>`;
+        //         };
+        //     }
+        //     ul.innerHTML += "<p></p>";
+        // };
+        console.log(liked_recipes[this.value][3].trim())
         for (var part of split_instructions) {
-            for (line of part.split(/\. |\.$; /))
-                if (/[A-Z]+/i.test(line) && !["F", "tsp", "tbsp", "Tbsp", "Tsp"].some((el) => line.endsWith(el + "."))) {
+            for (line of my_split(part, ".", ["°f", "tsp", "tbsp"])) {
+                if (/[A-Z]+/i.test(line)) {
                     line = line.trim()
                     ul.innerHTML += `<li>${line.charAt(0).toUpperCase() + line.slice(1)}</li>`;
                 };
+            }
             ul.innerHTML += "<p></p>";
         };
         recipeDescription.append(ul);
