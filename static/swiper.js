@@ -1,4 +1,3 @@
-// DOM
 const swiper = document.querySelector('#swiper');
 const like = document.querySelector('#like');
 const dislike = document.querySelector('#dislike');
@@ -93,13 +92,11 @@ function appendNewCard() {
   counter.innerText = `Recipes left: ${(recipes.length - cardCount) / 4}`;
 
 
-  // Create title for the card
   const title = document.createElement('div');
   title.innerText = recipes[cardCount + 1];
   title.classList.add("meal-title");
 
 
-  // Append title after the card element
   document.querySelector(".main-container").insertBefore(counter, document.querySelector(".icon-container"));
   document.querySelector(".main-container").insertBefore(title, document.querySelector(".find-meal-container"));
   }

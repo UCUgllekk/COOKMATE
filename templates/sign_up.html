@@ -22,7 +22,6 @@
         <div class="div-5">Sign up</div>
         <form action="{{ url_for('sign_up') }}" method="POST">
             {% block content %}
-                <!-- <input type="text" name="email" class="div-6" placeholder="Email", autocomplete="off", autofocus="on"> -->
                 <input type="text" name="email" class="div-6" placeholder="Email" autocomplete="off" autofocus="on" value="{{ email }}" required>
                 <div class="input-container">
                     <input type="password" id="password" class="div-7" placeholder="Password" autocomplete="off" name="password" required>

@@ -12,7 +12,6 @@ class Card {
       this.#init();
     }
   
-    // private properties
     #startPoint;
     #offsetX;
     #offsetY;
@@ -62,7 +61,6 @@ class Card {
   
       document.addEventListener('mouseup', this.#handleMoveUp);
   
-      // prevent card from being dragged
       this.element.addEventListener('dragstart', (e) => {
         e.preventDefault();
       });
@@ -73,13 +71,11 @@ class Card {
       this.#offsetY = y - this.#startPoint.y;
       const rotate = this.#offsetX * 0.1;
       this.element.style.transform = `translate(${this.#offsetX}px, ${this.#offsetY}px) rotate(${rotate}deg)`;
-      // dismiss card
       if (Math.abs(this.#offsetX) > document.body.clientWidth ** 0.7) {
         this.dismiss(this.#offsetX > 0 ? 1 : -1);
       }
     }
   
-    // mouse event handlers
     #handleMouseMove = (e) => {
       e.preventDefault();
       if (!this.#startPoint) return;
@@ -93,7 +89,6 @@ class Card {
       this.element.style.transform = '';
     }
   
-    // touch event handlers
     #handleTouchMove = (e) => {
       if (!this.#startPoint) return;
       const touch = e.changedTouches[0];

@@ -23,7 +23,6 @@ function my_split(text, splitter, forgotten_endings) {
                     splitted_text.push(text.slice(start_i, i))
                     start_i = i + 1;
                 }
-                
             }
         }
     }
@@ -41,7 +40,6 @@ if(typeof(String.prototype.trim) === "undefined")
 if (liked_recipes != "[]") {
     liked_recipes = liked_recipes.slice(2, -2).split("], [");
     var new_liked_recipes = [];
-    // liked_recipes.push(["asd", "asdf"]);
     for (var i = 0; i < liked_recipes.length; i++) {
         if (liked_recipes[i].slice(1, -1).split('", "')) {
         new_liked_recipes.push(liked_recipes[i].slice(1, -1).split('", "'));
@@ -55,7 +53,6 @@ if (liked_recipes != "[]") {
         titleDiv.classList.add("recipe-title")
         titleDiv.innerText = liked_recipes[i][1]
 
-        // ingredients_section.append(titleDiv)
         var column_div = document.createElement('div');
         column_div.classList.add("ingredients-column");
 
@@ -75,7 +72,6 @@ if (liked_recipes != "[]") {
         textdiv.append(ul_ingr)
 
         var show_recipe = document.createElement("a")
-        // show_recipe.id = 
         show_recipe.innerText = "jump to recipe"
         show_recipe.href = "javascript:void(0);"
         show_recipe.classList.add("find-meal")
@@ -84,10 +80,7 @@ if (liked_recipes != "[]") {
         var find_meal_div = document.createElement("div")
         find_meal_div.classList.add("find-meal-container")
         find_meal_div.append(show_recipe)
-        // <div class="find-meal-container">
-        //   <a href="javascript:void(0);" id="expandButton" class="find-meal visible">find a meal</a>
-        // </div>
-        
+
         ingredients_section.append(column_div)
         ingredients_section.append(textdiv)
 
@@ -125,8 +118,8 @@ for (var i = 0; i < expandButtons.length; i ++) {
 
         recipeTitle.innerText = 'Recipe';
         recipeTitle.style.fontWeight = 'bold';
-        recipeTitle.style.border = 'none'; // Remove the borderf
-        recipeTitle.style.textAlign = 'left'; // Align text to the left
+        recipeTitle.style.border = 'none';
+        recipeTitle.style.textAlign = 'left';
 
         const recipeDescription = document.createElement('div');
         recipeDescription.classList.add('recipe-description');
@@ -146,7 +139,6 @@ for (var i = 0; i < expandButtons.length; i ++) {
         expandButtons_dict[this.value].parentNode.parentNode.insertBefore(recipeDescription, recipeTitle.nextSibling);
         expandButtons_dict[this.value].parentNode.remove()
         recipeTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Remove the button after clicking
         const ingredientText = document.querySelectorAll('.ingredient-text');
         ingredientText.forEach(item => {
         item.style.overflowWrap = 'break-word';
