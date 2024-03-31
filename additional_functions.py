@@ -19,8 +19,8 @@ def validate_password(password: str):
 
 def validate_email(email:str):
     '''email'''
-    return bool(re.fullmatch(r"^(?!\.)[a-z!#$%&'*+\-/=?^_`{|}~]+(?:\.[a-z!#$%&'*+\-/=?^_`"+\
-        r"{|}~]{1,64})*@[a-z]{1,255}(\.(gmail|ucu|com|org|edu|gov|net|ua))+", email))
+    return bool(re.fullmatch(r"[!#$%&'*+\-/=?^_`{|}~\w]([!#$%&'*+\-/=?^_`{|}~\w]|" + \
+r"\.(?!\.|@)){0,63}@[a-z.]{1,255}\.(com|org|edu|gov|net|ua)", email))
 
 def find_with_majority_ingredients(ingredient_list, amount: float) -> list:
     '''Find recipes by ingredients'''
