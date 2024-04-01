@@ -92,6 +92,8 @@ html, body {
 }
 
 .links {
+    display: flex;
+    justify-content: space-between;
     text-align: right;
 }
 
@@ -189,6 +191,15 @@ html, body {
 .buttons {
     text-align: center;
     margin-top: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.deleters {
+    text-align: center;
+    margin-top: 0px;
     margin-bottom: 40px;
     display: flex;
     flex-direction: row;
@@ -205,6 +216,24 @@ html, body {
     font: 500 20px Inter, sans-serif;
     text-decoration: none;
     margin: 5px 10px;
+    cursor:pointer;
+}
+
+.all-deleter {
+    font-family: Inter, sans-serif;
+    color: rgb(155, 0, 0);
+    border-radius: 80px;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    /* padding: 4px 20px; */
+    font: 500 20px Inter, sans-serif;
+    text-decoration: none;
+    /* margin: 5px 10px; */
+}
+
+.all-deleter:hover {
+    color: rgb(255, 0, 0);
 }
 
 @media only screen and (max-width: 600px) {

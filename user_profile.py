@@ -23,6 +23,16 @@ class LikedView(MethodView):
             user = users.find_one({"email": user_email})
             liked = user['liked']
             deleting = False
+            if request.form.get('knopka').startswith("Delete all liked without"):
+                # for title, recipe_info in liked.items():
+                #     if not recipe_info["Rating"]:
+                #         users.update_one({'email': user_email}, {'$unset': {f'liked.{title}': recipe_info}})
+                users.update_one({"email": user_email}, {"$set": {"liked": {}}})
+                rated = user["rated"]
+                tuple_rated = tuple(rated.items())
+                for i in range(0, len(rated), 50):
+                    users.update_many({"email": user_email}, [{'$set': {f'liked.{meal[0]}': meal[1]}} for meal in tuple_rated[i*50:(i + 1) * 50]])
+                return redirect(url_for("liked"))
             if request.form.get('knopka').startswith("delete:"):
                 recipe_title = request.form.get('knopka')[7:]
                 if recipe_title not in liked:
@@ -72,12 +82,11 @@ class RatedView(MethodView):
             rated = user['rated']
             if request.form.get('knopka').startswith("delete:"):
                 recipe_title = request.form.get('knopka')[7:]
-                if recipe_title not in rated or recipe_title not in user['liked']:
-                    return render_template('liked.html', recipes = rated, filtered=False)
-                users.update_one({'email': user_email}
-                            , {'$set': {f"liked.{recipe_title}.Rating": 0}})
                 users.update_one({'email': user_email}
                             , {'$unset': {f'rated.{recipe_title}': user['rated'][recipe_title]}})
+                if recipe_title in user['liked']:
+                    users.update_one({'email': user_email}
+                            , {'$set': {f"liked.{recipe_title}.Rating": 0}})
                 user = users.find_one({"email": user_email})
                 rated = user['rated']
                 deleting = True
