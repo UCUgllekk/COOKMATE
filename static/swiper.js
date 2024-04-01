@@ -67,8 +67,10 @@ var card = ""
 function appendNewCard() {
   cardCount += 4;
   if (recipes.length <= cardCount) {
-    document.querySelector(".meal-title").remove()
-    document.querySelector(".counter").remove();
+    if (recipes.length > 0) {
+      document.querySelector(".meal-title").remove();
+      document.querySelector(".counter").remove();
+    }
   } else {
   card = new Card({
     imageUrl: recipes[cardCount],
