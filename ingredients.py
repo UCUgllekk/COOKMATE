@@ -5,7 +5,6 @@ from flask.views import MethodView
 from __init__ import users, dbrecipes
 from additional_functions import find_with_majority_ingredients
 
-
 class TinderView(MethodView):
     '''Tinder'''
     def get(self):
@@ -24,7 +23,10 @@ class StoreDataView(MethodView):
         '''Storing Data'''
         data = request.data
         data = json.loads(data)
-        coeff_recipes = find_with_majority_ingredients(data, 0.41) if data else []
+        coeff = int(data[-1][:-1])/100 if int(data[-1][:-1])/100 else 0.001
+        selected_ingredients = data[:-1]
+
+        coeff_recipes = find_with_majority_ingredients(selected_ingredients, coeff) if selected_ingredients else []
         recipes = sorted(coeff_recipes, key=lambda el: el[3].count("; "), reverse=True)
         recipes = sorted(recipes, key=lambda el: el[0], reverse=True)
         recipes = sum((el[1:] for el in recipes), [])
@@ -40,14 +42,20 @@ class StoreLikedRecipesView(MethodView):
         liked_recipes = data
         session["liked_recipes"] = liked_recipes
         user_email = session.get('email')
+        liked_from_user = users.find_one({"email": user_email}).get("liked", [])
+        liked_meals = []
         if user_email:
             for meal in liked_recipes:
-                if meal[1] not in users.find_one({"email": user_email})["liked"]:
-                    liked_meal = {'Ingredients': meal[2],
+                if meal[1] not in liked_from_user:
+                    liked_meals.append((meal[1], {'Ingredients': meal[2],
                                         'Instructions': meal[3],
                                         'Image_Name': f"{meal[0]}.jpg",
-                                        'Rating': 0}
-                    users.update_one({'email': user_email}, {'$set': {f'liked.{meal[1]}': liked_meal}})
+                                        'Rating': 0}))
+                    if len(liked_meals) == 50:
+                        users.update_many({"email": user_email}, [{'$set': {f'liked.{liked_meal[0]}': liked_meal[1]}} for liked_meal in liked_meals])
+                        liked_meals = []
+            if liked_meals:
+                users.update_many({"email": user_email}, [{'$set': {f'liked.{liked_meal[0]}': liked_meal[1]}} for liked_meal in liked_meals])
         return "Success", 200
 
 class RecipeView(MethodView):

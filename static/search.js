@@ -155,12 +155,13 @@ document.getElementById('find_meal_button').addEventListener('click', function()
     if (selected_ingredients.length) {
         this.innerHTML = "finding a meal<p>.</p><p>.</p>"
     };
+    console.log(selected_ingredients.concat([document.querySelector(".ingredients-coeff").innerText]))
     fetch('/store_data', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(selected_ingredients),
+        body: JSON.stringify(selected_ingredients.concat([document.querySelector(".ingredients-coeff").innerText])),
     })
     .then(response => {
         if (response.ok) {
@@ -170,5 +171,17 @@ document.getElementById('find_meal_button').addEventListener('click', function()
     })
     .catch((error) => {
         console.error('Error:', error);
+        this.innerHTML = "find a meal"
     });
 });
+
+
+function change_percentage(elem) {
+    console.log(elem)
+    document.querySelector(".ingredients-coeff").innerText = elem.innerText;
+    elem.parentNode.style.display = "none";
+    setTimeout(() => {
+        elem.parentNode.style.display = "";
+    }, 100);
+    console.log(elem.parentNode)
+}

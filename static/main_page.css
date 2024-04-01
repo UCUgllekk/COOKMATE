@@ -134,16 +134,53 @@ body, html {
   height: auto;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+.coeff-dropdown {
+  /* padding: 12px; */
+  margin: 0;
+  position: relative;
+  display: inline-block;
 }
+
+.coeff-dropdown p {
+  min-width: 70px;
+  padding: 27.5px 0;
+  padding-left: 20px;
+  margin: 0;
+  /* border: solid; */
+}
+
+.coeff-options {
+  display: none;
+  position: absolute;
+  /* border: solid; */
+}
+
+.coeff-dropdown button {
+  display: block;
+  min-width: 70px;
+  height: 25px;
+  background-color: whitesmoke;
+  border-width: 2px;
+  border-color: black;
+  border-top: none;
+  z-index: 1;
+  /* border-radius: 30%; */
+}
+
+.coeff-dropdown button:first-child {
+  border-top: solid;
+}
+
+.coeff-dropdown button:hover {
+  background-color: #ff9437;
+}
+
+
+
+.coeff-dropdown:hover .coeff-options {
+  display: inline-block;
+}
+
 
 
 .row {

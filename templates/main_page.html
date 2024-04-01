@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='main_page.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="shortcut icon" href="#">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <main class="main-container">
@@ -44,10 +45,20 @@
       <div class="ingredients-section row">
         <div>
           <h2 id="search-title" class="search-title">Choose your <br> ingredients</h2>
-          <form class="input-group" id="search-form">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4295edfeb8397e09642439a4471b1d1024a71466603be46ee89612408822000?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Search icon" class="search-icon">
-            <input type="text" id="search-bar" placeholder="Search ingredients...", autocomplete="off">
-          </form>
+          <div style="display: flex;">
+            <form class="input-group" id="search-form">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4295edfeb8397e09642439a4471b1d1024a71466603be46ee89612408822000?apiKey=88acd55e6d6346d7a3b2f206cf68b70d&" alt="Search icon" class="search-icon">
+              <input type="text" id="search-bar" placeholder="Search ingredients...", autocomplete="off">
+            </form>
+            <div class="coeff-dropdown" type="text">
+              <p class="ingredients-coeff">40%</p>
+              <div class="coeff-options">
+                {% for i in range(11) %}
+                <button onclick="change_percentage(this)">{{ i * 10 }}%</button>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
           <div id="suggestions">
           </div>
         </div>
