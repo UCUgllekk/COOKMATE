@@ -158,7 +158,7 @@ html, body {
     font-family: Inter, sans-serif;
     font-size: 20px;
     padding-bottom: 15px;
-    word-break: break-word;
+    word-break: break-all;
     height: 40px;
     min-width: 240px;
 }
