@@ -158,9 +158,18 @@ html, body {
     font-family: Inter, sans-serif;
     font-size: 20px;
     padding-bottom: 15px;
-    word-break: break-all;
+    word-break: break-word;
     height: 40px;
     min-width: 240px;
+}
+
+.recipe_title h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 240px;
+    text-overflow: ellipsis;
 }
 
 .fa-xmark:before {

@@ -48,11 +48,8 @@
                 <div class = 'recipe'>
                     <div class="title-deleter">
                         <a href='/recipe/{{ list["Image_Name"] }}/'>
-                            {% if title|length > 48 %}
-                                <div class = 'recipe_title'>{{ title[:48] }} ...</div>
-                            {% else %}
-                                <div class = 'recipe_title'>{{ title }}</div>
-                            {% endif %}
+                            <div class = 'recipe_title'><h2>{{ title }}</h2></div>
+
                         </a>
                         <form action="{{ url_for('liked') }}" method="post">
                             <button class="deleter" type="submit" name='knopka' value='delete:{{ recipe }}'><i class="fa fa-xmark"></i></button>
@@ -67,5 +64,6 @@
             {% endif %}
         </div>
     </div>
+  <script src="{{ url_for('static', filename='liked.js') }}"></script>
   </body>
 </html>
