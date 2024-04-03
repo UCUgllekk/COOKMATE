@@ -21,15 +21,13 @@
             <h1 class="title">Your profile</h1>
             <div class="links">
                 <form action="{{ url_for('liked') }}" method="post">
-                    <button class="all-deleter" type="submit" name='knopka' value="Delete all liked without rating">Delete all liked without rating</button>
+                    <button class="all-deleter" type="submit" name='knopka' value="Delete all liked without rating">Delete liked without rating</button>
                 </form>
-                <div>
+                <div style="min-width: 130px;">
                     <a class="active" href="/liked">Liked</a>
                     <a href="/rated">Rated</a>
                 </div>
             </div>
-            <!-- <div class="links">
-            </div> -->
             <div class="buttons">
                 <form action="{{ url_for('liked') }}" method="post">
                     <button class="sort" type="submit" name='knopka' value="name">Sort by name</button>
@@ -37,9 +35,6 @@
                     <button class="sort" type="submit" name='knopka' value="amount">Sort by amount of ingredients</button>
                 </form>
             </div>
-            <!-- <div class="deleters">
-                
-            </div> -->
             {% if not recipes %}
             <div class = 'no-liked'><h2>You have no liked recipes</h2></div>
             {% else %}
