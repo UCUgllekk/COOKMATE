@@ -42,7 +42,8 @@ class StoreLikedRecipesView(MethodView):
         liked_recipes = data
         session["liked_recipes"] = liked_recipes
         user_email = session.get('email')
-        liked_from_user = users.find_one({"email": user_email}).get("liked", [])
+        user = users.find_one({"email": user_email}) or {}
+        liked_from_user = user.get("liked", [])
         liked_meals = []
         if user_email:
             for meal in liked_recipes:
